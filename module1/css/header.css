@@ -14,11 +14,11 @@
 
 .header-navigation__list {
   display: flex;
+  transition: color 0.3s ease-in;
   list-style-type: none;
   gap: 40px;
 }
 
 .header-navigation__link:hover {
-  font-weight: 700;
   color: var(--text-hover-color);
 }
