@@ -1,5 +1,5 @@
 .body {
-  background-color: linear-gradient(to bottom, #f6fafd 0%, #ffffff 19.4%);
+  background: linear-gradient(to bottom, var(--gradient-color) 0%, var(--light-color) 19.4%);
 }
 
 .main-container {
