@@ -8,7 +8,9 @@
 }
 
 .container {
-  padding-bottom: 150px;
+  font: 500 18px/29px Ubuntu, sans-serif;
+  color: var(--text-color);
+  padding-top: 150px;
 }
 
 .link {
@@ -16,4 +18,9 @@
   -webkit-transition: color .3s ease-in;
         -o-transition: color .3s ease-in;
             transition: color .3s ease-in;
+}
+
+.section-title {
+  color: var(--title-color);
+  font: 700 40px/52px Ubuntu, sans-serif;
 }
