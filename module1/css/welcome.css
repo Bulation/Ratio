@@ -1,0 +1,27 @@
+.welcome-container {
+  padding-bottom: 100px;
+  background: url(../assets/welcome.png) no-repeat right bottom;
+}
+.welcome__description {
+  color: var(--text-color);
+  font: 500 18px/29px Ubuntu, sans-serif;
+}
+.welcome__title {
+  max-width: 645px;
+  color: var(--title-color);
+  font: 700 80px/88px Ubuntu, sans-serif;
+}
+.welcome__text {
+  margin: 50px 0;
+  max-width: 380px;
+}
+.welcome__link {
+  display: block;
+  width: fit-content;
+  text-align: center;
+  padding: 15px 37px;
+  background-color: var(--link-bg);
+  font-weight: 700;
+  color: var(--light-color);
+  border-radius: 50px;
+}
