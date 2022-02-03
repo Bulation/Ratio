@@ -1,9 +1,8 @@
 .header-container {
   display: flex;
   max-width: 1120px;
-  color: var(--text-color);
   font: 500 16px/26px Ubuntu, sans-serif;
-  padding: 65px 0 145px;
+  padding-top: 65px;
   gap: 120px;
 }
 
