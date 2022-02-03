@@ -1,0 +1,19 @@
+.body {
+  background-color: linear-gradient(to bottom, #f6fafd 0%, #ffffff 19.4%);
+}
+
+.main-container {
+  max-width: 1260px;
+  margin: 0 auto;
+}
+
+.container {
+  padding-bottom: 150px;
+}
+
+.link {
+  text-decoration: none;
+  -webkit-transition: color .3s ease-in;
+        -o-transition: color .3s ease-in;
+            transition: color .3s ease-in;
+}
