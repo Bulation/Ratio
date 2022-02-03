@@ -2,10 +2,7 @@
   padding-bottom: 100px;
   background: url(../assets/welcome.png) no-repeat right bottom;
 }
-.welcome__description {
-  color: var(--text-color);
-  font: 500 18px/29px Ubuntu, sans-serif;
-}
+
 .welcome__title {
   max-width: 645px;
   color: var(--title-color);
