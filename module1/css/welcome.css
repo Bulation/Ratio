@@ -1,3 +1,7 @@
+.welcome {
+  max-width: 1260px;
+}
+
 .welcome-container {
   padding-bottom: 100px;
   background: url(../assets/welcome.png) no-repeat right bottom;
@@ -8,6 +12,7 @@
   color: var(--title-color);
   font: 700 80px/88px Ubuntu, sans-serif;
 }
+
 .welcome__text {
   margin: 50px 0;
   max-width: 380px;
@@ -17,8 +22,13 @@
   width: fit-content;
   text-align: center;
   padding: 15px 37px;
+  transition: color 0.3s ease-in;
   background-color: var(--link-bg);
   font-weight: 700;
   color: var(--light-color);
   border-radius: 50px;
+}
+
+.welcome__link:hover {
+  color: var(--text-hover-color);
 }
