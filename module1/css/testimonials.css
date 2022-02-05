@@ -18,6 +18,7 @@
 }
 
 .testimonial {
+  width: 100%;
   position: relative;
   flex-shrink: 0;
   overflow: hidden;
@@ -164,4 +165,24 @@
   left: auto;
   right: 0;
   transform: rotate(40deg);
+}
+
+@media screen and (max-width: 1024px) {
+  .testimonials-container {
+    padding: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .testimonial-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .testimonials-list-container {
+    overflow: hidden;
+  }
+  .testimonial {
+    padding: 20px;
+  }
 }
