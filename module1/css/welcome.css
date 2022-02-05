@@ -32,3 +32,16 @@
 .welcome__link:hover {
   color: var(--text-hover-color);
 }
+
+@media screen and (max-width: 1024px) {
+  .welcome-container {
+    padding-bottom: 0;
+    background: none;
+  }
+  .welcome__title {
+    font: 700 30px/45px Ubuntu, sans-serif;
+  }
+  .welcome__text {
+    margin: 20px 0;
+  }
+}
