@@ -1,9 +1,10 @@
 .header-container {
   display: flex;
-  max-width: 1120px;
+  max-width: 400px;
+  width: 100%;
   font: 500 16px/26px Ubuntu, sans-serif;
   padding-top: 65px;
-  gap: 120px;
+  justify-content: space-between;
 }
 
 .header__logo {
@@ -21,4 +22,10 @@
 
 .header-navigation__link:hover {
   color: var(--text-hover-color);
+}
+
+@media screen and (max-width: 420px) {
+  .header-navigation__list {
+    gap: 20px;
+  }
 }
