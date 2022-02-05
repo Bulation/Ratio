@@ -4,6 +4,7 @@
 }
 
 .main-container {
+  width: calc(100% - 40px);
   max-width: 1260px;
   margin: 0 auto;
 }
@@ -25,4 +26,14 @@
 .section-title {
   color: var(--title-color);
   font: 700 40px/52px Ubuntu, sans-serif;
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    font: 500 16px/26px Ubuntu, sans-serif;
+    padding-top: 50px;
+  }
+  .section-title {
+    font: 700 20px/30px Ubuntu, sans-serif;
+  }
 }
