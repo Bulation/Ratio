@@ -1,11 +1,18 @@
 :root {
   --text-color: #4B5D68;
+  --footer-text-color: #212353;
   --text-hover-color: #212353;
+  --footer-text-hover-color: #9C69E2;
   --title-color: #212353;
   --item-link-color: #212353;
   --light-color: #FFFFFF;
   --gradient-color: #F6FAFD;
+  --testimonial-shadow-color: #9C69E21A;
+  --first-testimonial-shadow-color: #9C69E24D;
+  --bullet-active-bg: #F063B8;
   --link-bg: #9C69E2;
+  --testimonials-bg: #9C69E2;
+  --socials-bg: #212353;
   --about-bg: #F063B826;
   --border-radius: 50px;
   --items-count: 2;
