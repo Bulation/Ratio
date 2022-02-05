@@ -110,6 +110,12 @@
   gap: 20px;
 }
 
+.arrows-pagination__arrow-container {
+  padding-top: 7px;
+  cursor: pointer;
+  height: 14px;
+}
+
 .arrows-pagination__arrow {
   display: block;
   cursor: pointer;
