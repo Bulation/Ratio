@@ -1,5 +1,7 @@
 .footer-container {
   display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
   color: var(--footer-text-color);
   justify-content: space-between;
   padding: 165px 0 65px 0;
@@ -74,4 +76,10 @@
 
 .socials-list__item_instagram {
   background-image: url(../assets/instagram.svg);
+}
+
+@media screen and (max-width: 768px) {
+  .footer-container {
+    justify-content: center;
+  }
 }
