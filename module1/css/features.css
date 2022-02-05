@@ -10,6 +10,8 @@
 
 .item {
   display: flex;
+  justify-content: center;
+  align-items: center;
   font: 400 16px/26px Ubuntu, sans-serif;
   width: calc(100% / var(--items-count) - (var(--items-gap) / var(--items-count)));
   gap: 30px;
@@ -108,4 +110,37 @@
 .features-headline__subtitle {
   margin-top: 50px;
   text-align: center;
+}
+
+@media screen and (max-width: 1024px) {
+  :root {
+    --items-count: 1;
+    --items-gap: 20px;
+  }
+  .features-items {
+    padding-top: 30px;
+  }
+  .features-headline__subtitle {
+    margin-top: 20px;
+  }
+  .item {
+    background-position: center;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .item {
+    flex-direction: column;
+    gap: 0;
+  }
+  .item__img {
+    padding: 0;
+  }
+  .item__description {
+    padding: 0;
+  }
+  .item__text {
+    margin: 10px 0;
+    min-height: auto;
+  }
 }
