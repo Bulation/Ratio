@@ -9,7 +9,7 @@
 .header__logo {
   width: 50px;
   height: 35px;
-  background: url(../assets/logo.svg);
+  background: url(../assets/logo.svg) no-repeat;
 }
 
 .header-navigation__list {
