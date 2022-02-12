@@ -24,7 +24,7 @@
   overflow: hidden;
   border: 1px solid var(--testimonials-bg);
   max-width: 400px;
-  box-shadow: 0px 20px 0px 0px var(--testimonial-shadow-color);
+  box-shadow: 0 20px 0 0 var(--testimonial-shadow-color);
   background-color: var(--light-color);
   padding: 55px 60px 55px 40px;
   border-radius: 20px;
@@ -41,12 +41,12 @@
 }
 
 .testimonials-list__testimonial_first {
-  box-shadow: 0px 20px 0px 0px var(--first-testimonial-shadow-color);
+  box-shadow: 0 20px 0 0 var(--first-testimonial-shadow-color);
   padding: 60px 70px 50px 70px;
   max-width: 645px;
 }
 
-.testimonial__img img {
+.testimonial__img {
   width: 90px;
   height: 90px;
   object-fit: cover;
