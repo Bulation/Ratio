@@ -24,3 +24,5 @@ export const COLORS = {
   '4096': 'rgb(250, 88, 73)'
 }
 export const WIN_VALUE = 2048;
+export const ALLOWED_TIME = 50;
+export const ALLOWED_DISTANCE = 60;
