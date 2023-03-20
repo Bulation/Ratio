@@ -6,7 +6,6 @@ export interface IGameState {
   boardsStack: string,
   scoresStack: string,
   winValue: string,
-  isWin: string,
-  results: string,
+  is2048Reached: string,
   records: string
 }

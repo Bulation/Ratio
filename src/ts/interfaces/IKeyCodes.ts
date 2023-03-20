@@ -1,8 +1,8 @@
-import { IDirections } from "./IDirections";
+import { Directions } from '../types/Directions';
 
 export interface IKeyCodes {
-  'ArrowUp': keyof IDirections,
-  'ArrowRight': keyof IDirections,
-  'ArrowDown': keyof IDirections,
-  'ArrowLeft': keyof IDirections
+  ArrowUp: Directions;
+  ArrowRight: Directions;
+  ArrowDown: Directions;
+  ArrowLeft: Directions;
 }
