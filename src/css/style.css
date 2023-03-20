@@ -2,11 +2,13 @@
 body {
   font-family: Roboto, Verdana, Tahoma, Geneva, sans-serif;
 }
+
 .game-title {
   margin: 0 auto;
   text-align: center;
   font-size: 80px;
 }
+
 .score-container {
   display: flex;
   gap: 20px;
@@ -14,6 +16,7 @@ body {
   margin: 0 auto;
   justify-content: center;
 }
+
 .score, .best-score {
   position: relative;
   display: block;
@@ -27,6 +30,7 @@ body {
   margin-top: 8px;
   text-align: center;
 }
+
 .board {
   width: 500px;
   margin: 15px auto;
@@ -43,6 +47,7 @@ body {
   gap: 5px;
   margin-bottom: 5px;
 }
+
 .board__cell {
   width: 94px;
   height: 94px;
@@ -65,7 +70,6 @@ body {
   position: absolute;
   background: #eee4da;
   box-shadow: 0 0 30px 10px rgb(243 215 116 / 0%), inset 0 0 0 1px rgb(255 255 255 / 0%);
-  font-family: Roboto, Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
   font-size: 35px;
   transition: all 0.1s ease-in;
@@ -73,36 +77,73 @@ body {
 
 .popup {
   position: fixed;
-  width: 100vw;
-  height: 100vh;
-  top: 0px;
-  left: 0px;
-  background-color: #29292999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.popup-wrapper {
-  position: relative;
+  left: 50%;
+  z-index: 3;
+  transform: translate(-50%, -50%);
+  top: 50%;
   flex-wrap: wrap;
   background-color: #ffffff;
   text-align: center;
   color: #000;
-  width: 50%;
-  height: 50%;
-  padding: 60px 20px;
-  overflow-y: scroll;
+  width: calc(100% - 20px);
+  margin: 0 auto;
+  max-width: 400px;
+  max-height: 100%;
+  height: auto;
+  transition: all 0.2s ease 0.1s;
+  overflow-y: auto;
+}
+
+.popup-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #29292999;
+  transition: all 0.2s ease 0.1s;
+}
+
+.popup-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.popup-body {
+  height: 100%;
+}
+
+.popup-title {
+  padding: 20px 0;
+}
+
+.popup-warn {
+  padding: 20px 0;
 }
 
 .popup-animated {
-  animation: appear 200ms ease 100ms;
+  animation: appearPopup 200ms ease 100ms;
   animation-fill-mode: backwards;
 }
 
 .popup-animate-out {
-  animation: appear 200ms ease 100ms;
+  animation: appearPopup 200ms ease 100ms;
   animation-direction: reverse;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.btn:disabled {
+  background-color: red;
 }
 
 .game-btns-container {
@@ -151,17 +192,13 @@ body {
 .popup-btn {
   margin: 10px auto;
 }
+
 .popup-close-btn {
   width: 52px;
   height: 52px;
-  position: absolute;
   font: 700 20px/0px Verdana;
-  top: 0;
-  right: 0;
   background: none;
   color: #000000;
-  border: 2px solid gold;
-  border-radius: 50%;
   cursor: pointer;
 }
 
@@ -169,7 +206,7 @@ body {
   cursor: pointer;
 }
 
-.results-table, .records-table {
+.records-table {
   margin: 20px auto;
 }
 
@@ -194,7 +231,9 @@ body {
 }
 
 .instruction {
+  max-width: 500px;
   width: 100%;
+  padding: 10px;
   margin: 10px auto;
   text-align: center;
 }
@@ -225,9 +264,6 @@ body {
   .game-title {
     font-size: 25px;
   }
-  .popup-wrapper {
-    width: 90%;
-  }
 }
 
 @keyframes appear {
@@ -239,5 +275,17 @@ body {
   100% {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@keyframes appearPopup {
+  0% {
+    opacity: 0;
+    transform: scale(0) translate(-50%, -50%);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: scale(1) translate(-50%, -50%);
   }
 }
