@@ -1,11 +1,11 @@
-export function getDate(time: number) {
+export function getDate(time: number) { // функция для перевода количество секунд во время формата HH:MM:SS
   const hour = Math.floor(time / 3600)
   const minute = Math.floor(time / 60);
   const second = time - 60 * minute;
   let stringHour = String(hour);
   let stringMinute = String(minute);
   let stringSecond = String(second);
-  if (hour < 10) {
+  if (hour < 10) { // если значение меньше 10, то добавляем ведущий ноль
     stringHour = `0${hour}`;
   }
   if (minute < 10) {
