@@ -1,15 +1,11 @@
-export const BOARD_SIZE = 5;
-export const PROBABILITY = 0.9;
+export const BOARD_SIZE = 5; // размер игрового поля
+export const PROBABILITY = 0.9; // вероятность выпадения двойки
 export const MIN_DEFAULT_NUM = 2;
-export const MAX_DEFAULT_NUM = 4;
-export const NUMBERS_ON_TOP_OF_BOARD = [0, 1, 2, 3, 4];
-export const NUMBERS_ON_RIGHT_OF_BOARD = [4, 9, 14, 19, 24];
-export const NUMBERS_ON_BOTTOM_OF_BOARD = [20, 21, 22, 23, 24];
-export const NUMBERS_ON_LEFT_OF_BOARD = [0, 5, 10, 15, 20];
-export const DEFAULT_FONT_SIZE = 40;
-export const FONT_COEF = 5;
-export const STATE_KEYS = ['bestScore', 'score', 'time', 'board', 'boardsStack', 'scoresStack', 'winValue', 'isWin', 'results', 'records'];
-export const COLORS = {
+export const MAX_DEFAULT_NUM = 4; // выпадают только числа 2 и 4
+export const DEFAULT_FONT_SIZE = 40; // размер шрифта для чисел
+export const FONT_COEF = 5; // коэффициент уменьшения размера шрифта при увеличении количества цифр
+export const STATE_KEYS = ['bestScore', 'score', 'time', 'board', 'boardsStack', 'scoresStack', 'winValue', 'isWin', 'records']; // массив ключей по которым хранятся значения в локал сторедж
+export const COLORS = { // объект, в котором ключи - значения чисел и значения - цвет, который должен соответствовать числовому значению ключа
   '2': 'rgb(230, 230, 250)',
   '4': 'rgb(254, 222, 0)',
   '8': 'rgb(108, 119, 159)',
@@ -23,6 +19,7 @@ export const COLORS = {
   '2048': 'rgb(153, 4, 254)',
   '4096': 'rgb(250, 88, 73)'
 }
-export const WIN_VALUE = 2048;
-export const ALLOWED_TIME = 50;
-export const ALLOWED_DISTANCE = 60;
+export const WIN_VALUE = 2048; // значение, необходимое для выигрыша
+export const ALLOWED_TIME = 50; // минимально разрешенное время для свайпа мышью
+export const ALLOWED_DISTANCE = 60; // минимально разрешенная дистанция для свайпа мышью
+export const COUNT_PER_PAGE = 10; // количество результатов на одной странице в таблице рекордов
