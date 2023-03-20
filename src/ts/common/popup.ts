@@ -1,23 +1,21 @@
 import Component from './component';
 
 export default class Popup extends Component {
-  overlay: Component;
+  popup: Component;
   title: Component<HTMLElement>;
   constructor(
     parent: HTMLElement,
     tagName: keyof HTMLElementTagNameMap,
     className: string,
     content: string,
-    popupContent: string
   ) {
     super(parent, tagName, className, content);
-    this.overlay = new Component(this.node, 'div', 'popup-wrapper popup-animated', '');
-    this.title = new Component(this.overlay.node, 'h2', '', popupContent);
-    this.overlay.setListener('animationend', () => this.overlay.removeClass('popup-animated'));
+    this.popup = new Component(this.node, 'div', 'popup popup-animated', '');
+    this.popup.setListener('animationend', () => this.popup.removeClass('popup-animated')); // cнимаем класс, отвечающий за анимацию по окончании анимации
   }
 
   destroy(): void {
-    this.overlay.setListener('animationend', () => this.node.remove());
-    this.overlay.setClass('popup-animate-out');
+    this.popup.setListener('animationend', () => this.node.remove()); // устанавливаем класс анимации исчезновения попапа и по окончании удаляем узел из дома
+    this.popup.setClass('popup-animate-out');
   }
 }
