@@ -4,7 +4,7 @@ export const MIN_DEFAULT_NUM = 2;
 export const MAX_DEFAULT_NUM = 4; // выпадают только числа 2 и 4
 export const DEFAULT_FONT_SIZE = 40; // размер шрифта для чисел
 export const FONT_COEF = 5; // коэффициент уменьшения размера шрифта при увеличении количества цифр
-export const STATE_KEYS = ['bestScore', 'score', 'time', 'board', 'boardsStack', 'scoresStack', 'winValue', 'isWin', 'records']; // массив ключей по которым хранятся значения в локал сторедж
+export const STATE_KEYS = ['bestScore', 'score', 'time', 'board', 'boardsStack', 'scoresStack', 'winValue', 'is2048Reached', 'records']; // массив ключей по которым хранятся значения в локал сторедж
 export const COLORS = { // объект, в котором ключи - значения чисел и значения - цвет, который должен соответствовать числовому значению ключа
   '2': 'rgb(230, 230, 250)',
   '4': 'rgb(254, 222, 0)',
