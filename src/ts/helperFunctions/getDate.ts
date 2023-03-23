@@ -1,7 +1,7 @@
 export function getDate(time: number) { // функция для перевода количество секунд во время формата HH:MM:SS
   const hour = Math.floor(time / 3600)
-  const minute = Math.floor(time / 60);
-  const second = time - 60 * minute;
+  const minute = Math.floor((time - 3600 * hour) / 60);
+  const second = time - (60 * minute + hour * 3600);
   let stringHour = String(hour);
   let stringMinute = String(minute);
   let stringSecond = String(second);
