@@ -168,7 +168,8 @@ export default class GameModel {
       if (fromCell.value && fromCell.value === foreCell.value && !foreCell.isMerged) {
         // если значения совпадают и ячейка еще не была замержена, то сразу возвращаем объект, который содержит ячейку и координаты
         return {
-          cell: foreCell,
+          value: foreCell.value,
+          isMerged: foreCell.isMerged,
           rowIndex: foreCell.rowIndex,
           colIndex: foreCell.colIndex
         };
@@ -176,7 +177,8 @@ export default class GameModel {
       if (!foreCell.value) {
         // если ячейка пустая, то сохраняем ее и ее координаты в переменную
         toCellObj = {
-          cell: foreCell,
+          value: foreCell.value,
+          isMerged: foreCell.isMerged,
           rowIndex: foreCell.rowIndex,
           colIndex: foreCell.colIndex
         };
@@ -216,7 +218,7 @@ export default class GameModel {
           continue;
         }
         let isMerged = false; // флаг, показывающий, будут ли мержиться ячейки
-        if (fromCellObj.value === toCellObj.cell.value) {
+        if (fromCellObj.value === toCellObj.value) {
           // если значения одинаковые
           isMerged = true; // то значит эти ячейки надо замержить
           this.updateScore(fromCellObj.value); // обновляем счет
