@@ -1,0 +1,1 @@
+export type Directions =  'toUp' | 'toRight' | 'toDown' | 'toLeft';
