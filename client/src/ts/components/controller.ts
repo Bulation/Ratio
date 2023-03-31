@@ -7,6 +7,9 @@ import { RecordsModel } from './models/recordsModel';
 import Timer from './models/timer';
 import Score from './models/score';
 import Table from './models/table';
+import User from './models/user';
+import API from '../api/api';
+
 export class Controller {
   view: View;
   gameModel: GameModel;
@@ -21,6 +24,7 @@ export class Controller {
   timer: Timer;
   score: Score;
   tableModel: Table;
+  user: User;
   constructor(node: HTMLElement) {
     this.timer = new Timer();
     this.score = new Score();
@@ -36,13 +40,22 @@ export class Controller {
     this.gameModel.initGame(storageData);
     this.score.initScore(storageData);
     this.timer.initTime(storageData);
-    if (this.storageModel.state.records) {
-      this.recordsModel.loadRecords(JSON.parse(this.storageModel.state.records)); // загрузка данных из локал стореджа
-    }
     this.handleKey();
     this.handlePointer();
     this.handleSavingState();
     this.handleResize(); // методы для обработки событий
+    if (!this.storageModel.state.login) {
+      // если в локал сторедже нет имени пользователя, то рендерим попап с формой для ввода имени
+      this.view.renderLoginForm();
+      this.gameModel.playable = false;
+    } else {
+      // иначе сохраняем то значение, которое есть в локал сторедже
+      this.user = new User(this.storageModel.state.login);
+    }
+    if (this.storageModel.state.time) {
+      // если в локал сторедже уже есть сохраненная игра, то отправляем запрос на обновление времени из локал стореджа
+      API.initTime({ time: Number(this.storageModel.state.time) });
+    } 
   }
 
   handleResize() {
@@ -60,7 +73,7 @@ export class Controller {
   }
 
   bindViewMethods() {
-    this.gameModel.onUpdate = this.view.gameView.renderNum.bind(this.view.gameView); // при появлении нового числа в модеди игрового поля это число рендерится во вью
+    this.gameModel.onUpdateBoard = this.view.gameView.renderNum.bind(this.view.gameView); // при появлении нового числа в модеди игрового поля это число рендерится во вью
     this.gameModel.moveTo = this.view.gameView.moveTo.bind(this.view.gameView); // перемещение чисел
     this.gameModel.onMerge = this.view.gameView.renderMerging.bind(this.view.gameView); // мерж чисел
     this.timer.onUpdateTime = this.view.header.renderTime.bind(this.view.header); // при обновлении времени оно перерендеривается
@@ -69,22 +82,22 @@ export class Controller {
   }
 
   bindMethods() {
-    this.gameModel.checkGameStatus = () => {
+    this.gameModel.checkGameStatus = async () => {
       this.gameModel.playable = true; // игра становится активной
       if (!this.gameModel.isEmptyCell() && !this.gameModel.isMergeSiblingNumbers()) {
-        this.timer.stopTime();
+        this.timer.stopTimer();
         this.gameModel.onGameOver();
         this.gameModel.playable = false; // если нет пустых ячеек и нельзя ничего замержить, то останавливается время, рендерится попап проигрыша, игра становится не активной
       }
       if (!this.gameModel.isWin()) {
         return; // если победа не произошла, то выходим из функции
       }
-      this.recordsModel.saveRecord(this.timer.time, this.gameModel.valueForWin); //если победа произошла, то сохраняем рекорд
       this.gameModel.valueForWin *= 2; // меняем значение, которое нужно для победы. Необоходимо для бесконечной игры
       if (!this.gameModel.is2048Reached) {
         // если же произошла победа и игрок впервые достиг 2048
+        await API.addUser({ user: this.user.name }); // добавляем в базу данных имя пользователя
         this.gameModel.playable = false; // игра становится не активной
-        this.timer.stopTime(); // время останавливается
+        this.timer.stopTimer(); // время останавливается
         this.gameModel.onWin(); // рендерится попап выигрыша
         this.gameModel.is2048Reached = true; // указываем, что игрок достиг 2048
       }
@@ -97,8 +110,9 @@ export class Controller {
     this.gameModel.onWin = this.view.renderWinPopup.bind(this.view); // если произошел выигрыш, то рендерится соответствующий попап
     this.view.isBackBtnEnable = this.gameModel.isPreviousBoard.bind(this.gameModel); // от того, есть ли в стеке игровых полей игровое поле, зависит активность кнопки Back
     this.view.pauseGame = () => (this.gameModel.playable = false); // при открытии попапа ставим игру на паузу
-    this.view.restartGame = () => {
+    this.view.restartGame = async () => {
       // рестарт игры, если нажали на New Game
+      API.initTime({ time: 0 });
       this.gameModel.initGame();
       this.timer.initTime();
       this.score.initScore();
@@ -110,7 +124,7 @@ export class Controller {
       this.gameModel.board.forEach((row, rowInd) =>
         row.forEach((cell, cellInd) => {
           if (cell && cell.value) {
-            this.gameModel.onUpdate([rowInd, cellInd], cell.value); // пробегаемся по ячейкам и перерендериваем поле
+            this.gameModel.onUpdateBoard([rowInd, cellInd], cell.value); // пробегаемся по ячейкам и перерендериваем поле
           }
         })
       );
@@ -120,8 +134,8 @@ export class Controller {
         this.gameModel.onUpdateBoardsStack(false);
       }
     };
-    this.view.continueTimer = this.timer.startTime.bind(this.timer); // метод для продолжения хода времени
-    this.view.onSort = (sortName: 'time' | 'winValue') => {
+    this.view.continueTimer = this.timer.startTimer.bind(this.timer); // метод для продолжения хода времени
+    this.view.onSort = (sortName: 'time' | 'user') => {
       // метод для сортировки значений в таблице рекордов
       this.tableModel.changeOrder(sortName); // меняем порядок сортировки для того столбца, название которого передано в метод
       this.recordsModel.sortRecords(sortName, this.tableModel[sortName]); // сортируем результаты в модели результатов
@@ -135,11 +149,15 @@ export class Controller {
       this.view.editPagination(this.recordsModel.pageNumber, this.recordsModel.records.length); // редактируем кнопки пагинации и текст номера
     };
     this.view.continueGame = () => (this.gameModel.playable = true); // метод для продолжения игры, игра вновь становится активной
-    this.view.openRecordsPopup = () => {
-      // если нажата кнопка открытия таблицы рекордов
+    this.view.openRecordsPopup = async () => {
+      this.recordsModel.loadRecords(await API.getUsers());
       this.view.renderRecordsPopup(this.recordsModel.getSlicedData(), this.recordsModel.pageNumber); // рендерим попап, передавая туда данные из модели рекордов
       this.view.editPagination(this.recordsModel.pageNumber, this.recordsModel.records.length); // устанавливаем атрибуты для кнопок и текст номера страницы
     };
+    this.view.onSend = (name: string) => {
+      this.user = new User(name);
+      this.gameModel.playable = true;
+    }
   }
 
   handleSavingState() {
@@ -154,9 +172,9 @@ export class Controller {
         scoresStack: JSON.stringify(this.score.scoresStack),
         winValue: String(this.gameModel.valueForWin),
         is2048Reached: String(this.gameModel.is2048Reached),
-        records: this.recordsModel.records.length ? JSON.stringify(this.recordsModel.records) : ''
+        login: this.user.name
       });
-    };
+    }; 
   }
 
   handleKey() {
@@ -227,14 +245,9 @@ export class Controller {
     };
     document.body.addEventListener('mousedown', (e) => {
       // установка обработчиков на документе при клике
-      e.preventDefault();
       startEvent(e);
     });
-    document.body.addEventListener('mousemove', (e) => {
-      e.preventDefault();
-    });
     document.body.addEventListener('mouseup', (e) => {
-      e.preventDefault();
       stopEvent(e);
     });
     this.view.gameView.gameBoard.setListener('touchmove', (e) => {
