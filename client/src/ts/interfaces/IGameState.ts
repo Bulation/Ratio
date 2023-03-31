@@ -7,5 +7,5 @@ export interface IGameState {
   scoresStack: string,
   winValue: string,
   is2048Reached: string,
-  records: string
+  login: string,
 }
