@@ -174,7 +174,7 @@ export class Controller {
         is2048Reached: String(this.gameModel.is2048Reached),
         login: this.user.name
       });
-    }; 
+    };
   }
 
   handleKey() {

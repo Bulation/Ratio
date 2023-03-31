@@ -68,7 +68,7 @@ export class View {
     const form = new Component(formPopup.popup.node, 'form', 'form', '');
     const input = new Component<HTMLInputElement>(form.node, 'input', 'form__input', '');
     input.node.placeholder = 'Enter your name';
-    const submitBtn = new Component<HTMLButtonElement>(form.node, 'button', 'form__btn', 'Submit');
+    const submitBtn = new Component<HTMLButtonElement>(form.node, 'button', 'btn form__btn', 'Submit');
     const errorMsg =  new Component(form.node, 'div', 'form__error-msg', "Name must be longer than 2 symbols and don't contain numbers")
     submitBtn.node.type = 'submit';
     form.setListener('submit', (e) => {
@@ -78,6 +78,7 @@ export class View {
         formPopup.backDrop.destroy();
       } else {
         errorMsg.setClass('form__error-msg_active');
+        input.setClass('form__input_invalid');
       }
     })
   }
