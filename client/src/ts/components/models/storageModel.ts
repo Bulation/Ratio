@@ -10,7 +10,7 @@ export class StorageModel {
     'scoresStack': '',
     'winValue': '',
     'is2048Reached': '',
-    'records': ''
+    'login': ''
   };
   constructor() {}
 
