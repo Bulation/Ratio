@@ -13,19 +13,19 @@ export default class Timer {
     } else {
       this.time = 0;
     }
-    this.stopTime(); // уничтожение интервала
+    this.stopTimer(); // уничтожение интервала
     this.onUpdateTime(this.time); // апдейт времени во вьюхе
-    this.startTime(); // старт интервала
+    this.startTimer(); // старт интервала
   }
 
-  startTime() {
+  startTimer() {
     this.timer = setInterval(() => {
       this.time++;
       this.onUpdateTime(this.time);
     }, 1000);
   }
 
-  stopTime() {
+  stopTimer() {
     const timer = this.timer;
     clearInterval(timer);
   }
