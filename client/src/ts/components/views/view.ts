@@ -30,6 +30,7 @@ export class View {
   parentNode: HTMLElement;
   tbody: Component;
   onSend: (name: string) => void;
+  preloader: Component<HTMLElement>;
   constructor(parentNode: HTMLElement) {
     this.parentNode = parentNode;
   }
@@ -68,8 +69,18 @@ export class View {
     const form = new Component(formPopup.popup.node, 'form', 'form', '');
     const input = new Component<HTMLInputElement>(form.node, 'input', 'form__input', '');
     input.node.placeholder = 'Enter your name';
-    const submitBtn = new Component<HTMLButtonElement>(form.node, 'button', 'btn form__btn', 'Submit');
-    const errorMsg =  new Component(form.node, 'div', 'form__error-msg', "Name must be longer than 2 symbols and don't contain numbers")
+    const submitBtn = new Component<HTMLButtonElement>(
+      form.node,
+      'button',
+      'btn form__btn',
+      'Submit'
+    );
+    const errorMsg = new Component(
+      form.node,
+      'div',
+      'form__error-msg',
+      "Name must be longer than 2 symbols and don't contain numbers"
+    );
     submitBtn.node.type = 'submit';
     form.setListener('submit', (e) => {
       e.preventDefault();
@@ -80,7 +91,7 @@ export class View {
         errorMsg.setClass('form__error-msg_active');
         input.setClass('form__input_invalid');
       }
-    })
+    });
   }
 
   renderScore = (value: number) => {
@@ -127,7 +138,7 @@ export class View {
     });
   }
 
-  renderRecordsPopup(tableData: IRecord[], pageNumber: number) {
+  renderRecordsPopup() {
     const recordsPopup = new PopupView('Records table'); // создается попап с таблицей рекордов
     recordsPopup.backDrop.setListener('click', (e) => {
       // при клике на бэкдроп попап закрывается и игра продолжается
@@ -146,12 +157,8 @@ export class View {
         this.continueGame();
       }
     ); // создается крестик при клике по которому уничтожается попап и игра продолжается
-    if (!tableData.length) {
-      new Component(recordsPopup.popup.node, 'div', 'popup-warn', 'There is no records'); // если в таблице нет данных о рекордах, то рендерится текст, что рекордов нет и функция завершает свою работу
-      return;
-    }
     this.tableWrapper = new Component(recordsPopup.popup.node, 'div', 'table-wrapper', ''); // создается обертка для таблицы
-    this.renderTable(tableData, pageNumber); // рендерится таблица
+    this.renderPreloader();
     this.pagination = new PaginationView( // рендерится пагинация
       recordsPopup.popup.node,
       'div',
@@ -159,6 +166,16 @@ export class View {
       '',
       this.paginationClickHandle
     );
+  }
+
+  renderPreloader() {
+    // рендер прелоадера. Показывается при загрузке данных
+    this.preloader = new Component(this.tableWrapper.node, 'div', 'preloader', '');
+    new Component(this.preloader.node, 'div', 'preloader__dot', '');
+    const dotsList = new Component(this.preloader.node, 'div', 'preloader__dots-list', '');
+    new Component(dotsList.node, 'span', '', '');
+    new Component(dotsList.node, 'span', '', '');
+    new Component(dotsList.node, 'span', '', '');
   }
 
   editPagination(pageNumber: number, countOfItems: number) {
@@ -172,22 +189,34 @@ export class View {
   }
 
   renderTable(tableData: IRecord[], pageNumber: number) {
+    this.preloader.destroy(); // уничтожение лоадера
+    if (!tableData.length) {
+      new Component(this.tableWrapper.node, 'div', '', 'There is no records');
+      return;
+    }
     this.table = new Component(this.tableWrapper.node, 'table', 'records-table', ''); // создается таблица
     const thead = new Component(this.table.node, 'thead', '', ''); // шапка таблицы
     new Component(thead.node, 'th', '', '№'); // первая колонка со значением номера
-    const timeHead = new Component(thead.node, 'th', `table-header time-header`, 'Time').setListener('click', () => {
+    const timeHead = new Component(
+      thead.node,
+      'th',
+      `table-header time-header`,
+      'Time'
+    ).setListener('click', () => {
       this.tbody.destroy(); // при клике на ячейку уничтожается таблица и идет сортировка данных по времени
       this.toggleSortClass(timeHead); // меняется класс для ячейки
       this.onSort('time');
     });
-    const valueHead = new Component(thead.node, 'th', `table-header value-header`, 'Value').setListener(
-      'click',
-      () => {
-        this.tbody.destroy();
-        this.toggleSortClass(valueHead);
-        this.onSort('user'); // сортировка по значению
-      }
-    );
+    const valueHead = new Component(
+      thead.node,
+      'th',
+      `table-header value-header`,
+      'Value'
+    ).setListener('click', () => {
+      this.tbody.destroy();
+      this.toggleSortClass(valueHead);
+      this.onSort('user'); // сортировка по значению
+    });
     this.renderTableBody(tableData, pageNumber);
   }
 
