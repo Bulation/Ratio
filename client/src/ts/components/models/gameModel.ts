@@ -17,7 +17,7 @@ export default class GameModel {
   valueForWin: number; // значение, необходимое для выигрыша. Изначально 2048, затем увеличивается вдвое
   is2048Reached = false; // флаг, показывающий, достиг ли игрок значения 2048
   moveTo: (last: number[], current: number[], isMerge: boolean) => Promise<void>; // метод, который передвигает все ячейки поля. Реализуется в контроллере
-  onUpdate: (coordinates: number[], num: number) => void; // метод, рендерящий числа в ячейках. Реализуется в контроллере.
+  onUpdateBoard: (coordinates: number[], num: number) => void; // метод, рендерящий числа в ячейках. Реализуется в контроллере.
   onMerge: (rowInd: number, cellInd: number, value: number) => void; // метод, который удваивает значение ячейки во вьюхе. Реализуется в контроллере
   onGameOver: () => void; // метод, рендерящий попап о геймовере. Реализуется в контроллере
   onWin: () => void; // метод, рендерящий попап о выигрыше. Реализуется в контроллере.
@@ -52,7 +52,7 @@ export default class GameModel {
       this.board.forEach((row, rowInd) =>
         row.forEach((cell, cellInd) => {
           if (cell.value) {
-            this.onUpdate([rowInd, cellInd], cell.value);
+            this.onUpdateBoard([rowInd, cellInd], cell.value);
           }
         })
       );
@@ -97,7 +97,7 @@ export default class GameModel {
       value: randomNum,
       isMerged: false
     };
-    this.onUpdate(randomIndex, randomNum); // рендер числа во вьюхе
+    this.onUpdateBoard(randomIndex, randomNum); // рендер числа во вьюхе
     this.checkGameStatus(); // проверка статуса игры
   }
 
