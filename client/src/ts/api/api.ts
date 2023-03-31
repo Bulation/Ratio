@@ -7,7 +7,7 @@ const API = {
     return data;
   },
 
-  async addUser(body: { name: string }) {
+  async addUser(body: { user: string }) {
     //body - данные, пришедшие из инпута в попапе при выигрыше
     const response = await fetch(`${BASE_URL}/record`, {
       method: 'POST',
