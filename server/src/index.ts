@@ -5,7 +5,7 @@ import { UserRouter } from './userRouter.js';
 import { API_URL, DB_NAME, LOGIN, PASSWORD, PORT } from './constants.js';
 
 
-export default class Server {
+class Server {
   dbUrl: string;
   port: number;
   app: Application;
