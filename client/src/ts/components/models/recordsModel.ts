@@ -5,13 +5,6 @@ export class RecordsModel {
   records: IRecord[] = []; // массив, в котором хранятся все рекорды
   pageNumber = 1; // номер текущей страницы таблицы рекордов
   constructor() {}
-
-  saveRecord(time: number, winValue: number) { // сохранение рекорда
-    this.records.push({
-      'time': time,
-      'winValue': winValue
-    });
-  }
   
   loadRecords(records: IRecord[]) { // загрузка рекордов из локал стореджа
     this.records = records;
@@ -19,10 +12,10 @@ export class RecordsModel {
 
   sortRecords(sortKey: keyof IRecord, order: string) { // сортировка рекордов по времени или значению
     if (order === 'ASC') {
-      return this.records.sort((a, b) => a[sortKey] - b[sortKey]);
+      return this.records.sort((a, b) => a[sortKey] > b[sortKey] ? 1 : -1);
     }
     if (order === 'DESC') {
-      return this.records.sort((a, b) => b[sortKey] - a[sortKey]);
+      return this.records.sort((a, b) => a[sortKey] > b[sortKey] ? -1 : 1);
     }
   }
 
