@@ -95,11 +95,11 @@ export class Controller {
       this.gameModel.valueForWin *= 2; // меняем значение, которое нужно для победы. Необоходимо для бесконечной игры
       if (!this.gameModel.is2048Reached) {
         // если же произошла победа и игрок впервые достиг 2048
-        await API.addUser({ user: this.user.name }); // добавляем в базу данных имя пользователя
         this.gameModel.playable = false; // игра становится не активной
         this.timer.stopTimer(); // время останавливается
         this.gameModel.onWin(); // рендерится попап выигрыша
         this.gameModel.is2048Reached = true; // указываем, что игрок достиг 2048
+        await API.addUser({ user: this.user.name }); // добавляем в базу данных имя пользователя
       }
     };
     this.gameModel.updateScore = this.score.updateScore.bind(this.score); // если в результате хода произошел мерж, то обновляется счет в модели счета
@@ -150,9 +150,10 @@ export class Controller {
     };
     this.view.continueGame = () => (this.gameModel.playable = true); // метод для продолжения игры, игра вновь становится активной
     this.view.openRecordsPopup = async () => {
-      this.recordsModel.loadRecords(await API.getUsers());
-      this.view.renderRecordsPopup(this.recordsModel.getSlicedData(), this.recordsModel.pageNumber); // рендерим попап, передавая туда данные из модели рекордов
+      this.view.renderRecordsPopup(); // рендерим попап
       this.view.editPagination(this.recordsModel.pageNumber, this.recordsModel.records.length); // устанавливаем атрибуты для кнопок и текст номера страницы
+      this.recordsModel.loadRecords(await API.getUsers()); // загрузка данных с бэка
+      this.view.renderTable(this.recordsModel.getSlicedData(), this.recordsModel.pageNumber); // рендер таблицы с полученными данными
     };
     this.view.onSend = (name: string) => {
       this.user = new User(name);
