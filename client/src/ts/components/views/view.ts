@@ -17,7 +17,7 @@ export class View {
   onBack: () => void; // метод для возвращения поля к предыдущему состоянию
   isBackBtnEnable: () => boolean; // метод, определяющий, активна ли кнопка Back
   backDrop: Popup; // бэкдроп попапа
-  onSort: (sortName: 'time' | 'winValue') => void; // метод для сортировки таблицы рекордов. Реализуется в контроллере
+  onSort: (sortName: 'time' | 'user') => void; // метод для сортировки таблицы рекордов. Реализуется в контроллере
   continueGame: () => void; // метод для продолжения игры
   pauseGame: () => void; // метод для постановки игры на паузу
   pagination: PaginationView; // компонент пагинации
@@ -29,6 +29,7 @@ export class View {
   gameView: GameView; // вьюха, отрисовывающая игровое поле
   parentNode: HTMLElement;
   tbody: Component;
+  onSend: (name: string) => void;
   constructor(parentNode: HTMLElement) {
     this.parentNode = parentNode;
   }
@@ -60,6 +61,25 @@ export class View {
       'instruction',
       'How to play: use arrow keys, swipe on phone or hold down the left mouse button and drag the mouse in different directions to move the numbers.'
     );
+  }
+
+  renderLoginForm() {
+    const formPopup = new PopupView('Login');
+    const form = new Component(formPopup.popup.node, 'form', 'form', '');
+    const input = new Component<HTMLInputElement>(form.node, 'input', 'form__input', '');
+    input.node.placeholder = 'Enter your name';
+    const submitBtn = new Component<HTMLButtonElement>(form.node, 'button', 'form__btn', 'Submit');
+    const errorMsg =  new Component(form.node, 'div', 'form__error-msg', "Name must be longer than 2 symbols and don't contain numbers")
+    submitBtn.node.type = 'submit';
+    form.setListener('submit', (e) => {
+      e.preventDefault();
+      if (input.node.value.length >= 2 && input.node.value.match(/\d/g) === null) {
+        this.onSend(input.node.value);
+        formPopup.backDrop.destroy();
+      } else {
+        errorMsg.setClass('form__error-msg_active');
+      }
+    })
   }
 
   renderScore = (value: number) => {
@@ -164,7 +184,7 @@ export class View {
       () => {
         this.tbody.destroy();
         this.toggleSortClass(valueHead);
-        this.onSort('winValue'); // сортировка по значению
+        this.onSort('user'); // сортировка по значению
       }
     );
     this.renderTableBody(tableData, pageNumber);
@@ -176,7 +196,7 @@ export class View {
       const tr = new Component(this.tbody.node, 'tr', '', ''); // создание строки таблицы
       new Component(tr.node, 'td', '', `${i + 1 + COUNT_PER_PAGE * (pageNumber - 1)}`); // создание ячейки текущего номера
       new Component(tr.node, 'td', '', `${getDate(tableData[i].time)}`); // рендер ячейки со временем
-      new Component(tr.node, 'td', '', `${tableData[i].winValue}`); // рендер ячейки со значением
+      new Component(tr.node, 'td', '', `${tableData[i].user}`); // рендер ячейки со значением
     }
   }
 
