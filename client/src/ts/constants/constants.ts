@@ -23,4 +23,4 @@ export const WIN_VALUE = 2048; // значение, необходимое дл�
 export const ALLOWED_TIME = 50; // минимально разрешенное время для свайпа мышью
 export const ALLOWED_DISTANCE = 60; // минимально разрешенная дистанция для свайпа мышью
 export const COUNT_PER_PAGE = 10; // количество результатов на одной странице в таблице рекордов
-export const BASE_URL = 'https://two048-back.onrender.com//api/v1';
+export const BASE_URL = 'https://two048-back.onrender.com/api/v1';
