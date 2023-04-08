@@ -7,8 +7,8 @@ import Page from './Page';
 
 export default class Home extends Page {
   parent: HTMLElement;
-  main: Component<HTMLElement>;
-  articlesContainer: Component<HTMLElement>;
+  main: Component;
+  articlesContainer: Component;
   constructor(parent: HTMLElement) {
     super();
     this.parent = parent;

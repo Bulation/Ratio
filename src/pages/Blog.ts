@@ -5,7 +5,7 @@ import Home from './Home';
 export default class Blog {
   parent: HTMLElement;
   home: Home;
-  main: Component<HTMLElement>;
+  main: Component;
   renderBanner: (articleData: IArticle, articleStyles: Record<string, string>) => void;
   renderArticles: () => void;
   renderArticle: (articleData: IArticle) => void;

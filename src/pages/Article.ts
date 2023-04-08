@@ -6,7 +6,7 @@ import { IDetailedArticle } from '../interfaces/IDetailedArticle';
 export default class Article {
   main: Component;
   parent: HTMLElement;
-  article: Component<HTMLElement>;
+  article: Component;
 
   constructor(parent: HTMLElement) {
     this.parent = parent;
