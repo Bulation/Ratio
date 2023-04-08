@@ -1,0 +1,19 @@
+@keyframes navFromRight {
+  0% {
+    transform: translate(100%);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes navToRight {
+  0% {
+    transform: translate(0);
+  }
+
+  100% {
+    transform: translate(100%);
+  }
+}
