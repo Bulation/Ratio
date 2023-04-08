@@ -1,16 +1,17 @@
 import Header from './components/Header/header';
-import About from './pages/About';
+import About from './pages/About/About';
 import API from './api/api';
 import NotFoundPage from './pages/NotFoundPage';
 import Home from './pages/Home';
 import Blog from './pages/Blog';
 import Article from './pages/Article';
 import { IDetailedArticle } from './interfaces/IDetailedArticle';
+import Page from './pages/Page';
 
 export default class Controller {
   about: About;
   header: Header;
-  currentPage: About | NotFoundPage | Home | Blog | Article;
+  currentPage: Page;
   notFoundPage: NotFoundPage;
   home: Home;
   blog: Blog;
