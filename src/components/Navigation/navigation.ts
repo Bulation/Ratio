@@ -69,7 +69,6 @@ export default class Navigation {
   }
 
   addActiveClass(index: number) {
-    console.log(index);
     this.listLinks[index].setClass('navigation__link_active');
     this.activeMenuItem = this.listLinks[index];
   }
