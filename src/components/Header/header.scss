@@ -7,14 +7,15 @@
   padding-bottom: 43px;
 }
 
-.title {
-  font: 700 30px/37px Libre Baskerville;
-  padding: 17px 0 0 16px;
-  color: #ffffff;
-  position: relative;
-  &_dark {
-    color: var(--title-dark-color);
-  }
+.visually-hidden {
+  height: 1px; 
+  overflow: hidden;
+  width: 1px;
+  position: absolute;
+  clip: rect(1px 1px 1px 1px); 
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%); 
+  white-space: nowrap;
 }
 
 @media screen and (max-width: 767px) {

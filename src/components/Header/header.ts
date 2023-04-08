@@ -4,16 +4,15 @@ import Navigation from '../Navigation/navigation';
 import svg from '../../../public/logo.svg?raw';
 
 export default class Header {
-  header: Component<HTMLElement>;
-  headerContainer: Component<HTMLElement>;
-  logo: Component<HTMLElement>;
-  title: Component<HTMLElement>;
-  titleLightText: Component<HTMLElement>;
-  titleDarkText: Component<HTMLElement>;
+  header: Component;
+  headerContainer: Component;
+  logo: Component;
+  title: Component;
   navigation: Navigation;
   isInHome = true;
   constructor(parentNode: HTMLElement) {
     this.header = new Component(parentNode, 'header', 'header', '');
+    this.title = new Component(this.header.node, 'h1', 'visually-hidden', 'Nuntium');
     this.headerContainer = new Component(this.header.node, 'div', 'header-container', '');
     this.logo = new Component(this.headerContainer.node, 'a', 'logo', '').setListener(
       'click',
