@@ -32,7 +32,7 @@ export default class Article {
     articleImage.node.src = articleData.image;
     this.renderArticle(articleData);
     this.renderAuthor(articleData);
-    this.renderPagination(articleData, prevArticle, nextArticle);
+    this.renderPagination(prevArticle, nextArticle);
   }
 
   renderArticle(articleData: IDetailedArticle) {
@@ -104,7 +104,6 @@ export default class Article {
   }
 
   renderPagination(
-    articleData: IDetailedArticle,
     prevArticle: IDetailedArticle | undefined,
     nextArticle: IDetailedArticle | undefined
   ) {
