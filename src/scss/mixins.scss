@@ -1,0 +1,81 @@
+@mixin article-tag {
+  font: 400 20px/27px Open Sans;
+  color: var(--tag-color);
+  @media screen and (max-width: 768px) {
+    margin-bottom: 8px;
+    font: 400 14px/19px Open Sans;
+  }
+  @media screen and (max-width: 600px) {
+    font: 400 12px/16px Open Sans;
+  }
+}
+
+@mixin article-title {
+  font: 700 33px/41px Libre Baskerville;
+  margin-bottom: 12px;
+  cursor: pointer;
+  @media screen and (max-width: 768px) {
+    font: 700 24px/30px Libre Baskerville;
+    margin-bottom: 8px;
+  }
+  @media screen and (max-width: 600px) {
+    font: 700 18px/22px Libre Baskerville;
+  }
+}
+
+@mixin article-name {
+  text-align: center;
+  color: var(--tag-color);
+  position: relative;
+  font: 400 16px/22px Open Sans;
+  padding-right: 12px;
+  &:after {
+    content: '';
+    position: absolute;
+    top: 11px;
+    right: 0;
+    width: 3px;
+    height: 3px;
+    background-color: var(--tag-color);
+    @media screen and (max-width: 768px) {
+      top: 8px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    font: 400 12px/16px Open Sans;
+  }
+  @media screen and (max-width: 600px) {
+    padding-right: 8px;
+  }
+}
+
+@mixin article-time {
+  text-align: center;
+  padding-left: 9px;
+  font: 400 16px/22px Open Sans;
+  color: var(--tag-color);
+  @media screen and (max-width: 768px) {
+    font: 400 12px/16px Open Sans;
+  }
+  @media screen and (max-width: 600px) {
+    padding-left: 5px;
+  }
+}
+
+@mixin article-read-time {
+  text-align: center;
+  font: 400 14px/19px Open Sans;
+  color: var(--tag-color);
+  @media screen and (max-width: 768px) {
+    font: 400 12px/16px Open Sans;
+  }
+}
+
+@mixin article-description {
+  font: 400 16px/24px Open Sans;
+  margin-top: 14px;
+  @media screen and (max-width: 768px) {
+    margin-top: 8px;
+    font: 400 14px/24px Open Sans;
+  }
+}
