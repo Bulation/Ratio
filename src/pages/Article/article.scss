@@ -72,7 +72,7 @@
     text-transform: uppercase;
     margin-bottom: 15px;
     @media screen and (max-width: 768px) {
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
   }
   &__content {
@@ -141,6 +141,9 @@
     &_right {
       justify-content: flex-end;
     }
+    @media screen and (max-width: 768px) {
+      gap: 8px;
+    }
   }
   &__arrow {
     width: 150px;
@@ -175,8 +178,5 @@
     @media screen and (max-width: 600px) {
       display: none;
     }
-  }
-  @media screen and (max-width: 768px) {
-    gap: 8px;
   }
 }
