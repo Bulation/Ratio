@@ -4,14 +4,14 @@ export const ARTICLES_COUNT_PER_PAGE = 3;
 export const MENU_LINKS_OBJECT = [
   {
     content: 'Home',
-    url: '/',
+    url: './',
   },
   {
     content: 'Blog',
-    url: '/blog',
+    url: './blog',
   },
   {
     content: 'About',
-    url: '/about',
+    url: './about',
   },
 ];

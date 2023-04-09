@@ -47,7 +47,7 @@ export default class Home extends Page {
       'article-item articles-list__article-item',
       ''
     ).setListener('click', () => {
-      history.pushState('', '', `/blog/article/${articleData.id}`);
+      history.pushState('', '', `./blog/article/${articleData.id}`);
       const popStateEvent = new PopStateEvent('popstate', { state: '' });
       dispatchEvent(popStateEvent);
     });
@@ -126,7 +126,7 @@ export default class Home extends Page {
       'article-item__title',
       articleData.title
     ).setListener('click', () => {
-      history.pushState('', '', `/blog/article/${articleData.id}`);
+      history.pushState('', '', `./blog/article/${articleData.id}`);
       const popStateEvent = new PopStateEvent('popstate', { state: '' });
       dispatchEvent(popStateEvent);
     });

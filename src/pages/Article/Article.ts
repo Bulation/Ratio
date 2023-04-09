@@ -126,7 +126,7 @@ export default class Article extends Page {
         'pagination__btn pagination__btn_left',
         ''
       );
-      prev.node.href = `/blog/article/${prevArticle.id}`;
+      prev.node.href = `./blog/article/${prevArticle.id}`;
       prev.setListener('click', (e) => {
         e.preventDefault();
         history.pushState('', '', prev.node.href);
@@ -149,7 +149,7 @@ export default class Article extends Page {
         'pagination__btn pagination__btn_right',
         ''
       );
-      next.node.href = `/blog/article/${nextArticle.id}`;
+      next.node.href = `./blog/article/${nextArticle.id}`;
       next.setListener('click', (e) => {
         e.preventDefault();
         history.pushState('', '', next.node.href);

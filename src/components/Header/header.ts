@@ -18,7 +18,7 @@ export default class Header {
       'click',
       () => {
         if (!this.isInHome) {
-          history.pushState('', '', '/');
+          history.pushState('', '', './');
           const popStateEvent = new PopStateEvent('popstate', { state: '' });
           dispatchEvent(popStateEvent);
         }

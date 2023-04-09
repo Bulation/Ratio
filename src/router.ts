@@ -38,8 +38,8 @@ export default class Router {
       }
     });
     if (isWrongUrl) {
-      history.pushState('', '', '/404');
-      this.routes['/404']('/404');
+      history.pushState('', '', './404');
+      this.routes['./404']('./404');
     }
   }
 }

@@ -7,23 +7,23 @@ const controller = new Controller();
 
 const routes = [
   {
-    path: '/',
+    path: './',
     handler: controller.handleHomeRoute.bind(controller),
   },
   {
-    path: '/about',
+    path: './about',
     handler: controller.handleAboutRoute.bind(controller),
   },
   {
-    path: '/blog',
+    path: './blog',
     handler: controller.handleBlogRoute.bind(controller),
   },
   {
-    path: '/blog/article/:id',
+    path: './blog/article/:id',
     handler: controller.handleArticleRoute.bind(controller),
   },
   {
-    path: '/404',
+    path: './404',
     handler: controller.handleWrongRoute.bind(controller),
   },
 ];
