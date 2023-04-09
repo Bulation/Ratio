@@ -3,7 +3,8 @@ import getCreatedDate from '../../helperFunctions/getCreatedDate';
 import getMinsRead from '../../helperFunctions/getMinsRead';
 import { IDetailedArticle } from '../../interfaces/IDetailedArticle';
 import Page from '../Page';
-import authorAvatar from '../../../public/author.jpg';
+import authorAvatar from '../../assets/author.jpg';
+import { SITE_URL } from '../../constants/constants';
 
 export default class Article extends Page {
   main: Component;
@@ -126,7 +127,7 @@ export default class Article extends Page {
         'pagination__btn pagination__btn_left',
         ''
       );
-      prev.node.href = `./blog/article/${prevArticle.id}`;
+      prev.node.href = `${SITE_URL}blog/article/${prevArticle.id}`;
       prev.setListener('click', (e) => {
         e.preventDefault();
         history.pushState('', '', prev.node.href);
@@ -149,7 +150,7 @@ export default class Article extends Page {
         'pagination__btn pagination__btn_right',
         ''
       );
-      next.node.href = `./blog/article/${nextArticle.id}`;
+      next.node.href = `${SITE_URL}blog/article/${nextArticle.id}`;
       next.setListener('click', (e) => {
         e.preventDefault();
         history.pushState('', '', next.node.href);

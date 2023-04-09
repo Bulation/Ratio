@@ -26,7 +26,7 @@ export default class Blog {
     this.renderBanner(featuredArticle, { top: '0', left: '45px' });
     this.renderArticles();
     for (let i = 0; i < articles.length; i += 1) {
-      const img = new URL(`../../public/article${i}.jpg`, import.meta.url).href;
+      const img = new URL(`../assets/article${i}.jpg`, import.meta.url).href;
       this.renderArticle(articles[i], img);
     }
   }

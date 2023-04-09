@@ -1,29 +1,30 @@
 import Router from './router';
 import Controller from './controller';
 import './style.scss';
+import { SITE_URL } from './constants/constants';
 
 const router = new Router();
 const controller = new Controller();
 
 const routes = [
   {
-    path: './',
+    path: `${SITE_URL}`,
     handler: controller.handleHomeRoute.bind(controller),
   },
   {
-    path: './about',
+    path: `${SITE_URL}about`,
     handler: controller.handleAboutRoute.bind(controller),
   },
   {
-    path: './blog',
+    path: `${SITE_URL}blog`,
     handler: controller.handleBlogRoute.bind(controller),
   },
   {
-    path: './blog/article/:id',
+    path: `${SITE_URL}blog/article/:id`,
     handler: controller.handleArticleRoute.bind(controller),
   },
   {
-    path: './404',
+    path: `${SITE_URL}404`,
     handler: controller.handleWrongRoute.bind(controller),
   },
 ];

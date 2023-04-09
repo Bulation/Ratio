@@ -1,7 +1,7 @@
 import Component from '../../common/component';
-import { MENU_ITEMS_COUNT, MENU_LINKS_OBJECT } from '../../constants/constants';
+import { MENU_ITEMS_COUNT, MENU_LINKS_OBJECT, SITE_URL } from '../../constants/constants';
 import Navigation from '../Navigation/navigation';
-import svg from '../../../public/logo.svg?raw';
+import svg from '../../assets/logo.svg?raw';
 
 export default class Header {
   header: Component;
@@ -18,7 +18,7 @@ export default class Header {
       'click',
       () => {
         if (!this.isInHome) {
-          history.pushState('', '', './');
+          history.pushState('', '', `${SITE_URL}`);
           const popStateEvent = new PopStateEvent('popstate', { state: '' });
           dispatchEvent(popStateEvent);
         }

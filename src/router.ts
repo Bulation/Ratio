@@ -1,3 +1,5 @@
+import { SITE_URL } from './constants/constants';
+
 export default class Router {
   routes: { [key: string]: (url: string) => boolean } = {};
 
@@ -38,8 +40,8 @@ export default class Router {
       }
     });
     if (isWrongUrl) {
-      history.pushState('', '', './404');
-      this.routes['./404']('./404');
+      history.pushState('', '', `${SITE_URL}404`);
+      this.routes[`${SITE_URL}404`](`${SITE_URL}404`);
     }
   }
 }

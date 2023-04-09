@@ -1,5 +1,5 @@
 import Component from '../../common/component';
-import { ARTICLES_COUNT_PER_PAGE } from '../../constants/constants';
+import { ARTICLES_COUNT_PER_PAGE, SITE_URL } from '../../constants/constants';
 import getCreatedDate from '../../helperFunctions/getCreatedDate';
 import getMinsRead from '../../helperFunctions/getMinsRead';
 import { IArticle } from '../../interfaces/IArticle';
@@ -23,7 +23,7 @@ export default class Home extends Page {
     this.renderBanner(featuredArticle, { top: '0', left: '45px' });
     this.renderArticles();
     for (let i = 0; i < ARTICLES_COUNT_PER_PAGE; i += 1) {
-      const img = new URL(`../../../public/article${i}.jpg`, import.meta.url).href;
+      const img = new URL(`../../assets/article${i}.jpg`, import.meta.url).href;
       this.renderArticle(articles[i], img);
     }
     this.renderBanner(featuredArticle, { top: '54px', right: '78px' });
@@ -47,7 +47,7 @@ export default class Home extends Page {
       'article-item articles-list__article-item',
       ''
     ).setListener('click', () => {
-      history.pushState('', '', `./blog/article/${articleData.id}`);
+      history.pushState('', '', `${SITE_URL}blog/article/${articleData.id}`);
       const popStateEvent = new PopStateEvent('popstate', { state: '' });
       dispatchEvent(popStateEvent);
     });
@@ -126,7 +126,7 @@ export default class Home extends Page {
       'article-item__title',
       articleData.title
     ).setListener('click', () => {
-      history.pushState('', '', `./blog/article/${articleData.id}`);
+      history.pushState('', '', `${SITE_URL}blog/article/${articleData.id}`);
       const popStateEvent = new PopStateEvent('popstate', { state: '' });
       dispatchEvent(popStateEvent);
     });

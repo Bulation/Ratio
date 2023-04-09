@@ -85,7 +85,7 @@ export default class Controller {
     if (articleData.nextId !== null) {
       nextArticle = await API.getArticle(articleData.nextId.toString());
     }
-    const img = new URL(`../public/article${params.id}.jpg`, import.meta.url).href;
+    const img = new URL(`./assets/article${params.id}.jpg`, import.meta.url).href;
     this.article.render(articleData, img, prevArticle, nextArticle);
     this.deleteSEO();
     this.addSEO(articleData.seo);
