@@ -1,6 +1,6 @@
 import Component from '../common/component';
 import { IArticle } from '../interfaces/IArticle';
-import Home from './Home';
+import Home from './Home/Home';
 
 export default class Blog {
   parent: HTMLElement;
@@ -8,7 +8,7 @@ export default class Blog {
   main: Component;
   renderBanner: (articleData: IArticle, articleStyles: Record<string, string>) => void;
   renderArticles: () => void;
-  renderArticle: (articleData: IArticle) => void;
+  renderArticle: (articleData: IArticle, img: string) => void;
   constructor(parent: HTMLElement) {
     this.parent = parent;
     const home = new Home(parent);
@@ -23,10 +23,11 @@ export default class Blog {
 
   render(featuredArticle: IArticle, articles: IArticle[]) {
     this.main = new Component(this.parent, 'main', '', '');
-    this.renderBanner(featuredArticle, { top: '0', left: '45' });
+    this.renderBanner(featuredArticle, { top: '0', left: '45px' });
     this.renderArticles();
     for (let i = 0; i < articles.length; i += 1) {
-      this.renderArticle(articles[i]);
+      const img = new URL(`../../public/article${i}.jpg`, import.meta.url).href;
+      this.renderArticle(articles[i], img);
     }
   }
 }
