@@ -2,9 +2,9 @@ import Header from './components/Header/header';
 import About from './pages/About/About';
 import API from './api/api';
 import NotFoundPage from './pages/NotFoundPage';
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import Blog from './pages/Blog';
-import Article from './pages/Article';
+import Article from './pages/Article/Article';
 import { IDetailedArticle } from './interfaces/IDetailedArticle';
 import Page from './pages/Page';
 
@@ -75,7 +75,8 @@ export default class Controller {
     if (articleData.nextId !== null) {
       nextArticle = await API.getArticle(articleData.nextId.toString());
     }
-    this.article.render(articleData, prevArticle, nextArticle);
+    const img = new URL(`../public/article${params.id}.jpg`, import.meta.url).href;
+    this.article.render(articleData, img, prevArticle, nextArticle);
   }
 
   async handleWrongRoute() {
