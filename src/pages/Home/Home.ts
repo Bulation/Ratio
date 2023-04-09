@@ -47,7 +47,9 @@ export default class Home extends Page {
       'article-item articles-list__article-item',
       ''
     ).setListener('click', () => {
-      window.location.href = `/blog/article/${articleData.id}`;
+      history.pushState('', '', `/blog/article/${articleData.id}`);
+      const popStateEvent = new PopStateEvent('popstate', { state: '' });
+      dispatchEvent(popStateEvent);
     });
     const articleImage = new Component<HTMLImageElement>(
       article.node,
@@ -124,7 +126,9 @@ export default class Home extends Page {
       'article-item__title',
       articleData.title
     ).setListener('click', () => {
-      window.location.href = `/blog/article/${articleData.id}`;
+      history.pushState('', '', `/blog/article/${articleData.id}`);
+      const popStateEvent = new PopStateEvent('popstate', { state: '' });
+      dispatchEvent(popStateEvent);
     });
     const authorName = new Component(
       featuredArticle.node,
