@@ -1,6 +1,6 @@
 .container {
   max-width: 1316px;
-  padding: 0 25px;
+  width: calc(100% - 50px);
   margin: 0 auto;
 }
 
@@ -8,6 +8,13 @@ a {
   display: block;
   text-decoration: none;
   cursor: pointer;
+}
+
+h2 {
+  font: 700 42px/52px Libre Baskerville;
+  @media screen and (max-width: 768px) {
+    font: 700 24px/30px Libre Baskerville;
+  }
 }
 
 ul {
