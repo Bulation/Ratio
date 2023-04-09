@@ -1,0 +1,128 @@
+.banner-container {
+  @extend .container;
+  position: relative;
+  padding-bottom: 25px;
+  &__featured-article {
+    position: absolute;
+    width: 510px;
+    padding: 76px 40px 96px;
+    @media screen and (max-width: 768px) {
+      width: 374px;
+      padding: 22px;
+    }
+    @media screen and (max-width: 600px) {
+      position: static;
+      width: 100%;
+      padding: 0;
+    }
+  }
+}
+
+.article-item {
+  background-color: #ffffff;
+  &__tag {
+    @include article-tag;
+  }
+  &__title {
+    @include article-title;
+  }
+  &__name {
+    @include article-name;
+  }
+  &__time {
+    @include article-time;
+  }
+  &__read-time {
+    @include article-read-time;
+  }
+  &__description {
+    @include article-description;
+  }
+  &__img {
+    width: 371px;
+    height: 298px;
+    @media screen and (max-width: 768px) {
+      width: 264px;
+      height: 232px;
+      margin: 0 auto;
+      display: block;
+    }
+    @media screen and (max-width: 420px) {
+      width: 270px;
+      height: 100px;
+    }
+  }
+}
+
+.banner-img {
+  height: 592px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+}
+
+.articles-list {
+  max-width: 856px;
+  width: calc(100% - 50px);
+  margin: 0 auto;
+  padding: 25px 0 62px;
+  &__title {
+    font: 700 42px/57px Open Sans;
+    text-align: center;
+    color: var(--title-dark-color);
+    position: relative;
+    margin-bottom: 54px;
+    &::before {
+      content: '';
+      width: 190px;
+      height: 5px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -17px;
+      background-color: var(--title-dark-color);
+      @media screen and (max-width: 768px) {
+        width: 220px;
+        bottom: 0;
+      }
+      @media screen and (max-width: 600px) {
+        width: 110px;
+        bottom: -11px;
+      }
+    }
+    @media screen and (max-width: 768px) {
+      margin-bottom: 91px;
+      font: 700 36px/49px Open Sans;
+    }
+    @media screen and (max-width: 600px) {
+      margin-bottom: 41px;
+      font: 700 24px/33px Open Sans;
+    }
+  }
+  &__article-item {
+    display: flex;
+    align-items: center;
+    gap: 55px;
+    cursor: pointer;
+    @media screen and (max-width: 768px) {
+      gap: 22px;
+    }
+    @media screen and (max-width: 600px) {
+      display: block;
+    }
+  }
+  &__article-item:not(:last-child) {
+    margin-bottom: 50px;
+    @media screen and (max-width: 768px) {
+      margin-bottom: 25px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding: 30px 0 80px;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 25px 0;
+  }
+}
