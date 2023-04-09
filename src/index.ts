@@ -19,7 +19,7 @@ const routes = [
     handler: controller.handleBlogRoute.bind(controller),
   },
   {
-    path: '/blog/articles/:id',
+    path: '/blog/article/:id',
     handler: controller.handleArticleRoute.bind(controller),
   },
   {
