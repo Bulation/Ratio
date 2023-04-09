@@ -1,9 +1,7 @@
+import { IAboutSEO } from './IAboutSEO';
+
 export interface IAbout {
   title: string;
-  seo: {
-    title: string;
-    description: string;
-    keywords: string;
-  };
+  seo: IAboutSEO;
   content: string;
 }
