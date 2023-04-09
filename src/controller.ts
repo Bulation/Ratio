@@ -7,6 +7,8 @@ import Blog from './pages/Blog';
 import Article from './pages/Article/Article';
 import { IDetailedArticle } from './interfaces/IDetailedArticle';
 import Page from './pages/Page';
+import { IAboutSEO } from './interfaces/IAboutSEO';
+import { IDetailedArticleSEO } from './interfaces/IDetailedArticleSEO';
 
 export default class Controller {
   about: About;
@@ -16,6 +18,7 @@ export default class Controller {
   home: Home;
   blog: Blog;
   article: Article;
+  metaTags = ['id', 'title', 'content', 'description', 'keywords'];
   constructor() {
     this.header = new Header(document.body);
     this.home = new Home(document.body);
@@ -35,6 +38,8 @@ export default class Controller {
     const articles = await API.getArticles();
     const featuredArticle = await API.getFeaturedData();
     this.home.render(featuredArticle, articles);
+    this.deleteSEO();
+    document.title = 'Home';
   }
 
   async handleBlogRoute() {
@@ -47,6 +52,8 @@ export default class Controller {
     const articles = await API.getArticles();
     const featuredArticle = await API.getFeaturedData();
     this.blog.render(featuredArticle, articles);
+    this.deleteSEO();
+    document.title = 'Blog';
   }
 
   async handleAboutRoute() {
@@ -58,6 +65,9 @@ export default class Controller {
     this.header.toggleHome(false);
     const aboutData = await API.getAboutData();
     this.about.render(aboutData);
+    this.deleteSEO();
+    this.addSEO(aboutData.seo);
+    document.title = aboutData.seo.title;
   }
 
   async handleArticleRoute(params: { [key: string]: string }) {
@@ -77,6 +87,9 @@ export default class Controller {
     }
     const img = new URL(`../public/article${params.id}.jpg`, import.meta.url).href;
     this.article.render(articleData, img, prevArticle, nextArticle);
+    this.deleteSEO();
+    this.addSEO(articleData.seo);
+    document.title = articleData.seo.title;
   }
 
   async handleWrongRoute() {
@@ -86,5 +99,27 @@ export default class Controller {
     this.currentPage = this.notFoundPage;
     this.notFoundPage.render();
     this.header.toggleHome(false);
+    this.deleteSEO();
+    document.title = 'Page is not found';
+  }
+
+  addSEO(metaData: IAboutSEO | IDetailedArticleSEO) {
+    const head = document.head;
+    Object.keys(metaData).forEach((tag) => {
+      const metaTag = document.createElement('meta');
+      metaTag.name = tag;
+      metaTag.content = metaData[tag] as string;
+      head.append(metaTag);
+    });
+  }
+
+  deleteSEO() {
+    const head = document.head;
+    this.metaTags.forEach((tag) => {
+      const metaTag = head.querySelector(`[name=${tag}]`);
+      if (metaTag) {
+        metaTag.remove();
+      }
+    });
   }
 }
