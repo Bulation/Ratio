@@ -48,7 +48,6 @@ export default class Navigation {
   }
 
   handleLinkClick(link: Component<HTMLAnchorElement>) {
-    this.removeActiveClass();
     if (this.burger.hasClass('burger_active')) {
       this.toggleNavigationClass();
     }
@@ -74,7 +73,6 @@ export default class Navigation {
   }
 
   removeActiveClass() {
-    console.log(this.activeMenuItem);
     if (this.activeMenuItem) {
       this.activeMenuItem.removeClass('navigation__link_active');
     }
