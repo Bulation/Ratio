@@ -7,6 +7,7 @@ const router = new Router();
 const controller = new Controller();
 
 const routes = [
+  // массив со всеми роутами, которые будем добавлять в роутер
   {
     path: `${SITE_URL}`,
     handler: controller.handleHomeRoute.bind(controller),
@@ -37,5 +38,5 @@ window.onpopstate = () => {
   router.navigate(window.location.pathname);
 };
 
-const popStateEvent = new PopStateEvent('popstate', { state: '' });
-window.dispatchEvent(popStateEvent);
+const popStateEvent = new PopStateEvent('popstate');
+window.dispatchEvent(popStateEvent); // создание ивента popstate и принудительный вызов. Необходимо для навигации, так как ивент 'popstate' триггерится только тогда, когда юзер нажимает на кнопки "Вперед" и "Назад" в браузере
