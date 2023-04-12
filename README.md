@@ -1,6 +1,6 @@
 # Сайт Nuntium Blog
 
-(Видео о модуле)[https://youtu.be/WzmHU8D7sMY]
+[Видео о модуле](https://youtu.be/WzmHU8D7sMY)
 
 ## Краткая информация о проекте
 
@@ -25,4 +25,4 @@
 
 ## Деплой
 
-(https://bulation.github.io/Ratio/module2/)
+[https://bulation.github.io/Ratio/module4/]
