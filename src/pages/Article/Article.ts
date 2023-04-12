@@ -35,6 +35,7 @@ export default class Article extends Page {
       ''
     );
     articleImage.node.src = img;
+    articleImage.node.alt = 'Article image';
     this.renderArticle(articleData);
     this.renderAuthor(articleData);
     this.renderPagination(prevArticle, nextArticle);
@@ -88,6 +89,7 @@ export default class Article extends Page {
     const authorContent = new Component(articleAuthor.node, 'div', 'author__content', '');
     const authorImg = new Component<HTMLImageElement>(authorContent.node, 'img', 'author__img', '');
     authorImg.node.src = authorAvatar;
+    authorImg.node.alt = 'Author avatar';
     const authorInfo = new Component(authorContent.node, 'div', 'author__info', '');
     const authorName = new Component(
       authorInfo.node,

@@ -67,6 +67,7 @@ export default class Home extends Page {
       ''
     );
     articleImage.node.src = img; // добавляем путь к фото в src
+    articleImage.node.alt = 'Article image';
     const articleContent = new Component(articleLink.node, 'div', 'article-link__content', '');
     const articleTag = new Component(
       articleContent.node,

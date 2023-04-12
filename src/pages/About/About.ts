@@ -25,5 +25,6 @@ export default class About {
     );
     const content = new Component(aboutContainer.node, 'div', 'about-container__content', '');
     content.node.innerHTML = pageData.content;
+    content.node.querySelector('img').alt = 'bee on chamomile'; // добавление атрибута alt для картинки
   }
 }
