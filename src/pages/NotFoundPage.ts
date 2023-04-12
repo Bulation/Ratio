@@ -11,7 +11,7 @@ export default class NotFoundPage extends Page {
     this.parent = parent;
   }
 
-  removePage() {
+  pageWillUnmount() {
     this.main.destroy();
   }
 
