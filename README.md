@@ -25,4 +25,4 @@
 
 ## Деплой
 
-[https://bulation.github.io/Ratio/module4/]
+https://bulation.github.io/Ratio/module4/
