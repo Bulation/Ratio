@@ -18,6 +18,7 @@ export default class Header {
       'click',
       () => {
         if (!this.isInHome) {
+          // если по логотипу кликнули не на домашней странице, то переключаемся на домашнюю страницу
           history.pushState('', '', `${SITE_URL}`);
           const popStateEvent = new PopStateEvent('popstate', { state: '' });
           dispatchEvent(popStateEvent);
@@ -33,6 +34,6 @@ export default class Header {
   }
 
   toggleHome(value: boolean) {
-    this.isInHome = value;
+    this.isInHome = value; // меняем значение свойства в зависимости от того, на какой странице находимся
   }
 }
