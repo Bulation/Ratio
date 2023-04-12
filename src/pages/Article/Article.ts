@@ -16,7 +16,7 @@ export default class Article extends Page {
     this.parent = parent;
   }
 
-  removePage() {
+  pageWillUnmount() {
     this.main.destroy();
   }
 
@@ -119,7 +119,7 @@ export default class Article extends Page {
     prevArticle: IDetailedArticle | undefined,
     nextArticle: IDetailedArticle | undefined
   ) {
-    const pagination = new Component(this.main.node, 'div', 'pagination', ''); // для стрелок сделать стили flex-grow: 50; width: 50%
+    const pagination = new Component(this.main.node, 'div', 'pagination', '');
     if (prevArticle) {
       const prev = new Component<HTMLAnchorElement>(
         pagination.node,
@@ -127,7 +127,7 @@ export default class Article extends Page {
         'pagination__btn pagination__btn_left',
         ''
       );
-      prev.node.href = `${SITE_URL}blog/article/${prevArticle.id}`;
+      prev.node.href = `${SITE_URL}blog/article/${prevArticle.id}`; // добавляем адрес в атрибут href
       prev.setListener('click', (e) => {
         e.preventDefault();
         history.pushState('', '', prev.node.href);
