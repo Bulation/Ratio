@@ -25,28 +25,31 @@ export default class Controller {
     this.about = new About(document.body);
     this.blog = new Blog(document.body);
     this.notFoundPage = new NotFoundPage(document.body);
-    this.article = new Article(document.body);
+    this.article = new Article(document.body); // создание инстансов классов страниц
   }
 
   async handleHomeRoute() {
     if (this.currentPage) {
-      this.currentPage.removePage();
+      // если надо переключиться с одной страницы на другую, то текущую удаляем
+      this.currentPage.pageWillUnmount();
     }
     this.currentPage = this.home;
-    this.header.navigation.addActiveClass(0);
-    this.header.toggleHome(true);
+    this.header.navigation.removeActiveClass();
+    this.header.navigation.addActiveClass(0); // удаляем класс с текущего активного пункта меню и ставим на другой пункт
+    this.header.toggleHome(true); // так как находимся на домашней странице, то ставим соответствующий флаг
     const articles = await API.getArticles();
     const featuredArticle = await API.getFeaturedData();
-    this.home.render(featuredArticle, articles);
-    this.deleteSEO();
+    this.home.render(featuredArticle, articles); // рендерим страницу с полученными данными
+    this.deleteSEO(); // удаляем метатеги, если они есть
     document.title = 'Home';
   }
 
   async handleBlogRoute() {
     if (this.currentPage) {
-      this.currentPage.removePage();
+      this.currentPage.pageWillUnmount();
     }
     this.currentPage = this.blog;
+    this.header.navigation.removeActiveClass();
     this.header.navigation.addActiveClass(1);
     this.header.toggleHome(false);
     const articles = await API.getArticles();
@@ -58,15 +61,16 @@ export default class Controller {
 
   async handleAboutRoute() {
     if (this.currentPage) {
-      this.currentPage.removePage();
+      this.currentPage.pageWillUnmount();
     }
     this.currentPage = this.about;
+    this.header.navigation.removeActiveClass();
     this.header.navigation.addActiveClass(2);
     this.header.toggleHome(false);
     const aboutData = await API.getAboutData();
     this.about.render(aboutData);
     this.deleteSEO();
-    this.addSEO(aboutData.seo);
+    this.addSEO(aboutData.seo); // добавляем мета-теги, полученные с api
     document.title = aboutData.seo.title;
   }
 
@@ -74,7 +78,7 @@ export default class Controller {
     let prevArticle: IDetailedArticle;
     let nextArticle: IDetailedArticle;
     if (this.currentPage) {
-      this.currentPage.removePage();
+      this.currentPage.pageWillUnmount();
     }
     this.currentPage = this.article;
     this.header.toggleHome(false);
@@ -85,7 +89,7 @@ export default class Controller {
     if (articleData.nextId !== null) {
       nextArticle = await API.getArticle(articleData.nextId.toString());
     }
-    const img = new URL(`./assets/article${params.id}.jpg`, import.meta.url).href;
+    const img = new URL(`./assets/article${params.id}.jpg`, import.meta.url).href; // получаем зарезолвенный для билда урл картинки
     this.article.render(articleData, img, prevArticle, nextArticle);
     this.deleteSEO();
     this.addSEO(articleData.seo);
@@ -94,7 +98,7 @@ export default class Controller {
 
   async handleWrongRoute() {
     if (this.currentPage) {
-      this.currentPage.removePage();
+      this.currentPage.pageWillUnmount();
     }
     this.currentPage = this.notFoundPage;
     this.notFoundPage.render();
@@ -109,7 +113,7 @@ export default class Controller {
       const metaTag = document.createElement('meta');
       metaTag.name = tag;
       metaTag.content = metaData[tag] as string;
-      head.append(metaTag);
+      head.append(metaTag); // создаем мета-тег, добавляем атрибуты name и content и добавляем в head
     });
   }
 
@@ -118,6 +122,7 @@ export default class Controller {
     this.metaTags.forEach((tag) => {
       const metaTag = head.querySelector(`[name=${tag}]`);
       if (metaTag) {
+        // получаем мета-тег из head и если он есть, то удаляем его
         metaTag.remove();
       }
     });
