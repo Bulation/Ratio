@@ -1,8 +1,9 @@
 import Component from '../common/component';
 import { IArticle } from '../interfaces/IArticle';
 import Home from './Home/Home';
+import Page from './Page';
 
-export default class Blog {
+export default class Blog extends Page {
   parent: HTMLElement;
   home: Home;
   main: Component;
@@ -13,6 +14,7 @@ export default class Blog {
   counter: number;
   timer: NodeJS.Timer | null;
   constructor(parent: HTMLElement) {
+    super();
     this.parent = parent;
     const home = new Home(parent); // применяем композицию и привязываем методы из класса Home
     this.renderBanner = home.renderBanner.bind(this);
@@ -23,6 +25,8 @@ export default class Blog {
   pageWillUnmount() {
     window.onscroll = null;
     window.onresize = null; // снимаем обработчики при уничтожении страницы
+    const timer = this.timer;
+    clearTimeout(timer);
     this.main.destroy();
   }
 

@@ -137,7 +137,7 @@ export default class Home extends Page {
       articleData.title
     ).setListener('click', () => {
       history.pushState('', '', `${SITE_URL}blog/article/${articleData.id}`);
-      const popStateEvent = new PopStateEvent('popstate', { state: '' });
+      const popStateEvent = new PopStateEvent('popstate');
       dispatchEvent(popStateEvent);
     });
     const authorName = new Component(

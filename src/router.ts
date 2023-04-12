@@ -36,8 +36,8 @@ export default class Router {
     let isWrongUrl = true; // переменная, отвечающая за то, является ли параметр url верным урлом
     Object.keys(this.routes).forEach((route) => {
       // пробегаемся по всем роутам и вызываем все функции, содержащиеся в объекте this.routes
-      const handler = this.routes[route];
-      if (handler(url)) {
+      const routeHandler = this.routes[route];
+      if (routeHandler(url)) {
         // если роут подходит под пришедший url, то значит url верный
         isWrongUrl = false;
       }
