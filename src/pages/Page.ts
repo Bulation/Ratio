@@ -6,5 +6,5 @@ export default abstract class Page {
   abstract render(
     ...params: Array<IAbout | string | IDetailedArticle | IArticle | IArticle[]>
   ): void;
-  abstract removePage(): void;
+  abstract pageWillUnmount(): void;
 }
