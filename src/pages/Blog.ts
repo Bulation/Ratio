@@ -7,7 +7,7 @@ export default class Blog {
   home: Home;
   main: Component;
   renderBanner: (articleData: IArticle, articleStyles: Record<string, string>) => void;
-  renderArticles: () => void;
+  renderArticlesSection: () => void;
   renderArticle: (articleData: IArticle, img: string) => void;
   articles: IArticle[];
   counter: number;
@@ -16,7 +16,7 @@ export default class Blog {
     this.parent = parent;
     const home = new Home(parent); // применяем композицию и привязываем методы из класса Home
     this.renderBanner = home.renderBanner.bind(this);
-    this.renderArticles = home.renderArticles.bind(this);
+    this.renderArticlesSection = home.renderArticlesSection.bind(this);
     this.renderArticle = home.renderArticle.bind(this);
   }
 
@@ -33,7 +33,7 @@ export default class Blog {
     this.main = new Component(this.parent, 'main', '', '');
     this.articles = articles;
     this.renderBanner(featuredArticle, { top: '0', left: '45px' });
-    this.renderArticles();
+    this.renderArticlesSection();
     for (let i = 0; i < 3; i += 1) {
       const img = new URL(`../assets/article${this.counter}.jpg`, import.meta.url).href;
       this.renderArticle(articles[this.counter], img);
