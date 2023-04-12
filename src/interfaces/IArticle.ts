@@ -1,4 +1,5 @@
 export interface IArticle {
+  // интерфейс для статей в массиве статей
   id: number;
   tag: string;
   title: string;

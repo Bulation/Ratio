@@ -1,4 +1,5 @@
 export interface IDetailedArticle {
+  // интерфейс для статьи
   id: number; // id новости
   title: string; // Заголовок новости
   seo: {
