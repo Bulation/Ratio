@@ -9,7 +9,7 @@ export default class About {
     this.parent = parent;
   }
 
-  removePage() {
+  pageWillUnmount() {
     this.main.destroy();
   }
 
