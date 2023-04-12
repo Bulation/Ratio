@@ -18,7 +18,8 @@
   }
 }
 
-.article-item {
+.article-link {
+  color: #000000;
   background-color: #ffffff;
   &__tag {
     @include article-tag;
@@ -101,7 +102,7 @@
       font: 700 24px/33px Open Sans;
     }
   }
-  &__article-item {
+  &__article-link {
     display: flex;
     align-items: center;
     gap: 55px;

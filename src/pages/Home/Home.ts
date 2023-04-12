@@ -44,55 +44,64 @@ export default class Home extends Page {
     const article = new Component(
       this.articlesContainer.node,
       'li',
-      'article-item articles-list__article-item',
+      'articles-list__article-item',
       ''
-    ).setListener('click', () => {
-      history.pushState('', '', `${SITE_URL}blog/article/${articleData.id}`); // при клике на статью создаем запись в истории
-      const popStateEvent = new PopStateEvent('popstate', { state: '' });
+    );
+    const articleLink = new Component<HTMLAnchorElement>(
+      article.node,
+      'a',
+      'article-link articles-list__article-link',
+      ''
+    );
+    articleLink.node.href = `${SITE_URL}blog/article/${articleData.id}`;
+    articleLink.setListener('click', (e) => {
+      e.preventDefault();
+      history.pushState('', '', articleLink.node.href); // при клике на статью создаем запись в истории
+      const popStateEvent = new PopStateEvent('popstate');
       dispatchEvent(popStateEvent); // создаем ивент и диспатчим его. Затем роутер перенаправит на страницу со статьей
     });
     const articleImage = new Component<HTMLImageElement>(
-      article.node,
+      articleLink.node,
       'img',
-      'article-item__img',
+      'article-link__img',
       ''
     );
     articleImage.node.src = img; // добавляем путь к фото в src
-    const articleContent = new Component(article.node, 'div', 'article-item__content', '');
+    const articleContent = new Component(articleLink.node, 'div', 'article-link__content', '');
     const articleTag = new Component(
       articleContent.node,
       'p',
-      'article-item__tag',
+      'article-link__tag',
       articleData.tag
     );
     const articleTitle = new Component(
       articleContent.node,
       'h3',
-      'article-item__title',
+      'article-link__title',
       articleData.title
     );
     const authorName = new Component(
       articleContent.node,
       'span',
-      'article-item__name',
+      'article-link__name',
       articleData.author
     );
     const createdTime = new Component(
       articleContent.node,
       'span',
-      'article-item__time',
+      'article-link__time',
       getCreatedDate(articleData.createdAt)
     );
     const articleReadTime = new Component(
       articleContent.node,
       'span',
-      'article-item__read-time',
+      'article-link__read-time',
       getMinsRead(articleData.readTime)
     );
     const articleDescription = new Component(
       articleContent.node,
       'div',
-      'article-item__description',
+      'article-link__description',
       ''
     );
     articleDescription.node.innerHTML = articleData.description;
@@ -107,8 +116,8 @@ export default class Home extends Page {
     );
     const featuredArticle = new Component(
       bannerContainer.node,
-      'article',
-      'article-item banner-container__featured-article',
+      'div',
+      'article-link banner-container__featured-article',
       ''
     );
     Object.keys(articleStyles).forEach((style) => {
@@ -117,13 +126,13 @@ export default class Home extends Page {
     const articleTag = new Component(
       featuredArticle.node,
       'p',
-      'article-item__tag',
+      'article-link__tag',
       articleData.tag
     );
     const articleTitle = new Component(
       featuredArticle.node,
       'h3',
-      'article-item__title',
+      'article-link__title',
       articleData.title
     ).setListener('click', () => {
       history.pushState('', '', `${SITE_URL}blog/article/${articleData.id}`);
@@ -133,25 +142,25 @@ export default class Home extends Page {
     const authorName = new Component(
       featuredArticle.node,
       'span',
-      'article-item__name',
+      'article-link__name',
       articleData.author
     );
     const createdTime = new Component(
       featuredArticle.node,
       'span',
-      'article-item__time',
+      'article-link__time',
       getCreatedDate(articleData.createdAt)
     );
     const articleReadTime = new Component(
       featuredArticle.node,
       'span',
-      'article-item__read-time',
+      'article-link__read-time',
       getMinsRead(articleData.readTime)
     );
     const articleDescription = new Component(
       featuredArticle.node,
       'p',
-      'article-item__description',
+      'article-link__description',
       articleData.description
     );
   }
