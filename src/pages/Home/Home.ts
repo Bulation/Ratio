@@ -14,22 +14,22 @@ export default class Home extends Page {
     this.parent = parent;
   }
 
-  removePage() {
+  pageWillUnmount() {
     this.main.destroy();
   }
 
   render(featuredArticle: IArticle, articles: IArticle[]) {
     this.main = new Component(this.parent, 'main', '', '');
-    this.renderBanner(featuredArticle, { top: '0', left: '45px' });
-    this.renderArticles();
+    this.renderBanner(featuredArticle, { top: '0', left: '45px' }); // рендер баннера, передаем туда данные и стили
+    this.renderArticlesSection(); // рендер блока со статьями
     for (let i = 0; i < ARTICLES_COUNT_PER_PAGE; i += 1) {
       const img = new URL(`../../assets/article${i}.jpg`, import.meta.url).href;
-      this.renderArticle(articles[i], img);
+      this.renderArticle(articles[i], img); // рендер каждой статьи в блоке со статьями
     }
     this.renderBanner(featuredArticle, { top: '54px', right: '78px' });
   }
 
-  renderArticles() {
+  renderArticlesSection() {
     const articlesSection = new Component(this.main.node, 'section', 'articles-section', '');
     this.articlesContainer = new Component(articlesSection.node, 'ul', 'articles-list', '');
     const articlesTitle = new Component(
@@ -47,9 +47,9 @@ export default class Home extends Page {
       'article-item articles-list__article-item',
       ''
     ).setListener('click', () => {
-      history.pushState('', '', `${SITE_URL}blog/article/${articleData.id}`);
+      history.pushState('', '', `${SITE_URL}blog/article/${articleData.id}`); // при клике на статью создаем запись в истории
       const popStateEvent = new PopStateEvent('popstate', { state: '' });
-      dispatchEvent(popStateEvent);
+      dispatchEvent(popStateEvent); // создаем ивент и диспатчим его. Затем роутер перенаправит на страницу со статьей
     });
     const articleImage = new Component<HTMLImageElement>(
       article.node,
@@ -57,7 +57,7 @@ export default class Home extends Page {
       'article-item__img',
       ''
     );
-    articleImage.node.src = img;
+    articleImage.node.src = img; // добавляем путь к фото в src
     const articleContent = new Component(article.node, 'div', 'article-item__content', '');
     const articleTag = new Component(
       articleContent.node,
@@ -112,7 +112,7 @@ export default class Home extends Page {
       ''
     );
     Object.keys(articleStyles).forEach((style) => {
-      featuredArticle.setStyle(style, articleStyles[style]);
+      featuredArticle.setStyle(style, articleStyles[style]); // добавляем стили для баннера
     });
     const articleTag = new Component(
       featuredArticle.node,
