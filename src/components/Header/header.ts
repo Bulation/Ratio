@@ -21,7 +21,7 @@ export default class Header {
       if (!this.isInHome) {
         // если по логотипу кликнули не на домашней странице, то переключаемся на домашнюю страницу
         history.pushState('', '', this.logo.node.href);
-        const popStateEvent = new PopStateEvent('popstate', { state: '' });
+        const popStateEvent = new PopStateEvent('popstate');
         dispatchEvent(popStateEvent);
       }
     });
