@@ -20,7 +20,7 @@ defineProps<ISearchProps>()
   </section>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
   .search {
     &__container {
       max-width: 1366px;
