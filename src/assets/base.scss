@@ -1,0 +1,60 @@
+:root {
+  --overlay-color: #29292999;
+  --burger-color: #0000008A;
+  --main-text-color: #484848;
+  --second-text-color: #9A9A9A;
+  --link-color: #484848;
+  --title-color: #484848;
+  --button-color: #484848;
+  --header-bg-color: #EFF0F2;
+  --placeholder-color: #C2C6CC;
+  --separator-color: #DDDDDD;
+  --banner-color: #9A9A9A;
+  --address-color: #9A9A9A;
+  --input-color: #9A9A9A;
+  --input-outline: #E8EAEC;
+  --btn-bg: #9A9A9A;
+  --newsletter-bg: #E8EAEC;
+  --footer-bg: #EFF0F2;
+  --market-bg: #E0E2E6;
+  --rights-border: #E0E2E6;
+  --order-input-color: #959595;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.body_overlay {
+  overflow: hidden;
+  &:before {
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--overlay-color);
+    z-index: 2;
+  }
+}
+
+.section-title {
+  font: 700 36px/48px Montserrat;
+  color: var(--title-color);
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 140px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: var(--title-color);
+    left: 0;
+    bottom: -38px;
+  }
+}
