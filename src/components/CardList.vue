@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { IFeaturedData } from '@/interfaces/IFeaturedData';
-import type { ILatestData } from '@/interfaces/ILatestData';
+import type { IHotelData } from '@/interfaces/IHotelData';
+import type { ILatestHotelData } from '@/interfaces/ILatestHotelData';
 import CardItem from './CardItem.vue';
 
 interface ICardListProps {
-  list: ILatestData[] | IFeaturedData[]
+  list: ILatestHotelData[] | IHotelData[]
 }
 defineProps<ICardListProps>()
 

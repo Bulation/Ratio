@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import HotelInfo from './HotelInfo.vue';
-import type { ILatestData } from '@/interfaces/ILatestData';
-import type { IFeaturedData } from '@/interfaces/IFeaturedData';
+import type { IHotelData } from '@/interfaces/IHotelData';
+import type { ILatestHotelData } from '@/interfaces/ILatestHotelData';
 
 import SvgIcon from './UI/SvgIcon.vue';
 
@@ -33,7 +33,7 @@ const params = {
 };
 
 interface ICardItemProps {
-  list: IFeaturedData[] | ILatestData[]
+  list: IHotelData[] | ILatestHotelData[]
   location: "featured" | "latest" | "details"
 }
 
@@ -69,10 +69,10 @@ watchEffect(() => {
             clickable: true
           }"
         >
-          <swiper-slide class="slide" v-for="(image, index) in (item as IFeaturedData).images" :key="index">
+          <swiper-slide class="slide" v-for="(image, index) in (item as IHotelData).images" :key="index">
             <div class="item__back-img" :style="{ backgroundImage: `url(${image})`, borderRadius: '12px' }">
               <SvgIcon className="item__heart" id="heart" />
-              <div class="swiper-no-swiping item__price">{{ convertArrayPriceToString((item as IFeaturedData).price) }}</div>
+              <div class="swiper-no-swiping item__price">{{ convertArrayPriceToString((item as IHotelData).price) }}</div>
             </div>
           </swiper-slide>
         </swiper-container>
@@ -82,11 +82,11 @@ watchEffect(() => {
             <div class="item__flat-info flat-info">
               <div class="flat-info__bed">
                 <SvgIcon className="flat-info__bed-icon" id="bed" />
-                <span>{{ (item as IFeaturedData).info[0].bathroom }}</span>
+                <span>{{ (item as IHotelData).info[0].bathroom }}</span>
               </div>
               <div class="flat-info__bath">
                 <SvgIcon className="flat-info__bath-icon" id="bath" />
-                <span>{{ (item as IFeaturedData).info[0].bedroom }}</span>
+                <span>{{ (item as IHotelData).info[0].bedroom }}</span>
               </div>
             </div>
           </div>
