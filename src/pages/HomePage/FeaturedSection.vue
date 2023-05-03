@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { IFeaturedData } from '@/interfaces/IFeaturedData';
+import type { IHotelData } from '@/interfaces/IHotelData';
 import CardList from '@/components/CardList.vue';
 
 interface IFeaturedProps {
-  featuredList: IFeaturedData[]
+  featuredList: IHotelData[]
 }
 defineProps<IFeaturedProps>();
 </script>

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { ILatestData } from '@/interfaces/ILatestData';
+import type { ILatestHotelData } from '@/interfaces/ILatestHotelData';
 import CardList from '@/components/CardList.vue';
 
 interface ILatestProps {
-  latestList: ILatestData[]
+  latestList: ILatestHotelData[]
 }
 defineProps<ILatestProps>()
 

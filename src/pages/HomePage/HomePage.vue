@@ -7,12 +7,12 @@ import API from '@/services/api';
 import { onMounted, ref } from 'vue';
 import type { IBannerData } from '@/interfaces/IBannerData';
 import FeaturedSection from './FeaturedSection.vue';
-import type { ILatestData } from '@/interfaces/ILatestData';
-import type { IFeaturedData } from '@/interfaces/IFeaturedData';
+import type { ILatestHotelData } from '@/interfaces/ILatestHotelData';
+import type { IHotelData } from '@/interfaces/IHotelData';
 
 const banners = ref<IBannerData>();
-const latestList = ref<ILatestData[]>([]);
-const featuredList = ref<IFeaturedData[]>([]);
+const latestList = ref<ILatestHotelData[]>([]);
+const featuredList = ref<IHotelData[]>([]);
 
 onMounted(() => {
   getBanners();
