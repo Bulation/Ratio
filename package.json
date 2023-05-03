@@ -13,8 +13,10 @@
   },
   "dependencies": {
     "@vuepic/vue-datepicker": "^4.4.0",
+    "pinia": "^2.0.35",
     "swiper": "^9.2.4",
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
