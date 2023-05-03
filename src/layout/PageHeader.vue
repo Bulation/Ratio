@@ -42,14 +42,14 @@ onUpdated(() => {
         <h1 class="title header__title">
           <a class="title__link" href="#">Logo</a>
         </h1>
-        <nav class="navigation" v-bind:class="{ 'navigation_show': isMobileNavShow, 'navigation_hidden': isMobileNavHidden }">
+        <nav class="navigation" :class="{ 'navigation_show': isMobileNavShow, 'navigation_hidden': isMobileNavHidden }">
           <ul class="navigation__list">
-            <li class="navigation__item" v-for="link in MENU_LINKS_OBJECT" v-bind:key="link.content">
-              <a class="navigation__link" v-bind:href="link.url" v-on:click="isMobileNavShow ? toggleBurger() : null">{{ link.content }}</a>
+            <li class="navigation__item" v-for="link in MENU_LINKS_OBJECT" :key="link.content">
+              <a class="navigation__link" :href="link.url" @click="isMobileNavShow ? toggleBurger() : null">{{ link.content }}</a>
             </li>
           </ul>
         </nav>
-        <div class="burger header__burger" v-bind:class="{ burger_active: isMobileNavShow }" v-on:click="toggleBurger">
+        <div class="burger header__burger" :class="{ burger_active: isMobileNavShow }" @click="toggleBurger">
           <span class="burger__item"></span>
           <span class="burger__item"></span>
           <span class="burger__item"></span>
