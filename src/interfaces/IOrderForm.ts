@@ -1,4 +1,4 @@
-export interface IForm {
+export interface IOrderForm {
   [key: string]: string;
   firstName: string;
   lastName: string;

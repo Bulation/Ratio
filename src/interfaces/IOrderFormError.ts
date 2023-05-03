@@ -1,5 +1,5 @@
-export interface IFormError {
-  [key: string]: string
+export interface IOrderFormError {
+  [key: string]: boolean
   firstName: boolean
   lastName: boolean
   info1: boolean

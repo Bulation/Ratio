@@ -1,8 +1,8 @@
 import type { IAmenity } from "./IAmenity";
 import type { IAuthor } from "./IAuthor";
-import type { IFeaturedData } from "./IFeaturedData";
+import type { IHotelData } from "./IHotelData";
 
-export interface IHotel extends IFeaturedData {
+export interface IDetailedHotelData extends IHotelData {
   type: string[];
   period: string[];
   coords: string[];

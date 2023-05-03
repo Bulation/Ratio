@@ -1,4 +1,4 @@
-export interface ILatestData {
+export interface ILatestHotelData {
   author: {
     avatar: string;
   };
