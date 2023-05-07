@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import HotelInfo from './HotelInfo.vue';
-import type { IHotelData } from '@/interfaces/IHotelData';
-import type { ILatestHotelData } from '@/interfaces/ILatestHotelData';
+import HotelInfo from './HotelInfo.vue'
+import type { IHotelData } from '@/interfaces/IHotelData'
+import type { ILatestHotelData } from '@/interfaces/ILatestHotelData'
 
-import SvgIcon from './UI/SvgIcon.vue';
+import SvgIcon from './UI/SvgIcon.vue'
 
-import { register } from 'swiper/element/bundle';
-register();
+import { register } from 'swiper/element/bundle'
+register()
 
-import { ref, watchEffect } from 'vue';
-import convertArrayPriceToString from '@/helperFunctions/convertArrayPriceToString';
+import { ref, watchEffect } from 'vue'
+import convertArrayPriceToString from '@/helperFunctions/convertArrayPriceToString'
 
-const swiperEls = ref([]);
+const swiperEl = ref(null)
 const params = {
   injectStyles: [
     `
@@ -28,55 +28,62 @@ const params = {
         height: 10px;
       }
     }
-    `,
+    `
   ]
-};
+}
 
 interface ICardItemProps {
-  list: IHotelData[] | ILatestHotelData[]
-  location: "featured" | "latest" | "details"
+  item: IHotelData | ILatestHotelData
+  location: 'featured' | 'latest' | 'details'
 }
 
 defineProps<ICardItemProps>()
-  
-watchEffect(() => {
-  if (swiperEls.value.length) {
-    swiperEls.value.forEach((swiperEl) => {
-      Object.assign(swiperEl, params);
-      swiperEl.initialize();
-    });
-  }
-});
 
+watchEffect(() => {
+  if (swiperEl.value) {
+    Object.assign(swiperEl.value, params)
+    swiperEl.value.initialize()
+  }
+})
 </script>
 <template>
-  <template v-for="item in list" :key="item._id">
     <li v-if="location === 'latest'" class="list-item list-item_latest">
-      <a href="#" class="item item_latest">
-        <div class="item__back-img" :style="{ backgroundImage: `url(${item.image})`, borderRadius: '8px'}">
+      <router-link :to="{ name: 'details', params: { id: item._id } }" class="item item_latest">
+        <div
+          class="item__back-img"
+          :style="{ backgroundImage: `url(${item.image})`, borderRadius: '8px' }"
+        >
           <SvgIcon className="item__heart" id="heart" />
           <img class="item__img" :src="item.author.avatar" alt="avatar" />
           <HotelInfo :name="item.name" :address="item.address" />
         </div>
-      </a>
+      </router-link>
     </li>
     <li v-else-if="location === 'featured'" class="list-item list-item_featured">
       <div class="item item_featured">
         <swiper-container
           init="false"
-          ref="swiperEls"
+          ref="swiperEl"
           :pagination="{
             clickable: true
           }"
         >
-          <swiper-slide class="slide" v-for="(image, index) in (item as IHotelData).images" :key="index">
-            <div class="item__back-img" :style="{ backgroundImage: `url(${image})`, borderRadius: '12px' }">
+          <swiper-slide
+            v-for="(image, index) in (item as IHotelData).images"
+            :key="index"
+          >
+            <div
+              class="item__back-img"
+              :style="{ backgroundImage: `url(${image})`, borderRadius: '12px' }"
+            >
               <SvgIcon className="item__heart" id="heart" />
-              <div class="swiper-no-swiping item__price">{{ convertArrayPriceToString((item as IHotelData).price) }}</div>
+              <div class="swiper-no-swiping item__price">
+                {{ convertArrayPriceToString((item as IHotelData).price) }}
+              </div>
             </div>
           </swiper-slide>
         </swiper-container>
-        <a class="item__link" href="#">
+        <router-link :to="{ name: 'details', params: { id: item._id } }" class="item__link">
           <div class="item__container">
             <HotelInfo :name="item.name" :address="item.address" />
             <div class="item__flat-info flat-info">
@@ -90,104 +97,194 @@ watchEffect(() => {
               </div>
             </div>
           </div>
-        </a>
+        </router-link>
       </div>
     </li>
-  </template>
+    <li v-else-if="location === 'details'" class="list-item list-item_details">
+      <div class="item item_details">
+        <swiper-container
+          init="false"
+          ref="swiperEl"
+          :pagination="{
+            clickable: true
+          }"
+        >
+          <swiper-slide
+            v-for="(image, index) in (item as IHotelData).images"
+            :key="index"
+          >
+            <div
+              class="item__back-img item__back-img_details"
+              :style="{ backgroundImage: `url(${image})`, borderRadius: '16px' }"
+            >
+              <SvgIcon className="item__heart" id="heart" />
+              <div class="swiper-no-swiping item__host-info">
+                <img class="item__img" :src="(item as IHotelData).author.avatar" alt="Avatar">
+                <div class="item__host-description host-description">
+                  <p class="host-description__listed">Listed by:</p>
+                  <h4 class="host-description__host-name">{{ (item as IHotelData).name }}</h4>
+                  <p class="host-description__price">For: {{ convertArrayPriceToString((item as IHotelData).price) }}</p>
+                </div>
+              </div>
+            </div>
+          </swiper-slide>
+        </swiper-container>
+        <router-link :to="{ name: 'details', params: { id: item._id } }" class="item__link item__link_details">
+          <div class="item__container">
+            <HotelInfo :name="item.name" :address="item.address" />
+            <div class="item__flat-info flat-info">
+              <div class="flat-info__bed">
+                <SvgIcon className="flat-info__bed-icon" id="bed" />
+                <span>{{ (item as IHotelData).info[0].bathroom }}</span>
+              </div>
+              <div class="flat-info__bath">
+                <SvgIcon className="flat-info__bath-icon" id="bath" />
+                <span>{{ (item as IHotelData).info[0].bedroom }}</span>
+              </div>
+            </div>
+            <div class="item__other-info other-info">
+              <p>Apartment on Rent</p>
+              <div class="other-info__separator"></div>
+              <p>For Long Period: 1 - 2 Years</p>
+            </div>
+          </div>
+        </router-link>
+      </div>
+    </li>
 </template>
-  
 
 <style scoped lang="scss">
-  .slide {
-    height: auto;
+
+.list-item {
+  &_latest {
+    max-width: 279px;
+    width: 100%;
+  }
+  &_featured {
     max-width: 382px;
     width: 100%;
   }
+  &_details {
+    box-shadow: 0px 0px 10px 0px #E5E5E5;
+    border-radius: 16px;
+  }
+}
 
-  .list-item {
-    &_latest {
-      max-width: 279px;
-      width: 100%;
-    }
-    &_featured {
-      max-width: 382px;
-      width: 100%;
-    }
+.item {
+  display: block;
+  position: relative;
+  border-radius: 8px;
+  &__container {
+    width: 100%;
   }
-  
-  .item {
-    display: block;
+  &__back-img {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     position: relative;
-    border-radius: 8px;
-    &__container {
-      width: 100%;
-    }
-    &__back-img {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      position: relative;
-      padding: 22px 19px 20px 21px;
-      min-height: 340px;
-    }
-    &__img {
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      margin-bottom: 12px;
-    }
-    &__price {
-      color: var(--second-text-color);
-      font: 600 18px/22px Montserrat;
-    }
-    &__heart {
-      position: absolute;
-      top: 22px;
-      right: 19px;
-      width: 26px;
-      height: 23px;
-      cursor: pointer;
-      transition: fill 0.3s ease-in;
-      &:hover {
-        fill: red;
-      }
-    }
-    &_latest {
-      max-width: 279px;
-      width: 100%;
-    }
-    &_featured {
-      max-width: 382px;
-      width: 100%;
-    }
-    &__link {
-      display: block;
-      margin-top: 27px;
-    }
-    &__flat-info {
-      margin-top: 15px;
-      margin-left: 5px;
+    padding: 22px 19px 20px 21px;
+    min-height: 340px;
+    &_details {
+      min-height: 384px;
     }
   }
-  .flat-info {
+  &__img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-bottom: 12px;
+  }
+  &__price {
+    color: var(--second-text-color);
+    font: 600 18px/22px Montserrat;
+  }
+  &__heart {
+    position: absolute;
+    top: 22px;
+    right: 19px;
+    width: 26px;
+    height: 23px;
+    cursor: pointer;
+    transition: fill 0.3s ease-in;
+    &:hover {
+      fill: red;
+    }
+  }
+  &_latest {
+    max-width: 279px;
+    width: 100%;
+  }
+  &_featured {
+    max-width: 382px;
+    width: 100%;
+  }
+  &_details {
+    max-width: 574px;
+    width: 100%;
+  }
+  &__link {
+    display: block;
+    margin-top: 27px;
+    &_details {
+      padding: 0 25px 20px 25px;
+    }
+  }
+  &__flat-info {
+    margin-top: 15px;
+    margin-left: 5px;
+  }
+  &__host-info {
+    display: flex;
+    gap: 21px;
+  }
+  &__other-info {
+    display: flex;
+    gap: 17px;
+    font: 600 14px/17px Montserrat;
+    color: var(--second-text-color);
+    margin-top: 30px;
+  }
+}
+.flat-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font: 600 16px/20px Montserrat;
+  color: var(--main-text-color);
+  &__bed,
+  &__bath {
     display: flex;
     align-items: center;
-    gap: 20px;
-    font: 600 16px/20px Montserrat;
-    color: var(--main-text-color);
-    &__bed, &__bath {
-      display: flex;
-      align-items: center;
-    }
-    &__bed-icon {
-      width: 23px;
-      height: 17px;
-      margin-right: 9px;
-    }
-    &__bath-icon {
-      width: 19px;
-      height: 19px;
-      margin-right: 8px;
-    }
   }
+  &__bed-icon {
+    width: 23px;
+    height: 17px;
+    margin-right: 9px;
+  }
+  &__bath-icon {
+    width: 19px;
+    height: 19px;
+    margin-right: 8px;
+  }
+}
+.other-info {
+  &__separator {
+    height: 18px;
+    width: 1px;
+    background-color: var(--separator-color);
+  }
+}
+
+.host-description {
+  color: var(--main-text-color);
+  &__listed {
+    font: 500 12px/15px Montserrat;
+  }
+  &__host-name {
+    font: 700 18px/22px Montserrat;
+  }
+  &__price {
+    font: 500 16px/20px Montserrat;
+  }
+}
 </style>
