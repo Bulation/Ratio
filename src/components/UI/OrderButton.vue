@@ -20,5 +20,8 @@ defineProps<{
     &:disabled {
       background-color: grey;
     }
+    @media screen and (max-width: 420px) {
+      width: 290px;
+    }
   }
 </style>
