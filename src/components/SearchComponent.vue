@@ -12,13 +12,12 @@ import { useRouter } from 'vue-router'
 const countries = ref<ICountry[]>([])
 const searchStore = useSearchedState();
 const router = useRouter();
-const isError = ref(false);
 
 const getCountries = async () => {
   try {
     countries.value = await API.getCountries()
   } catch (e) {
-    isError.value = true;
+    console.error(e);
   }
 }
 
@@ -44,7 +43,7 @@ const rules = {
     return value.length === 0 || isNaN(Date.parse(value))
   },
   guest: (value: string) => {
-    return isNaN(Number(value)) || typeof value !== 'number'
+    return isNaN(Number(value)) || !value;
   }
 }
 
@@ -70,9 +69,6 @@ const submitForm = async () => {
 </script>
 
 <template>
-  <template v-if="isError">
-    <ErrorComponent />
-  </template>
   <form novalidate @submit.prevent="submitForm" class="search-form" action="#">
     <div class="search-form__inputs-wrap">
       <div class="search-form__select">
