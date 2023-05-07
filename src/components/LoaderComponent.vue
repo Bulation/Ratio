@@ -6,7 +6,9 @@ const isLoading = ref(true)
 
 watchEffect(() => {
   if (props.data) {
-    isLoading.value = false
+    isLoading.value = false;
+  } else {
+    isLoading.value = true;
   }
 })
 
