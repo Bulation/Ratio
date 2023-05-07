@@ -1,9 +1,9 @@
-import { BASE_URL } from "@/constants"
-import type { IBannerData } from "@/interfaces/IBannerData";
-import type { ICountry } from "@/interfaces/ICountry";
+import { BASE_URL } from '@/constants'
+import type { IBannerData } from '@/interfaces/IBannerData'
+import type { ICountry } from '@/interfaces/ICountry'
 import type { IHotelData } from '@/interfaces/IHotelData'
-import type { IFilter } from "@/interfaces/IFilter";
-import type { IOrderForm } from "@/interfaces/IOrderForm";
+import type { IFilter } from '@/interfaces/IFilter'
+import type { IOrderForm } from '@/interfaces/IOrderForm'
 import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData'
 import type { ILatestHotelData } from '@/interfaces/ILatestHotelData'
 
@@ -54,7 +54,7 @@ const API = {
     return data
   },
 
-  async postFilter(body: IFilter) {
+  async postFilter(body: IFilter): Promise<IHotelData[]> {
     return this.postData('/hotel/filter', body)
   },
 
