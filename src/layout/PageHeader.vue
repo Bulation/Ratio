@@ -1,55 +1,56 @@
 <script setup lang="ts">
 import { MENU_LINKS_OBJECT } from '@/constants'
-import { ref, onUpdated, onMounted, onUnmounted } from 'vue';
+import { ref, onUpdated, onMounted, onUnmounted } from 'vue'
+import { RouterLink } from 'vue-router'
 
-const isMobileNavShow = ref(false);
-const isMobileNavHidden = ref(false);
+
+const isMobileNavShow = ref(false)
+const isMobileNavHidden = ref(false)
 
 const toggleBurger = () => {
-  isMobileNavShow.value = !isMobileNavShow.value;
-    if (!isMobileNavShow.value) {
-      isMobileNavHidden.value = true;
-    } else {
-      isMobileNavHidden.value = false;
-    }
+  isMobileNavShow.value = !isMobileNavShow.value
+  if (!isMobileNavShow.value) {
+    isMobileNavHidden.value = true
+  } else {
+    isMobileNavHidden.value = false
+  }
 }
 
-onMounted(() => {
-  document.body.onclick = (e) => { 
-    if (
-      e.target instanceof HTMLElement &&
-      !e.target.closest('.navigation, .burger') &&
-      isMobileNavShow.value
-    ) {
-      toggleBurger();
-    }
-  }
-})
-
-onUnmounted(() => {
-  document.body.onclick = null;
-})
-
 onUpdated(() => {
-  isMobileNavShow.value ? document.body.classList.add('body_overlay') : document.body.classList.remove('body_overlay');
+  isMobileNavShow.value
+    ? document.body.classList.add('body_overlay')
+    : document.body.classList.remove('body_overlay')
 })
 </script>
 
 <template>
-  <header class="header">
+  <header class="header" 
+          v-click-outside="() => isMobileNavShow ? toggleBurger() : null">
     <div class="header__container">
       <div class="header__wrap">
         <h1 class="title header__title">
-          <a class="title__link" href="#">Logo</a>
+          <RouterLink class="title__link" to="/">Logo</RouterLink>
         </h1>
-        <nav class="navigation" :class="{ 'navigation_show': isMobileNavShow, 'navigation_hidden': isMobileNavHidden }">
+        <nav
+          class="navigation"
+          :class="{ navigation_show: isMobileNavShow, navigation_hidden: isMobileNavHidden }"
+        >
           <ul class="navigation__list">
             <li class="navigation__item" v-for="link in MENU_LINKS_OBJECT" :key="link.content">
-              <a class="navigation__link" :href="link.url" @click="isMobileNavShow ? toggleBurger() : null">{{ link.content }}</a>
+              <a
+                class="navigation__link"
+                :href="link.url"
+                @click="isMobileNavShow ? toggleBurger() : null"
+                >{{ link.content }}</a
+              >
             </li>
           </ul>
         </nav>
-        <div class="burger header__burger" :class="{ burger_active: isMobileNavShow }" @click="toggleBurger">
+        <div
+          class="burger header__burger"
+          :class="{ burger_active: isMobileNavShow }"
+          @click="toggleBurger"
+        >
           <span class="burger__item"></span>
           <span class="burger__item"></span>
           <span class="burger__item"></span>
@@ -60,7 +61,6 @@ onUpdated(() => {
 </template>
 
 <style lang="scss" scoped>
-
 .header {
   background-color: var(--header-bg-color);
   &__wrap {
@@ -113,7 +113,7 @@ onUpdated(() => {
     }
   }
   @media screen and (max-width: 767px) {
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     transform: translateX(100%);
     position: fixed;
     z-index: 4;
@@ -151,5 +151,4 @@ onUpdated(() => {
     display: block;
   }
 }
-
 </style>
