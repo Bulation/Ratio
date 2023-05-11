@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import SearchSection from './SearchSection.vue'
 import LatestSection from './LatestSection.vue'
+import FeaturedSection from './FeaturedSection.vue'
 import BannerComponent from '@/components/BannerComponent.vue'
 import PageFooter from '@/layout/PageFooter.vue'
+import ErrorComponent from '@/components/ErrorComponent.vue'
 import API from '@/services/api'
 import { onMounted, ref } from 'vue'
 import type { IBannerData } from '@/interfaces/IBannerData'
-import FeaturedSection from './FeaturedSection.vue'
 import type { ILatestHotelData } from '@/interfaces/ILatestHotelData'
 import type { IHotelData } from '@/interfaces/IHotelData'
-import ErrorComponent from '@/components/ErrorComponent.vue'
 import { useHead } from 'unhead'
 useHead({
   title: "Home",
@@ -28,34 +28,19 @@ const featuredList = ref<IHotelData[]>(null)
 const isError = ref(false);
 
 onMounted(() => {
-  getBanners()
-  getLatestList()
-  getFeaturedList()
+  getData()
 })
 
-const getBanners = async () => {
+const getData = async () => {
   try {
     banners.value = await API.getBanners()
-  } catch (e) {
-    isError.value = true;
-  }
-}
-
-const getLatestList = async () => {
-  try {
     latestList.value = await API.getLatestData()
-  } catch (e) {
-    isError.value = true;
-  }
-}
-
-const getFeaturedList = async () => {
-  try {
     featuredList.value = await API.getFeaturedData()
   } catch (e) {
     isError.value = true;
   }
 }
+
 </script>
 
 <template>
