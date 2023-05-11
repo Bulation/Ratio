@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue'
+import { onActivated, onDeactivated, onMounted, reactive, ref } from 'vue'
 import SvgIcon from './UI/SvgIcon.vue'
 import type { ICountry } from '@/interfaces/ICountry'
 import API from '@/services/api' 
@@ -25,12 +25,13 @@ onMounted(() => {
   getCountries()
 })
 
-const formState = reactive({
+const initialFormState = JSON.parse(localStorage.getItem('formState')) || {
   location: '',
   checkIn: '',
   checkOut: '',
   guest: null
-})
+};
+const formState = reactive(initialFormState);
 
 const rules = {
   location: (value: string) => {
@@ -66,6 +67,16 @@ const submitForm = async () => {
   searchStore.setSearchedState(formState);
   router.push('/search');
 }
+
+onActivated(() => {
+  window.onbeforeunload = () => {
+    localStorage.setItem('formState', JSON.stringify(formState));
+  }
+})
+
+onDeactivated(() => {
+  window.onbeforeunload = null;
+})
 </script>
 
 <template>
@@ -98,7 +109,7 @@ const submitForm = async () => {
           format="YYYY/MM/DD HH:mm"
           input-class="dp-input"
           :style="'width: 143px'"
-          :value="formState.checkIn"
+          :value="new Date(formState.checkIn)"
           @update:value="(value) => updateFormState(value, 'checkIn')"
           placeholder="Add Dates"
         />
@@ -111,7 +122,7 @@ const submitForm = async () => {
           format="YYYY/MM/DD HH:mm"
           input-class="dp-input"
           :style="'width: 143px'"
-          :value="formState.checkOut"
+          :value="new Date(formState.checkOut)"
           @update:value="(value) => updateFormState(value, 'checkOut')"
           placeholder="Add Dates"
         />
