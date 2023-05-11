@@ -10,20 +10,16 @@ import FeaturedSection from './FeaturedSection.vue'
 import type { ILatestHotelData } from '@/interfaces/ILatestHotelData'
 import type { IHotelData } from '@/interfaces/IHotelData'
 import ErrorComponent from '@/components/ErrorComponent.vue'
-import { useMeta } from 'vue-meta';
-
-useMeta({
+import { useHead } from 'unhead'
+useHead({
   title: "Home",
   meta: [
     { name: 'description', content: "Order and research our list of hotels" },
-    { name: 'keywords', content: "hotel, hotel list, order, preserve hotel" }
-  ],
-  og: {
-    title: "Hotel",
-    keywords: "hotel, hotel list, order, preserve hotel",
-    description: "Order and research our list of hotels",
-  },
-});
+    { name: 'keywords', content: "hotel, hotel list, order, preserve hotel" },
+    { property: 'og:title', content: "Hotel"},
+    { property: 'og:description', content: "Order and research our list of hotels"},
+  ]
+})
 
 const banners = ref<IBannerData>(null)
 const latestList = ref<ILatestHotelData[]>(null)
