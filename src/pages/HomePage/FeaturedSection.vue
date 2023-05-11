@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { IHotelData } from '@/interfaces/IHotelData'
-import CardList from '@/components/CardList.vue'
+import HotelCardList from '@/components/HotelCardList.vue'
 import { ElSkeletonItem } from 'element-plus'
 import LoaderComponent from '@/components/LoaderComponent.vue'
 
@@ -19,7 +19,7 @@ defineProps<IFeaturedProps>()
           <ElSkeletonItem :style="'width: 382px; height: 340px; margin-right: 20px;'" variant="rect" />
         </template>
         <template #default>
-          <CardList :list="featuredList" location="featured" />
+          <HotelCardList :list="featuredList" location="featured" />
         </template>
       </LoaderComponent>
     </div>

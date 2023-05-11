@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import OrderForm from './OrderForm.vue'
 import OrderHotel from './OrderHotel.vue'
-import PageFooter from '@/layout/PageFooter.vue'
+import PageFooter from '@/layout/PageFooter/PageFooter.vue'
 import { useHead } from 'unhead'
 useHead({
   title: "Order",

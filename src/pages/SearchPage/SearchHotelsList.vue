@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { IHotelData } from '@/interfaces/IHotelData';
 import LoaderComponent from '@/components/LoaderComponent.vue';
+import HotelCardList from '@/components/HotelCardList.vue';
 import { ElSkeletonItem } from 'element-plus';
 import { onActivated, ref } from 'vue';
 const emit = defineEmits(['showMore'])
@@ -33,7 +34,7 @@ defineProps<ISearchHotelsProps>()
           <h3 class="hotels-list__title">{{ list.length }} Results Found</h3>
           <div class="hotels-list__wrapper">
             <TransitionGroup name="hotels-list">
-              <CardList :list="copyList" location="details" />
+              <HotelCardList :list="copyList" location="details" />
             </TransitionGroup>
           </div>
           <button class="hotels-list__button" v-if="!isExpand && list.length > 3" @click="handleButtonClick" type="button">Other as per found results...</button>

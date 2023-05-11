@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ILatestHotelData } from '@/interfaces/ILatestHotelData'
-import CardList from '@/components/CardList.vue'
+import HotelCardList from '@/components/HotelCardList.vue'
 import { ElSkeletonItem } from 'element-plus'
 import LoaderComponent from '@/components/LoaderComponent.vue'
 
@@ -19,7 +19,7 @@ defineProps<ILatestProps>()
           <ElSkeletonItem :style="'width: 279px; height: 340px; margin-right: 20px;'" variant="rect" />
         </template>
         <template #default>
-          <CardList :list="latestList" location="latest" />
+          <HotelCardList :list="latestList" location="latest" />
         </template>
       </LoaderComponent>
     </div>
