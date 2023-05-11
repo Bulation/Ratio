@@ -9,4 +9,6 @@ export const useSearchedState = defineStore('hotels', () => {
     searchedState.value = filterState;
   }
   return { searchedState, getSearchedState, setSearchedState }
-})
+}, {
+  persist: true
+});
