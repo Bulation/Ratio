@@ -2,9 +2,9 @@
 import { onMounted, reactive, ref } from 'vue'
 import SvgIcon from './UI/SvgIcon.vue'
 import type { ICountry } from '@/interfaces/ICountry'
-import API from '@/services/api'
-import VueDatePicker from '@vuepic/vue-datepicker'
-import '@vuepic/vue-datepicker/dist/main.css'
+import API from '@/services/api' 
+import DatePicker from 'vue-datepicker-next';
+import 'vue-datepicker-next/index.css';;
 import useForm from './hooks/useForm'
 import { useSearchedState } from '@/store'
 import { useRouter } from 'vue-router'
@@ -93,18 +93,26 @@ const submitForm = async () => {
       </div>
       <div class="search-form__item search-form__date-picker">
         <h3 class="search-form__title">Check In</h3>
-        <VueDatePicker
-          :model-value="formState.checkIn"
-          @update:model-value="(value) => updateFormState(value, 'checkIn')"
+        <DatePicker
+          type="datetime"
+          format="YYYY/MM/DD HH:mm"
+          input-class="dp-input"
+          :style="'width: 143px'"
+          :value="formState.checkIn"
+          @update:value="(value) => updateFormState(value, 'checkIn')"
           placeholder="Add Dates"
         />
         <span class="search-form-error-msg" v-if="errors.checkIn">Date should be chosen</span>
       </div>
       <div class="search-form__item search-form__date-picker_out">
         <h3 class="search-form__title">Check Out</h3>
-        <VueDatePicker
-          :model-value="formState.checkOut"
-          @update:model-value="(value) => updateFormState(value, 'checkOut')"
+        <DatePicker
+          type="datetime"
+          format="YYYY/MM/DD HH:mm"
+          input-class="dp-input"
+          :style="'width: 143px'"
+          :value="formState.checkOut"
+          @update:value="(value) => updateFormState(value, 'checkOut')"
           placeholder="Add Dates"
         />
         <span class="search-form-error-msg" v-if="errors.checkOut">Date should be chosen</span>
@@ -225,15 +233,13 @@ const submitForm = async () => {
   color: red;
   font: 700 12px/15px Montserrat;
 }
-.dp {
-  &__input {
-    @extend .search-form-input;
-    border: none;
-    padding: 0;
-    &_icons {
-      display: none;
-    }
-  }
+.dp-input {
+  @extend .search-form-input;
+  border: none;
+  padding: 0;
+}
+.mx-icon-calendar {
+  display: none;
 }
 .search-select {
   max-width: 260px;
