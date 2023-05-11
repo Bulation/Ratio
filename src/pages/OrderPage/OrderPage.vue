@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import OrderForm from '@/components/OrderForm.vue'
-import OrderHotel from '@/components/OrderHotel.vue'
+import OrderForm from './OrderForm.vue'
+import OrderHotel from './OrderHotel.vue'
 import PageFooter from '@/layout/PageFooter.vue'
 import { useHead } from 'unhead'
 useHead({

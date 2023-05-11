@@ -2,8 +2,8 @@
 import ErrorComponent from '@/components/ErrorComponent.vue';
 import LoaderComponent from '@/components/LoaderComponent.vue';
 import MapComponent from '@/components/MapComponent.vue';
-import SearchHotelsList from '@/components/SearchHotelsList.vue';
-import SearchAboutHotel from '@/components/SearchAboutHotel.vue';
+import SearchHotelsList from './SearchHotelsList.vue';
+import SearchAboutHotel from './SearchAboutHotel.vue';
 import { ElSkeletonItem } from 'element-plus';
 import API from '@/services/api';
 import { useSearchedState } from '@/store';

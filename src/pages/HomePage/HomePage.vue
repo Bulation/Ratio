@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SearchSection from './SearchSection.vue'
+import SearchSection from './SearchSection/SearchSection.vue'
 import LatestSection from './LatestSection.vue'
 import FeaturedSection from './FeaturedSection.vue'
 import BannerComponent from '@/components/BannerComponent.vue'

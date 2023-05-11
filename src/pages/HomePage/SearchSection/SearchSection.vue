@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SearchComponent from '@/components/SearchComponent.vue'
+import SearchComponent from './SearchComponent.vue'
 import type { IBannerData } from '@/interfaces/IBannerData'
 import { ElSkeletonItem } from 'element-plus'
 import LoaderComponent from '@/components/LoaderComponent.vue'
