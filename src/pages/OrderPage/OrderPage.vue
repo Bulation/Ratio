@@ -2,19 +2,16 @@
 import OrderForm from '@/components/OrderForm.vue'
 import OrderHotel from '@/components/OrderHotel.vue'
 import PageFooter from '@/layout/PageFooter.vue'
-import { useMeta } from 'vue-meta';
-useMeta({
+import { useHead } from 'unhead'
+useHead({
   title: "Order",
   meta: [
     { name: 'description', content: "Make order and preserve hotel" },
-    { name: 'keywords', content: "hotel, hotel list, order, preserve hotel" }
-  ],
-  og: {
-    title: "Order",
-    keywords: "hotel, hotel list, order, preserve hotel",
-    description: "Make order and preserve hotel",
-  },
-});
+    { name: 'keywords', content: "hotel, hotel list, order, preserve hotel" },
+    { property: 'og:title', content: "Order"},
+    { property: 'og:description', content: "Make order and preserve hotel"},
+  ]
+})
 </script>
 
 <template>
