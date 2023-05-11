@@ -7,7 +7,7 @@ import { ElSkeletonItem } from 'element-plus';
 import CardList from '@/components/CardList.vue';
 import API from '@/services/api';
 import { useSearchedState } from '@/store';
-import { onActivated, onMounted, ref, watch } from 'vue';
+import { onActivated, onMounted, ref } from 'vue';
 import type { IHotelData } from '@/interfaces/IHotelData';
 import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData';
 import { useHead } from 'unhead'
