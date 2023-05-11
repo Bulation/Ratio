@@ -30,9 +30,7 @@ const getList = async () => {
   }
 }
 
-onMounted(async () => { 
-  await getList();
-  useHead({
+const metaData = {
     title: `${list.value?.length} hotels found`,
     meta: [
       { name: 'description', content: "list of found hotels" },
@@ -40,10 +38,17 @@ onMounted(async () => {
       { property: 'og:title', content: `${list.value?.length} hotels found` },
       { property: 'og:description', content: "list of found hotels"},
     ]
-  })
+  }
+
+onMounted(async () => { 
+  await getList();
+  useHead(metaData);
 })
 
-onActivated(() => getList());
+onActivated(async () => { 
+  await getList();
+  useHead(metaData);
+});
 
 const showMore = () => {
   copyList.value = list.value;
@@ -61,9 +66,9 @@ const showMore = () => {
     <div class="hotels-list">
       <LoaderComponent :style="'margin-top: 110px;'" :data="list" :count="3">
         <template #template>
-          <ElSkeletonItem :style="'display: block; max-width: 574px; height: 384px; margin-bottom: 30px;'" variant="rect" />
-          <ElSkeletonItem :style="'display: block; max-width: 453px; height: 24px; margin-bottom: 57px;'" variant="text" />
-          <ElSkeletonItem :style="'display: block; max-width: 453px; height: 24px; margin-bottom: 93px;'" variant="text" />
+          <ElSkeletonItem :style="'display: block; width: 574px; height: 384px; margin-bottom: 30px;'" variant="rect" />
+          <ElSkeletonItem :style="'display: block; width: 453px; height: 24px; margin-bottom: 57px;'" variant="text" />
+          <ElSkeletonItem :style="'display: block; width: 453px; height: 24px; margin-bottom: 93px;'" variant="text" />
         </template>
         <template #default>
           <h3 class="hotels-list__title">{{ list.length }} Results Found</h3>
@@ -76,9 +81,9 @@ const showMore = () => {
         </template>
       </LoaderComponent>
     </div>
-    <LoaderComponent :data="firstHotel">
+    <LoaderComponent :style="'width: auto;'" :data="firstHotel">
       <template #template>
-        <ElSkeletonItem :style="'display: block; max-width: 668px; height: 736px;'" variant="rect" />
+        <ElSkeletonItem :style="'display: block; width: 668px; height: 736px;'" variant="rect" />
       </template>
       <template #default>
         <div class="map">
@@ -127,7 +132,11 @@ const showMore = () => {
     cursor: pointer;
     background: none;
     color: var(--main-text-color);
+    transition: color 0.3s ease-in;
     font: 700 16px/20px Montserrat;
+    &:hover {
+      color: var(--second-text-color);
+    }
   }
   @media screen and (max-width: 1024px) {
     padding: 20px;
