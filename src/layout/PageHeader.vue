@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { MENU_LINKS_OBJECT } from '@/constants'
-import { ref, onUpdated, onMounted, onUnmounted } from 'vue'
+import { ref, onUpdated } from 'vue'
 import { RouterLink } from 'vue-router'
 
 
