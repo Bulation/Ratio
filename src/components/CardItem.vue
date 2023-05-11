@@ -2,6 +2,8 @@
 import HotelInfo from './HotelInfo.vue'
 import type { IHotelData } from '@/interfaces/IHotelData'
 import type { ILatestHotelData } from '@/interfaces/ILatestHotelData'
+import { onActivated } from 'vue';
+import HostInfo from './HostInfo.vue'
 
 import SvgIcon from './UI/SvgIcon.vue'
 
@@ -12,7 +14,7 @@ import { ref, watchEffect } from 'vue'
 import convertArrayPriceToString from '@/helperFunctions/convertArrayPriceToString'
 
 const swiperEl = ref(null)
-const params = {
+const paginationStyles = {
   injectStyles: [
     `
     .swiper-pagination-bullets.swiper-pagination-horizontal {
@@ -39,12 +41,14 @@ interface ICardItemProps {
 
 defineProps<ICardItemProps>()
 
-watchEffect(() => {
+const injectPaginationStyles = () => {
   if (swiperEl.value) {
-    Object.assign(swiperEl.value, params)
+    Object.assign(swiperEl.value, paginationStyles)
     swiperEl.value.initialize()
   }
-})
+}
+watchEffect(injectPaginationStyles)
+onActivated(injectPaginationStyles) // при переходе со страницы на страницу нужно заново инжектить стили для пагинации
 </script>
 <template>
     <li v-if="location === 'latest'" class="list-item list-item_latest">
@@ -118,14 +122,7 @@ watchEffect(() => {
               :style="{ backgroundImage: `url(${image})`, borderRadius: '16px' }"
             >
               <SvgIcon className="item__heart" id="heart" />
-              <div class="swiper-no-swiping item__host-info">
-                <img class="item__img" :src="(item as IHotelData).author.avatar" alt="Avatar">
-                <div class="item__host-description host-description">
-                  <p class="host-description__listed">Listed by:</p>
-                  <h4 class="host-description__host-name">{{ (item as IHotelData).name }}</h4>
-                  <p class="host-description__price">For: {{ convertArrayPriceToString((item as IHotelData).price) }}</p>
-                </div>
-              </div>
+              <HostInfo :item="(item as IHotelData)" />
             </div>
           </swiper-slide>
         </swiper-container>
@@ -165,6 +162,8 @@ watchEffect(() => {
     width: 100%;
   }
   &_details {
+    max-width: 574px;
+    width: 100%;
     box-shadow: 0px 0px 10px 0px #E5E5E5;
     border-radius: 16px;
   }
@@ -233,10 +232,6 @@ watchEffect(() => {
     margin-top: 15px;
     margin-left: 5px;
   }
-  &__host-info {
-    display: flex;
-    gap: 21px;
-  }
   &__other-info {
     display: flex;
     gap: 17px;
@@ -275,16 +270,4 @@ watchEffect(() => {
   }
 }
 
-.host-description {
-  color: var(--main-text-color);
-  &__listed {
-    font: 500 12px/15px Montserrat;
-  }
-  &__host-name {
-    font: 700 18px/22px Montserrat;
-  }
-  &__price {
-    font: 500 16px/20px Montserrat;
-  }
-}
 </style>
