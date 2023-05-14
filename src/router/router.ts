@@ -22,6 +22,11 @@ const routes = [
     component: SearchPage
   },
   {
+    path: '/details/:id',
+    name: 'details',
+    component: SearchPage
+  },
+  {
     path: '/404',
     name: 'NotFound',
     component: NotFoundPage
@@ -30,7 +35,7 @@ const routes = [
     path: '/:pathMatch(.*)*',
     redirect: '/404'
   }
-] as RouteRecordRaw[];
+] as RouteRecordRaw[]
 
 const router = createRouter({
   history: createWebHistory(),
