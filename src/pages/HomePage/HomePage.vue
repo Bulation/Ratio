@@ -4,7 +4,6 @@ import LatestSection from './LatestSection.vue'
 import FeaturedSection from './FeaturedSection.vue'
 import BannerComponent from '@/components/BannerComponent.vue'
 import PageFooter from '@/layout/PageFooter/PageFooter.vue'
-import ErrorComponent from '@/components/ErrorComponent.vue'
 import API from '@/services/api'
 import { onMounted, ref } from 'vue'
 import type { IBannerData } from '@/interfaces/IBannerData'
@@ -22,31 +21,22 @@ useHead({
 })
 
 const banners = ref<IBannerData>(null)
-const latestList = ref<ILatestHotelData[]>(null)
-const featuredList = ref<IHotelData[]>(null)
+const latestList = ref<ILatestHotelData[]>([])
+const featuredList = ref<IHotelData[]>([])
 
-const isError = ref(false);
-
-onMounted(() => {
-  getData()
+onMounted(async () => {
+  await getData();
 })
 
 const getData = async () => {
-  try {
-    banners.value = await API.getBanners()
-    latestList.value = await API.getLatestData()
-    featuredList.value = await API.getFeaturedData()
-  } catch (e) {
-    isError.value = true;
-  }
+  banners.value = await API.getBanners()
+  latestList.value = await API.getLatestData()
+  featuredList.value = await API.getFeaturedData()
 }
 
 </script>
 
 <template>
-  <template v-if="isError">
-    <ErrorComponent />
-  </template>
   <main>
     <SearchSection :bannerData="banners" />
     <LatestSection :latest-list="latestList" />

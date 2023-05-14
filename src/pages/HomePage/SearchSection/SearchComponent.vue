@@ -14,15 +14,11 @@ const searchStore = useSearchedState();
 const router = useRouter();
 
 const getCountries = async () => {
-  try {
-    countries.value = await API.getCountries()
-  } catch (e) {
-    console.error(e);
-  }
+  countries.value = await API.getCountries()
 }
 
-onMounted(() => {
-  getCountries()
+onMounted(async () => {
+  await getCountries()
 })
 
 const initialFormState = JSON.parse(localStorage.getItem('formState')) || {
