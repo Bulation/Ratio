@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import ErrorComponent from '@/components/ErrorComponent.vue';
 import LoaderComponent from '@/components/LoaderComponent.vue';
 import MapComponent from '@/components/MapComponent.vue';
 import SearchHotelsList from './SearchHotelsList.vue';
@@ -15,17 +14,11 @@ const store = useSearchedState();
 const list = ref<IHotelData[]>(null)
 const copyList = ref<IHotelData[]>(null);
 const firstHotel = ref<IDetailedHotelData>(null);
-const isError = ref(false);
 
 const getList = async () => {
-  list.value = null;
-  try {
     list.value = await API.postFilter(store.getSearchedState);
     firstHotel.value = await API.getHotelData(list.value[0]._id);
     copyList.value = list.value.slice(0, 3);
-  } catch (e) {
-    isError.value = true;
-  }
 }
 
 watch(list, () => {
@@ -40,8 +33,8 @@ watch(list, () => {
   })
 })
 
-onActivated(() => { 
-  getList();
+onActivated(async () => { 
+  await getList();
 });
 
 const showMore = () => {
@@ -51,9 +44,6 @@ const showMore = () => {
 </script>
 
 <template>
-  <template v-if="isError">
-    <ErrorComponent />
-  </template>
   <section class="search">
     <SearchHotelsList :list="list" :copyList="copyList" @showMore="showMore" />
     <LoaderComponent :style="'width: auto;'" :data="firstHotel">
