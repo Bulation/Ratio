@@ -10,56 +10,48 @@ import OrderButton from '@/components/UI/OrderButton.vue'
 import useForm from '@/hooks/useForm'
 
 const countries = ref<ICountry[]>([])
-const isError = ref(false);
 const isPopupOpen = ref(false);
 const getCountries = async () => {
-  try {
-    countries.value = await API.getCountries()
-  } catch (e) {
-    isError.value = true;
-  }
+  countries.value = await API.getCountries()
 }
 
-onMounted(() => {
-  getCountries()
+onMounted(async () => {
+  await getCountries()
 })
 
 const rules: IOrderFormRules = {
-  firstName: (name: string) => {
-    return !name || name.length < 2
-  },
-  lastName: (name: string) => {
-    return !name || name.length < 2
-  },
-  info1: (name: string) => {
-    return !name || name.length < 2
-  },
-  info2: (name: string) => {
-    return !name || name.length < 2
-  },
-  country: (value: string) => {
-    return !value
-  },
+  first_name: (name: string) => !name || name.length < 2,
+  last_name: (name: string) => !name || name.length < 2,
+  info_1: (name: string) =>  !name || name.length < 2,
+  info_2: (name: string) => !name || name.length < 2,
+  country: (value: string) => !value,
   email: (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return !re.test(email)
-  }
+  },
+  phone: (value: string) => {
+    const re = /^(\+)?7(\s+)?\(?[0-9]{3}\)?(\s+)?[0-9]{3}(-|\s+)?[0-9]{4}$/
+    return !re.test(value)
+  },
+  comment: (value: string) => !value
 }
 
 const errors: IOrderFormError = reactive({
-  firstName: false,
-  lastName: false,
-  info1: false,
-  info2: false,
+  first_name: false,
+  last_name: false,
+  info_1: false,
+  info_2: false,
   country: false,
-  email: false
+  email: false,
+  phone: false,
+  comment: false
 });
 
 const initialFormState = JSON.parse(localStorage.getItem('orderFormState')) || {
-  firstName: '',
-  lastName: '',
-  info1: '',
-  info2: '',
+  first_name: '',
+  last_name: '',
+  info_1: '',
+  info_2: '',
   country: '',
   email: '',
   phone: '',
@@ -78,8 +70,8 @@ const submitForm = async () => {
   if (isSubmitDisabled.value) {
     return
   }
-  isPopupOpen.value = true;
   await API.postOrder(formState)
+  isPopupOpen.value = true;
 }
 
 onActivated(() => {
@@ -94,48 +86,45 @@ onDeactivated(() => {
 </script>
 
 <template>
-  <template v-if="isError">
-    <ErrorComponent />
-  </template>
   <form novalidate @submit.prevent="submitForm" class="order-form" action="#">
     <OrderInput
       type="text"
       @input="updateFormState"
-      :inputValue="formState.firstName"
+      :inputValue="formState.first_name"
       placeholder="First name *"
       :isRequired="true"
-      inputKey="firstName"
-      :isError="errors.firstName"
+      inputKey="first_name"
+      :isError="errors.first_name"
       errorMessage="Name must contain at least 2 symbols"
     />
     <OrderInput
       type="text"
       @input="updateFormState"
-      :inputValue="formState.lastName"
+      :inputValue="formState.last_name"
       placeholder="Last name *"
       :isRequired="true"
-      inputKey="lastName"
-      :isError="errors.lastName"
+      inputKey="last_name"
+      :isError="errors.last_name"
       errorMessage="Lastname must contain at least 2 symbols"
     />
     <OrderInput
       type="text"
       @input="updateFormState"
-      :inputValue="formState.info1"
+      :inputValue="formState.info_1"
       placeholder="Info-1 *"
       :isRequired="true"
-      inputKey="info1"
-      :isError="errors.info1"
+      inputKey="info_1"
+      :isError="errors.info_1"
       errorMessage="Info must contain at least 2 symbols"
     />
     <OrderInput
       type="text"
       @input="updateFormState"
-      :inputValue="formState.info2"
+      :inputValue="formState.info_2"
       placeholder="Info-2 *"
       :isRequired="true"
-      inputKey="info2"
-      :isError="errors.info2"
+      inputKey="info_2"
+      :isError="errors.info_2"
       errorMessage="Info must contain at least 2 symbols"
     />
     <div class="order-form-select-wrap">
@@ -171,13 +160,19 @@ onDeactivated(() => {
       placeholder="Phone number"
       :isRequired="false"
       inputKey="phone"
+      :isError="errors.phone"
+      errorMessage="phone should not be empty and must be like +79999999999"
     />
-    <textarea
+    <div :style="'width: 100%;'">
+      <textarea
       class="order-form-textarea"
+      @input="(e) => updateFormState((e.target as HTMLTextAreaElement).value, 'comment')"
       name="Comment"
       v-model="formState.comment"
       placeholder="Comment"
-    ></textarea>
+      ></textarea>
+      <span class="order-form-error-msg" v-if="errors.comment">Comment should not be empty</span>
+    </div>
     <OrderButton :style="'margin-top: 14px'" :isDisabled="isSubmitDisabled"
       >Reserve Now</OrderButton
     >
