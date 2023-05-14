@@ -11,13 +11,14 @@ const API = {
   async fetchData(path: string) {
     const response = await fetch(`${BASE_URL}${path}`)
     if (response.status >= 400 && response.status <= 600) {
-      throw new Error('Error')
+      throw new Error();
     }
     const data = await response.json()
     return data
   },
 
   async postData(path: string, body: IFilter | IOrderForm) {
+    console.log(JSON.stringify(body))
     const response = await fetch(`${BASE_URL}${path}`, {
       method: 'POST',
       headers: {
@@ -25,6 +26,9 @@ const API = {
       },
       body: JSON.stringify(body)
     })
+    if (response.status >= 400 && response.status <= 600) {
+      throw new Error()
+    }
     const data = await response.json()
     return data
   },
