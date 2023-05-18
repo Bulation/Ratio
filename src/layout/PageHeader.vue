@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { MENU_LINKS_OBJECT } from '@/constants'
-import { ref, onUpdated } from 'vue'
+import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
-
 
 const isMobileNavShow = ref(false)
 const isMobileNavHidden = ref(false)
@@ -11,16 +10,13 @@ const toggleBurger = () => {
   isMobileNavShow.value = !isMobileNavShow.value
   if (!isMobileNavShow.value) {
     isMobileNavHidden.value = true
+    document.body.classList.remove('body_overlay')
   } else {
     isMobileNavHidden.value = false
+    document.body.classList.add('body_overlay')
   }
 }
 
-onUpdated(() => {
-  isMobileNavShow.value
-    ? document.body.classList.add('body_overlay')
-    : document.body.classList.remove('body_overlay')
-})
 </script>
 
 <template>
@@ -78,7 +74,7 @@ onUpdated(() => {
     max-width: 1210px;
     width: calc(100% - 50px);
     margin: 0 auto;
-    padding: 14px 0;
+    padding: 19px 0;
   }
 }
 
