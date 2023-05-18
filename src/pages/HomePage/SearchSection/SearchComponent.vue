@@ -2,13 +2,13 @@
 import { onActivated, onDeactivated, onMounted, reactive, ref } from 'vue'
 import SvgIcon from '@/components/UI/SvgIcon.vue'
 import type { ICountry } from '@/interfaces/ICountry'
-import API from '@/services/api' 
 import DatePicker from 'vue-datepicker-next';
 import 'vue-datepicker-next/index.css';
 import useForm from '@/hooks/useForm'
-import { useSearchedState } from '@/store'
+import { useSearchedState } from '@/store/modules/searchModule'
 import { useRouter } from 'vue-router'
 import yandexMetrica from '@/services/yandexMetrika';
+import API from '@/services/api' 
 
 const countries = ref<ICountry[]>([])
 const searchStore = useSearchedState();

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usePreservedHotel } from '@/store';
+import { usePreservedHotel } from '@/store/modules/orderModule';
 import HotelInfo from '@/components/HotelInfo.vue';
 
 const preservedHotelStore = usePreservedHotel();
