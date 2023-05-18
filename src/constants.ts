@@ -118,3 +118,5 @@ export const EMAIL_REGEXP = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export const PHONE_REGEXP = /^(\+)?7(\s+)?\(?[0-9]{3}\)?(\s+)?[0-9]{3}(-|\s+)?[0-9]{4}$/;
 export const ICON_WIDTH = 52;
 export const ICON_HEIGHT = 66;
+export const TOTAL_RATING = 5.0;
+export const MAX_RATING_WIDTH = 135;
