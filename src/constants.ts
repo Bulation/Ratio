@@ -90,7 +90,6 @@ export const SOCIALS_LIST = [
     path: 'https://linkedin.com'
   }
 ]
-export const ZOOM = 16;
 export const RATING_LIST = [
   {
     name: 'Amenities',
