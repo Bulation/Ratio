@@ -42,9 +42,12 @@ defineProps<ISearchAboutHotelProps>()
 }
 
 .about-hotel {
-  max-width: 325px;
-  padding: 26px 36px 43px 18px;
+  width: 325px;
+  padding: 28px 36px 43px 18px;
   background-color: #ffffff;
+  @media screen and (max-width: 490px) {
+    width: 100%;
+  }
 }
 
 .amenities-list {
