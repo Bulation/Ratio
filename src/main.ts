@@ -1,20 +1,24 @@
 import { createApp } from 'vue'
+import { createHead } from '@vueuse/head'
 import App from './App.vue'
 import router from './router/router'
 import './assets/main.scss'
 import { createPinia } from 'pinia'
-import 'element-plus/dist/index.css'
-import { createMetaManager } from 'vue-meta';
-import { defaultConfig } from 'vue-meta'
-const app = createApp(App)
 
-app
-  .use(createPinia())
-  .use(router)
-  .use(
-    createMetaManager(false, {
-      ...defaultConfig,
-      meta: { tag: 'meta', nameless: true }
-    })
-  )
-  .mount('#app');
+import 'element-plus/es/components/base/style/css'
+import 'element-plus/theme-chalk/el-skeleton.css'
+import 'element-plus/es/components/skeleton-item/style/css'
+import 'element-plus/es/components/base/style/css';
+import 'element-plus/theme-chalk/el-skeleton-item.css';
+
+const app = createApp(App);
+const head = createHead()
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import clickOutsideDirective from './directives/clickOutsideDirective'
+
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+
+app.directive('click-outside', clickOutsideDirective);
+
+app.use(pinia).use(router).use(head).mount('#app');
