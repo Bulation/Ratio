@@ -1,5 +1,5 @@
 import type { Directive } from "vue";
-
+// директива для обработки кликов по бэкдропам
 const clickOutsideDirective: Directive = {
   mounted(element, { value }) {
     element.clickOutside = function (e: Event) {
