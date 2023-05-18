@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import yandexMetrica from '@/services/yandexMetrika'
 
 export default function useForm(
   formState: Record<string, any>,
@@ -25,6 +26,7 @@ export default function useForm(
 
   const updateFormState = (value: string, name: string) => {
     formState[name] = value
+    yandexMetrica.setGoal(name);
     clearError(name)
   }
   return { isSubmitDisabled, clearError, updateFormState, validateForm }
