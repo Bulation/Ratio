@@ -3,41 +3,39 @@ import type { IHotelData } from '@/interfaces/IHotelData';
 import LoaderComponent from '@/components/LoaderComponent.vue';
 import HotelCardList from '@/components/HotelCardList.vue';
 import { ElSkeletonItem } from 'element-plus';
-import { onActivated, ref } from 'vue';
-const emit = defineEmits(['showMore'])
+import { onActivated, ref, watch } from 'vue';
 
 interface ISearchHotelsProps {
-  copyList: IHotelData[],
   list: IHotelData[],
 }
 
 const isExpand = ref(false);
+const props = defineProps<ISearchHotelsProps>();
+const copyList = ref(props.list.slice(0, 3))
 
-onActivated(() => isExpand.value = false); // при возвращении на страницу возвращаем кнопку
+onActivated(() => isExpand.value = false); // при возвращении на страницу отображаем кнопку показа всех результатов
 
-const handleButtonClick = () => {
-  emit('showMore')
+const showMore = () => {
+  copyList.value = props.list;
   isExpand.value = true;
 }
 
-defineProps<ISearchHotelsProps>()
+watch(() => props.list, () => copyList.value = props.list.slice(0, 3)); // наблюдаем за изменением пропса, чтобы обновить copyList
 </script>
 <template>
 <div class="hotels-list">
       <LoaderComponent :style="'margin-top: 110px;'" :data="list" :count="3">
         <template #template>
-          <ElSkeletonItem :style="'display: block; width: 574px; height: 384px; margin-bottom: 30px;'" variant="rect" />
-          <ElSkeletonItem :style="'display: block; width: 453px; height: 24px; margin-bottom: 57px;'" variant="text" />
-          <ElSkeletonItem :style="'display: block; width: 453px; height: 24px; margin-bottom: 93px;'" variant="text" />
+          <ElSkeletonItem class="hotel-skeleton" variant="rect" />
+          <ElSkeletonItem class="text-skeleton" variant="text" />
+          <ElSkeletonItem class="text-skeleton" :style="'margin-bottom: 93px;'" variant="text" />
         </template>
         <template #default>
           <h3 class="hotels-list__title">{{ list.length }} Results Found</h3>
           <div class="hotels-list__wrapper">
-            <TransitionGroup name="hotels-list">
-              <HotelCardList :list="copyList" location="details" />
-            </TransitionGroup>
+            <HotelCardList :style="'row-gap: 80px'" :list="copyList" location="details" />
           </div>
-          <button class="hotels-list__button" v-if="!isExpand && list.length > 3" @click="handleButtonClick" type="button">Other as per found results...</button>
+          <button class="hotels-list__button" v-if="!isExpand && list.length > 3" @click="showMore" type="button">Other as per found results...</button>
         </template>
       </LoaderComponent>
     </div>
@@ -45,7 +43,7 @@ defineProps<ISearchHotelsProps>()
 
 <style scoped lang="scss">
 .hotels-list {
-  padding: 95px 40px 70px 80px;
+  padding: 90px 40px 70px 75px;
   &__title {
     margin-bottom: 115px;
     color: var(--main-text-color);
@@ -67,6 +65,26 @@ defineProps<ISearchHotelsProps>()
   }
   @media screen and (max-width: 1024px) {
     padding: 20px;
+  }
+}
+
+.hotel-skeleton {
+  display: block; 
+  width: 574px; 
+  height: 384px; 
+  margin-bottom: 30px;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
+}
+
+.text-skeleton {
+  display: block; 
+  width: 453px; 
+  height: 24px; 
+  margin-bottom: 57px;
+  @media screen and (max-width: 450px) {
+    width: 100%;
   }
 }
 </style>
