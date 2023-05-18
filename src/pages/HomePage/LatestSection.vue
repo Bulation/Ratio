@@ -16,7 +16,7 @@ defineProps<ILatestProps>()
       <h2 class="section-title latest__title">Latest on the Property Listing</h2>
       <LoaderComponent :data="latestList" :count="4">
         <template #template>
-          <ElSkeletonItem :style="'width: 279px; height: 340px; margin-right: 20px;'" variant="rect" />
+          <ElSkeletonItem class="card-skeleton" variant="rect" />
         </template>
         <template #default>
           <HotelCardList :list="latestList" location="latest" />
@@ -31,11 +31,17 @@ defineProps<ILatestProps>()
   max-width: 1206px;
   width: calc(100% - 30px);
   margin: 0 auto;
-  padding: 80px 0 50px;
+  padding: 88px 0 50px;
 }
 
 .latest__title {
   max-width: 340px;
   margin-bottom: 100px;
+}
+
+.card-skeleton {
+  width: 279px; 
+  height: 340px; 
+  margin-right: 20px;
 }
 </style>
