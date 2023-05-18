@@ -16,7 +16,7 @@ defineProps<IFeaturedProps>()
       <h2 class="section-title featured__title">Featured Properties on our Listing</h2>
       <LoaderComponent :data="featuredList" :count="6">
         <template #template>
-          <ElSkeletonItem :style="'width: 382px; height: 340px; margin-right: 20px;'" variant="rect" />
+          <ElSkeletonItem class="card-skeleton" variant="rect" />
         </template>
         <template #default>
           <HotelCardList :list="featuredList" location="featured" />
@@ -36,6 +36,15 @@ defineProps<IFeaturedProps>()
 
 .featured__title {
   max-width: 412px;
-  margin-bottom: 83px;
+  margin-bottom: 78px;
+}
+
+.card-skeleton {
+  width: 382px; 
+  height: 340px; 
+  margin-right: 20px;
+  @media screen and (max-width: 400px) {
+    width: 100%;
+  }
 }
 </style>
