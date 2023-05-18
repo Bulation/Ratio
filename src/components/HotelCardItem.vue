@@ -5,13 +5,14 @@ import type { ILatestHotelData } from '@/interfaces/ILatestHotelData'
 import { onActivated } from 'vue';
 import HostInfo from './HostInfo.vue'
 
+import { ref, watchEffect } from 'vue'
+import convertArrayPriceToString from '@/helperFunctions/convertArrayPriceToString'
+import yandexMetrica from '@/services/yandexMetrika';
 import SvgIcon from './UI/SvgIcon.vue'
 
 import { register } from 'swiper/element/bundle'
 register()
 
-import { ref, watchEffect } from 'vue'
-import convertArrayPriceToString from '@/helperFunctions/convertArrayPriceToString'
 
 const swiperEl = ref(null)
 const paginationStyles = {
@@ -34,6 +35,8 @@ const paginationStyles = {
   ]
 }
 
+const handleRouteClick = () => yandexMetrica.redirectToPage('/details');
+
 interface IHotelCardItemProps {
   item: IHotelData | ILatestHotelData
   location: 'featured' | 'latest' | 'details'
@@ -52,7 +55,7 @@ onActivated(injectPaginationStyles) // при переходе со страни
 </script>
 <template>
     <li v-if="location === 'latest'" class="list-item list-item_latest">
-      <router-link :to="{ name: 'details', params: { id: item._id } }" class="item item_latest">
+      <router-link @click="handleRouteClick" :to="{ name: 'details', params: { id: item._id } }" class="item item_latest">
         <div
           class="item__back-img"
           :style="{ backgroundImage: `url(${item.image})`, borderRadius: '8px' }"
@@ -87,16 +90,16 @@ onActivated(injectPaginationStyles) // при переходе со страни
             </div>
           </swiper-slide>
         </swiper-container>
-        <router-link :to="{ name: 'details', params: { id: item._id } }" class="item__link">
+        <router-link @click="handleRouteClick" :to="{ name: 'details', params: { id: item._id } }" class="item__link">
           <div class="item__container">
             <HotelInfo :name="item.name" :address="item.address" />
             <div class="item__flat-info flat-info">
               <div class="flat-info__bed">
-                <SvgIcon className="flat-info__bed-icon" id="bed" />
+                <SvgIcon className="flat-info__bed-icon" id="bedroom" />
                 <span>{{ (item as IHotelData).info[0].bathroom }}</span>
               </div>
               <div class="flat-info__bath">
-                <SvgIcon className="flat-info__bath-icon" id="bath" />
+                <SvgIcon className="flat-info__bath-icon" id="bathroom" />
                 <span>{{ (item as IHotelData).info[0].bedroom }}</span>
               </div>
             </div>
@@ -122,20 +125,20 @@ onActivated(injectPaginationStyles) // при переходе со страни
               :style="{ backgroundImage: `url(${image})`, borderRadius: '16px' }"
             >
               <SvgIcon className="item__heart" id="heart" />
-              <HostInfo :item="(item as IHotelData)" />
+              <HostInfo :name="(item as IHotelData).name" :avatar="(item as IHotelData).author.avatar" :price="(item as IHotelData).price" />
             </div>
           </swiper-slide>
         </swiper-container>
-        <router-link :to="{ name: 'details', params: { id: item._id } }" class="item__link item__link_details">
+        <router-link @click="handleRouteClick" :to="{ name: 'details', params: { id: item._id } }" class="item__link item__link_details">
           <div class="item__container">
             <HotelInfo :name="item.name" :address="item.address" />
             <div class="item__flat-info flat-info">
               <div class="flat-info__bed">
-                <SvgIcon className="flat-info__bed-icon" id="bed" />
+                <SvgIcon className="flat-info__bed-icon" id="bedroom" />
                 <span>{{ (item as IHotelData).info[0].bathroom }}</span>
               </div>
               <div class="flat-info__bath">
-                <SvgIcon className="flat-info__bath-icon" id="bath" />
+                <SvgIcon className="flat-info__bath-icon" id="bathroom" />
                 <span>{{ (item as IHotelData).info[0].bedroom }}</span>
               </div>
             </div>
@@ -229,7 +232,7 @@ onActivated(injectPaginationStyles) // при переходе со страни
     }
   }
   &__flat-info {
-    margin-top: 15px;
+    margin-top: 20px;
     margin-left: 5px;
   }
   &__other-info {
@@ -237,7 +240,7 @@ onActivated(injectPaginationStyles) // при переходе со страни
     gap: 17px;
     font: 600 14px/17px Montserrat;
     color: var(--second-text-color);
-    margin-top: 30px;
+    margin-top: 25px;
   }
 }
 .flat-info {
