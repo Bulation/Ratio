@@ -35,19 +35,18 @@ defineProps<ISearchProps>()
   &__container {
     max-width: 1366px;
     width: 100%;
-    min-height: 577px;
+    min-height: 566px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     background-size: cover;
-    padding-bottom: 83px;
     margin: 0 auto;
   }
   &__title {
     text-transform: uppercase;
     color: var(--title-color);
     font: 700 40px/49px Montserrat;
-    margin-bottom: 25px;
+    margin-bottom: 24px;
     padding-left: 30px;
   }
   &__wrap {
