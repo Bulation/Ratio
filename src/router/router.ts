@@ -3,7 +3,7 @@ const HomePage = () => import('@/pages/HomePage/HomePage.vue')
 const OrderPage = () => import('@/pages/OrderPage/OrderPage.vue')
 const SearchPage = () => import('@/pages/SearchPage/SearchPage.vue')
 const NotFoundPage = () => import('@/pages/NotFoundPage/NotFoundPage.vue')
-
+const DetailsPage = () => import('@/pages/DetailsPage/DetailsPage.vue')
 
 const routes = [
   {
@@ -24,7 +24,7 @@ const routes = [
   {
     path: '/details/:id',
     name: 'details',
-    component: SearchPage
+    component: DetailsPage
   },
   {
     path: '/404',
@@ -35,11 +35,14 @@ const routes = [
     path: '/:pathMatch(.*)*',
     redirect: '/404'
   }
-] as RouteRecordRaw[]
+] as RouteRecordRaw[] // почему-то тс ругается, что объект со свойством redirect не совместим с типом, поэтому задаю тип явно
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior() { // при переходе на новую страницу будет происходить скролл к верху страницы
+    return { top: 0 }
+  }
 })
 
 export default router
