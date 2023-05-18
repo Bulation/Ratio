@@ -18,7 +18,6 @@ const API = {
   },
 
   async postData(path: string, body: IFilter | IOrderForm) {
-    console.log(JSON.stringify(body))
     const response = await fetch(`${BASE_URL}${path}`, {
       method: 'POST',
       headers: {
