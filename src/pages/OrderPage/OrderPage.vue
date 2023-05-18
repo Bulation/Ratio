@@ -29,9 +29,11 @@ useHead({
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 25px;
   width: calc(100% - 30px);
   margin: 0 auto;
-  max-width: 1216px;
-  padding: 88px 0 75px;
+  max-width: 1230px;
+  padding: 83px 14px 80px 0;
 }
 </style>
