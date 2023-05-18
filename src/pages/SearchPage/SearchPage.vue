@@ -14,7 +14,7 @@ const firstHotel = ref<IDetailedHotelData>(null);
 
 const getList = async () => {
     list.value = await API.postFilter(store.getSearchedState);
-    firstHotel.value = await API.getHotelData(list.value[0]._id);
+    firstHotel.value = await API.getHotelData(list.value[0]._id); // получаем данные для отображения их поверх карты
 }
 
 watch(list, () => {
@@ -27,7 +27,7 @@ watch(list, () => {
       { property: 'og:description', content: "list of found hotels"},
     ]
   })
-})
+}) // изначально в list находится пустой массив, поэтому следим за изменениями, чтобы отобразить их в мета-тегах
 
 onActivated(async () => {
   await getList();
