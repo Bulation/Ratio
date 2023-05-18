@@ -1,23 +1,26 @@
 :root {
   --overlay-color: #29292999;
-  --burger-color: #0000008A;
+  --burger-color: #0000008a;
   --main-text-color: #484848;
-  --second-text-color: #9A9A9A;
+  --second-text-color: #9a9a9a;
   --link-color: #484848;
   --title-color: #484848;
   --button-color: #484848;
-  --header-bg-color: #EFF0F2;
-  --placeholder-color: #C2C6CC;
-  --separator-color: #DDDDDD;
-  --banner-color: #9A9A9A;
-  --address-color: #9A9A9A;
-  --input-color: #9A9A9A;
-  --input-outline: #E8EAEC;
-  --btn-bg: #9A9A9A;
-  --newsletter-bg: #E8EAEC;
-  --footer-bg: #EFF0F2;
-  --market-bg: #E0E2E6;
-  --rights-border: #E0E2E6;
+  --header-bg-color: #eff0f2;
+  --placeholder-color: #c2c6cc;
+  --separator-color: #dddddd;
+  --banner-color: #9a9a9a;
+  --address-color: #9a9a9a;
+  --input-color: #9a9a9a;
+  --input-outline: #e8eaec;
+  --btn-bg: #9a9a9a;
+  --newsletter-bg: #e8eaec;
+  --footer-bg: #eff0f2;
+  --flats-bg: #EFF0F2;
+  --market-bg: #e0e2e6;
+  --rights-border: #e0e2e6;
+  --separator-color: #e0e2e6;
+  --hotel-info-bg: #e0e2e6;
   --order-input-color: #959595;
 }
 
@@ -32,7 +35,7 @@ a {
 .body_overlay {
   overflow: hidden;
   &:before {
-    content: "";
+    content: '';
     position: fixed;
     left: 0;
     top: 0;
@@ -55,6 +58,6 @@ a {
     border-radius: 3px;
     background-color: var(--title-color);
     left: 0;
-    bottom: -38px;
+    bottom: -35px;
   }
 }
