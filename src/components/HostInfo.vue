@@ -1,22 +1,21 @@
 <script setup lang="ts">
-import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData';
-
 import convertArrayPriceToString from '@/helperFunctions/convertArrayPriceToString'
-import type { IHotelData } from '@/interfaces/IHotelData';
 
 interface IHostInfoProps {
-  item: IHotelData | IDetailedHotelData
+  avatar: string
+  name: string
+  price: string[]
 }
 defineProps<IHostInfoProps>()
 </script>
 
 <template>
   <div class="host-info">
-                <img class="host-info__img" :src="item.author.avatar" alt="Avatar">
+                <img class="host-info__img" :src="avatar" alt="Avatar">
                 <div class="host-description">
                   <p class="host-description__listed">Listed by:</p>
-                  <h4 class="host-description__host-name">{{ item.name }}</h4>
-                  <p class="host-description__price">For: {{ convertArrayPriceToString(item.price) }}</p>
+                  <h4 class="host-description__host-name">{{ name }}</h4>
+                  <p class="host-description__price">For: {{ convertArrayPriceToString(price) }}</p>
                 </div>
               </div>
 </template>
