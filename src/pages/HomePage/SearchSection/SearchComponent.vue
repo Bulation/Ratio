@@ -8,6 +8,7 @@ import 'vue-datepicker-next/index.css';
 import useForm from '@/hooks/useForm'
 import { useSearchedState } from '@/store'
 import { useRouter } from 'vue-router'
+import yandexMetrica from '@/services/yandexMetrika';
 
 const countries = ref<ICountry[]>([])
 const searchStore = useSearchedState();
@@ -62,6 +63,7 @@ const submitForm = async () => {
   formState.checkOut = new Date(formState.checkOut).toISOString()
   searchStore.setSearchedState(formState);
   router.push('/search');
+  yandexMetrica.redirectToPage('/search');
 }
 
 onActivated(() => {
@@ -71,6 +73,7 @@ onActivated(() => {
 })
 
 onDeactivated(() => {
+  localStorage.setItem('formState', JSON.stringify(formState));
   window.onbeforeunload = null;
 })
 </script>
@@ -106,7 +109,7 @@ onDeactivated(() => {
           input-class="dp-input"
           :style="'width: 143px'"
           :value="new Date(formState.checkIn)"
-          @update:value="(value) => updateFormState(value, 'checkIn')"
+          @update:value="(value: string) => updateFormState(value, 'checkIn')"
           placeholder="Add Dates"
         />
         <span class="search-form-error-msg" v-if="errors.checkIn">Date should be chosen</span>
@@ -119,7 +122,7 @@ onDeactivated(() => {
           input-class="dp-input"
           :style="'width: 143px'"
           :value="new Date(formState.checkOut)"
-          @update:value="(value) => updateFormState(value, 'checkOut')"
+          @update:value="(value: string) => updateFormState(value, 'checkOut')"
           placeholder="Add Dates"
         />
         <span class="search-form-error-msg" v-if="errors.checkOut">Date should be chosen</span>
@@ -148,7 +151,7 @@ onDeactivated(() => {
 
 <style lang="scss">
 .search-form {
-  padding: 15px 8px 15px 30px;
+  padding: 17px 8px 17px 30px;
   border-radius: 35px;
   background-color: #ffffff;
   &__inputs-wrap {
@@ -186,7 +189,7 @@ onDeactivated(() => {
   &__title {
     color: var(--title-color);
     font: 600 12px/15px Montserrat;
-    margin-bottom: 3px;
+    margin-bottom: 6px;
   }
   &__date-picker_out {
     width: 202px;
