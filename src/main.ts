@@ -4,6 +4,8 @@ import App from './App.vue'
 import router from './router/router'
 import './assets/main.scss'
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import clickOutsideDirective from './directives/clickOutsideDirective'
 
 import 'element-plus/es/components/base/style/css'
 import 'element-plus/theme-chalk/el-skeleton.css'
@@ -13,8 +15,6 @@ import 'element-plus/theme-chalk/el-skeleton-item.css';
 
 const app = createApp(App);
 const head = createHead()
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import clickOutsideDirective from './directives/clickOutsideDirective'
 
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
