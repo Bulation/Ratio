@@ -59,16 +59,4 @@ defineExpose({openPopup});
 .popup-leave-active {
   animation: appearPopup 0.5s reverse;
 }
-
-@keyframes appearPopup {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
 </style>
