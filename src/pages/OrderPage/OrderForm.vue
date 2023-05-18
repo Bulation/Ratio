@@ -7,10 +7,15 @@ import type { IOrderForm } from '@/interfaces/IOrderForm'
 import type { ICountry } from '@/interfaces/ICountry'
 import OrderInput from '@/components/UI/OrderInput.vue'
 import OrderButton from '@/components/UI/OrderButton.vue'
+import ModalWindow from '@/components/UI/ModalWindow.vue'
+import ErrorComponent from '@/components/ErrorComponent.vue'
 import useForm from '@/hooks/useForm'
+import yandexMetrica from '@/services/yandexMetrika'
+import { EMAIL_REGEXP, PHONE_REGEXP } from '@/constants'
 
 const countries = ref<ICountry[]>([])
-const isPopupOpen = ref(false);
+const modalRef = ref<InstanceType<typeof ModalWindow> | null>(null);
+const isError = ref(false);
 const getCountries = async () => {
   countries.value = await API.getCountries()
 }
@@ -26,11 +31,11 @@ const rules: IOrderFormRules = {
   info_2: (name: string) => !name || name.length < 2,
   country: (value: string) => !value,
   email: (email: string) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const re = EMAIL_REGEXP
     return !re.test(email)
   },
   phone: (value: string) => {
-    const re = /^(\+)?7(\s+)?\(?[0-9]{3}\)?(\s+)?[0-9]{3}(-|\s+)?[0-9]{4}$/
+    const re = PHONE_REGEXP;
     return !re.test(value)
   },
   comment: (value: string) => !value
@@ -70,8 +75,15 @@ const submitForm = async () => {
   if (isSubmitDisabled.value) {
     return
   }
-  await API.postOrder(formState)
-  isPopupOpen.value = true;
+  try {
+    await API.postOrder(formState)
+  } catch (e) {
+    yandexMetrica.setGoal('orderError')
+    isError.value = true;
+    return;
+  }
+  isError.value = false;
+  modalRef.value?.openPopup();
 }
 
 onActivated(() => {
@@ -86,6 +98,9 @@ onDeactivated(() => {
 </script>
 
 <template>
+  <template v-if="isError">
+    <ErrorComponent />
+  </template>
   <form novalidate @submit.prevent="submitForm" class="order-form" action="#">
     <OrderInput
       type="text"
@@ -173,20 +188,11 @@ onDeactivated(() => {
       ></textarea>
       <span class="order-form-error-msg" v-if="errors.comment">Comment should not be empty</span>
     </div>
-    <OrderButton :style="'margin-top: 14px'" :isDisabled="isSubmitDisabled"
+    <OrderButton class="order-form__btn" :isDisabled="isSubmitDisabled"
       >Reserve Now</OrderButton
     >
   </form>
-  <Teleport to="body">
-    <Transition name="popup">
-      <div v-if="isPopupOpen" class="popup-wrapper">
-        <div class="popup" v-click-outside="() => isPopupOpen = false">
-          <h2>Form is successfully submitted!</h2>
-          <OrderButton :style="'margin-top: 14px'" :isDisabled="false" @click="isPopupOpen = false">Ok</OrderButton>
-        </div>
-      </div>
-    </Transition>
-  </Teleport>
+  <ModalWindow ref="modalRef" />
 </template>
 
 <style lang="scss">
@@ -197,6 +203,11 @@ onDeactivated(() => {
   max-width: 671px;
   column-gap: 12px;
   row-gap: 10px;
+  &__btn {
+    position: relative;
+    left: 10px;
+    top: 8px;
+  }
 }
 .order-form-select-wrap {
   width: calc(50% - 7px);
@@ -244,57 +255,5 @@ onDeactivated(() => {
   padding-top: 15px;
   border-bottom: 1px solid #000000;
   resize: none;
-}
-
-.popup {
-  position: fixed;
-  left: 50%;
-  z-index: 3;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  top: 50%;
-  flex-wrap: wrap;
-  background-color: #ffffff;
-  text-align: center;
-  color: #000;
-  width: calc(100% - 20px);
-  margin: 0 auto;
-  max-width: 400px;
-  max-height: 100%;
-  height: auto;
-  transition: all 0.2s ease 0.1s;
-  overflow-y: auto;
-}
-
-.popup-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #29292999;
-  transition: all 0.2s ease 0.1s;
-}
-
-.popup-enter-active {
-  animation: appearPopup 0.5s;
-}
-.popup-leave-active {
-  animation: appearPopup 0.5s reverse;
-}
-
-@keyframes appearPopup {
-  0% {
-    opacity: 0;
-    transform: scale(0);
-  }
-  
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 </style>
