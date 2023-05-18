@@ -8,42 +8,36 @@ interface IDetailsGalleryProps {
   price: string[]
 }
 const props = defineProps<IDetailsGalleryProps>()
-const copyImages = ref(props.images.slice(0, 5));
-const isImagesShown = ref(false);
-const imagesCount = ref(props.images.length - copyImages.value.length);
+const copyImages = ref(props.images.slice(0, 5))
+const isImagesShown = ref(false)
+const imagesCount = ref(props.images.length - copyImages.value.length)
 
 const showMore = () => {
-  copyImages.value = props.images;
-  isImagesShown.value = true;
+  copyImages.value = props.images
+  isImagesShown.value = true
 }
 </script>
 
 <template>
-    <TransitionGroup name="gallery" class="gallery" tag="section">
+  <TransitionGroup name="gallery" class="gallery" tag="section">
+    <div class="gallery__image-wrapper" v-for="(image, i) in copyImages" :key="image">
+      <img class="gallery__image" :src="image" alt="gallery image" />
+      <div class="gallery__host-info" v-if="i === 0">
+        <HostInfo :avatar="avatar" :name="name" :price="price" />
+      </div>
       <div
-        class="gallery__image-wrapper"
-        v-for="(image, i) in copyImages"
-        :key="image"
+        class="image-content"
+        v-if="i === copyImages.length - 1 && !isImagesShown"
+        @click="showMore"
       >
-        <img class="gallery__image" :src="image" alt="gallery image">
-        <div class="gallery__host-info" v-if="i === 0">
-          <HostInfo :avatar="avatar" :name="name" :price="price" />
-        </div>
-        <div
-          class="image-content"
-          v-if="i === copyImages.length - 1 && !isImagesShown"
-          @click="showMore"
-        >
-          <div class="image-content__count">
-            +{{ imagesCount }}
-          </div>
-          <div class="image-content__text">
-            <div class="image-content__text_top">More</div>
-            <div class="image-content__text_bottom">Photos</div>
-          </div>
+        <div class="image-content__count">+{{ imagesCount }}</div>
+        <div class="image-content__text">
+          <div class="image-content__text_top">More</div>
+          <div class="image-content__text_bottom">Photos</div>
         </div>
       </div>
-    </TransitionGroup>
+    </div>
+  </TransitionGroup>
 </template>
 
 <style scoped lang="scss">
@@ -117,5 +111,4 @@ const showMore = () => {
 .gallery-enter-from {
   transform: translateX(100%);
 }
-
 </style>

@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import SvgIcon from '@/components/UI/SvgIcon.vue'
-import ModalWindow from '@/components/UI/ModalWindow.vue';
-import { EMAIL_REGEXP } from '@/constants';
-import { ref } from 'vue';
+import ModalWindow from '@/components/UI/ModalWindow.vue'
+import { EMAIL_REGEXP } from '@/constants'
+import { ref } from 'vue'
 
-const inputValue = ref('');
-const modalRef = ref<InstanceType<typeof ModalWindow> | null>(null);
-const errorMessage = "Email must be like **@**.**";
-const isError = ref(false);
+const inputValue = ref('')
+const modalRef = ref<InstanceType<typeof ModalWindow> | null>(null)
+const errorMessage = 'Email must be like **@**.**'
+const isError = ref(false)
 const submitForm = async () => {
-  const re = EMAIL_REGEXP;
+  const re = EMAIL_REGEXP
   if (!re.test(inputValue.value)) {
-    isError.value = true;
+    isError.value = true
     return
   }
-  modalRef.value?.openPopup();
+  modalRef.value?.openPopup()
 }
 </script>
 
@@ -27,7 +27,12 @@ const submitForm = async () => {
       </div>
       <form novalidate @submit.prevent="submitForm" action="#" class="newsletter__form">
         <div class="newsletter__form-body">
-          <input class="newsletter__input" type="email" v-model="inputValue" placeholder="Your Email..." />
+          <input
+            class="newsletter__input"
+            type="email"
+            v-model="inputValue"
+            placeholder="Your Email..."
+          />
           <button class="newsletter__btn" type="submit">
             <SvgIcon className="newsletter__icon" id="send" />
           </button>

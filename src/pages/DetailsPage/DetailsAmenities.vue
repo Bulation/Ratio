@@ -1,21 +1,24 @@
 <script setup lang="ts">
-import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData';
-import LoaderComponent from '@/components/LoaderComponent.vue';
-import DetailsExpandButton from '@/components/UI/DetailsExpandButton.vue';
-import { ElSkeletonItem } from 'element-plus';
-import { ref, watch } from 'vue';
+import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData'
+import LoaderComponent from '@/components/LoaderComponent.vue'
+import DetailsExpandButton from '@/components/UI/DetailsExpandButton.vue'
+import { ElSkeletonItem } from 'element-plus'
+import { ref, watch } from 'vue'
 
 interface IDetailsAmenitiesProps {
   hotel: IDetailedHotelData
 }
-const props = defineProps<IDetailsAmenitiesProps>();
-const isExpand = ref(false);
-const copyAmenities = ref([]);
+const props = defineProps<IDetailsAmenitiesProps>()
+const isExpand = ref(false)
+const copyAmenities = ref([])
 const showMore = () => {
-  copyAmenities.value = props.hotel.amenities;
-  isExpand.value = true;
+  copyAmenities.value = props.hotel.amenities
+  isExpand.value = true
 }
-watch(() => props.hotel, () => copyAmenities.value = props.hotel.amenities.slice(0, 6));
+watch(
+  () => props.hotel,
+  () => (copyAmenities.value = props.hotel.amenities.slice(0, 6))
+)
 </script>
 
 <template>
@@ -42,7 +45,13 @@ watch(() => props.hotel, () => copyAmenities.value = props.hotel.amenities.slice
             </li>
           </TransitionGroup>
         </ul>
-        <DetailsExpandButton class="details-amenities__button" v-if="!isExpand && hotel.amenities.length > 6" @click="showMore" type="button">Show All {{ hotel.amenities.length }} Amenities</DetailsExpandButton>
+        <DetailsExpandButton
+          class="details-amenities__button"
+          v-if="!isExpand && hotel.amenities.length > 6"
+          @click="showMore"
+          type="button"
+          >Show All {{ hotel.amenities.length }} Amenities</DetailsExpandButton
+        >
       </div>
     </template>
   </LoaderComponent>

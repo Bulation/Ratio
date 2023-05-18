@@ -40,7 +40,8 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
-  scrollBehavior() { // при переходе на новую страницу будет происходить скролл к верху страницы
+  scrollBehavior() {
+    // при переходе на новую страницу будет происходить скролл к верху страницы
     return { top: 0 }
   }
 })

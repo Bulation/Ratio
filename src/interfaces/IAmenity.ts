@@ -1,4 +1,4 @@
 export interface IAmenity {
-  icon: string;
-  name: string;
+  icon: string
+  name: string
 }

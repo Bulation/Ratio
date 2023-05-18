@@ -26,7 +26,7 @@ export default function useForm(
 
   const updateFormState = (value: string, name: string) => {
     formState[name] = value
-    yandexMetrica.setGoal(name);
+    yandexMetrica.setGoal(name)
     clearError(name)
   }
   return { isSubmitDisabled, clearError, updateFormState, validateForm }

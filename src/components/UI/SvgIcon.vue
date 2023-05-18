@@ -1,10 +1,9 @@
 <script setup lang="ts">
-
 interface ISvgProps {
-  className: string,
+  className: string
   id: string
 }
-defineProps<ISvgProps>();
+defineProps<ISvgProps>()
 </script>
 
 <template>

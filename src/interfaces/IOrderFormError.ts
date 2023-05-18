@@ -1,9 +1,9 @@
 export interface IOrderFormError {
   [key: string]: boolean
-  firstName: boolean
-  lastName: boolean
-  info1: boolean
-  info2: boolean
+  first_name: boolean
+  last_name: boolean
+  info_1: boolean
+  info_2: boolean
   country: boolean
   email: boolean
 }

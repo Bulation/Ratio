@@ -14,8 +14,8 @@ import yandexMetrica from '@/services/yandexMetrika'
 import { EMAIL_REGEXP, PHONE_REGEXP } from '@/constants'
 
 const countries = ref<ICountry[]>([])
-const modalRef = ref<InstanceType<typeof ModalWindow> | null>(null);
-const isError = ref(false);
+const modalRef = ref<InstanceType<typeof ModalWindow> | null>(null)
+const isError = ref(false)
 const getCountries = async () => {
   countries.value = await API.getCountries()
 }
@@ -27,7 +27,7 @@ onMounted(async () => {
 const rules: IOrderFormRules = {
   first_name: (name: string) => !name || name.length < 2,
   last_name: (name: string) => !name || name.length < 2,
-  info_1: (name: string) =>  !name || name.length < 2,
+  info_1: (name: string) => !name || name.length < 2,
   info_2: (name: string) => !name || name.length < 2,
   country: (value: string) => !value,
   email: (email: string) => {
@@ -35,7 +35,7 @@ const rules: IOrderFormRules = {
     return !re.test(email)
   },
   phone: (value: string) => {
-    const re = PHONE_REGEXP;
+    const re = PHONE_REGEXP
     return !re.test(value)
   },
   comment: (value: string) => !value
@@ -50,7 +50,7 @@ const errors: IOrderFormError = reactive({
   email: false,
   phone: false,
   comment: false
-});
+})
 
 const initialFormState = JSON.parse(localStorage.getItem('orderFormState')) || {
   first_name: '',
@@ -62,7 +62,7 @@ const initialFormState = JSON.parse(localStorage.getItem('orderFormState')) || {
   phone: '',
   comment: ''
 }
-const formState: IOrderForm = reactive(initialFormState);
+const formState: IOrderForm = reactive(initialFormState)
 
 const { isSubmitDisabled, clearError, updateFormState, validateForm } = useForm(
   formState,
@@ -79,21 +79,21 @@ const submitForm = async () => {
     await API.postOrder(formState)
   } catch (e) {
     yandexMetrica.setGoal('orderError')
-    isError.value = true;
-    return;
+    isError.value = true
+    return
   }
-  isError.value = false;
-  modalRef.value?.openPopup();
+  isError.value = false
+  modalRef.value?.openPopup()
 }
 
 onActivated(() => {
   window.onbeforeunload = () => {
-    localStorage.setItem('orderFormState', JSON.stringify(formState));
+    localStorage.setItem('orderFormState', JSON.stringify(formState))
   }
 })
 
 onDeactivated(() => {
-  window.onbeforeunload = null;
+  window.onbeforeunload = null
 })
 </script>
 
@@ -180,17 +180,15 @@ onDeactivated(() => {
     />
     <div :style="'width: 100%;'">
       <textarea
-      class="order-form-textarea"
-      @input="(e) => updateFormState((e.target as HTMLTextAreaElement).value, 'comment')"
-      name="Comment"
-      v-model="formState.comment"
-      placeholder="Comment"
+        class="order-form-textarea"
+        @input="(e) => updateFormState((e.target as HTMLTextAreaElement).value, 'comment')"
+        name="Comment"
+        v-model="formState.comment"
+        placeholder="Comment"
       ></textarea>
       <span class="order-form-error-msg" v-if="errors.comment">Comment should not be empty</span>
     </div>
-    <OrderButton class="order-form__btn" :isDisabled="isSubmitDisabled"
-      >Reserve Now</OrderButton
-    >
+    <OrderButton class="order-form__btn" :isDisabled="isSubmitDisabled">Reserve Now</OrderButton>
   </form>
   <ModalWindow ref="modalRef" />
 </template>

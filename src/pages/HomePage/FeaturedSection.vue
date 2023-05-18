@@ -40,8 +40,8 @@ defineProps<IFeaturedProps>()
 }
 
 .card-skeleton {
-  width: 382px; 
-  height: 340px; 
+  width: 382px;
+  height: 340px;
   margin-right: 20px;
   @media screen and (max-width: 400px) {
     width: 100%;

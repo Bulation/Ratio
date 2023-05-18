@@ -4,12 +4,12 @@ import OrderHotel from './OrderHotel.vue'
 import PageFooter from '@/layout/PageFooter/PageFooter.vue'
 import { useHead } from 'unhead'
 useHead({
-  title: "Order",
+  title: 'Order',
   meta: [
-    { name: 'description', content: "Make order and preserve hotel" },
-    { name: 'keywords', content: "hotel, hotel list, order, preserve hotel" },
-    { property: 'og:title', content: "Order"},
-    { property: 'og:description', content: "Make order and preserve hotel"},
+    { name: 'description', content: 'Make order and preserve hotel' },
+    { name: 'keywords', content: 'hotel, hotel list, order, preserve hotel' },
+    { property: 'og:title', content: 'Order' },
+    { property: 'og:description', content: 'Make order and preserve hotel' }
   ]
 })
 </script>

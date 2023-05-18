@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import type { IBannerData } from '@/interfaces/IBannerData'
 import { ElSkeletonItem } from 'element-plus'
-import LoaderComponent from './LoaderComponent.vue';
+import LoaderComponent from './LoaderComponent.vue'
 
 interface IBannerProps {
   bannerData: IBannerData
   bannerKey: keyof IBannerData
 }
 defineProps<IBannerProps>()
-
 </script>
 
 <template>

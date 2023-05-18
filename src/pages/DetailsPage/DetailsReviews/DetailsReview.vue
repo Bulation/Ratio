@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import getCreatedDate from '@/helperFunctions/getCreatedDate';
-import type { IAuthor } from '@/interfaces/IAuthor';
+import getCreatedDate from '@/helperFunctions/getCreatedDate'
+import type { IAuthor } from '@/interfaces/IAuthor'
 interface IDetailsReviewProps {
   review: IAuthor
 }
@@ -10,9 +10,11 @@ defineProps<IDetailsReviewProps>()
 <template>
   <div class="details-review">
     <div class="details-review__heading">
-      <img class="details-review__avatar" :src="review.author.avatar" alt="Reviewer avatar">
+      <img class="details-review__avatar" :src="review.author.avatar" alt="Reviewer avatar" />
       <div class="details-review__author-info">
-        <h4 class="details-review__author-name">{{ review.author.name }} {{ review.author.surname }}</h4>
+        <h4 class="details-review__author-name">
+          {{ review.author.name }} {{ review.author.surname }}
+        </h4>
         <p class="details-review__author-date">{{ getCreatedDate(review.date) }}</p>
       </div>
     </div>

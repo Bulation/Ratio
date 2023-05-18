@@ -11,12 +11,12 @@ import type { ILatestHotelData } from '@/interfaces/ILatestHotelData'
 import type { IHotelData } from '@/interfaces/IHotelData'
 import { useHead } from 'unhead'
 useHead({
-  title: "Home",
+  title: 'Home',
   meta: [
-    { name: 'description', content: "Order and research our list of hotels" },
-    { name: 'keywords', content: "hotel, hotel list, order, preserve hotel" },
-    { property: 'og:title', content: "Hotel"},
-    { property: 'og:description', content: "Order and research our list of hotels"},
+    { name: 'description', content: 'Order and research our list of hotels' },
+    { name: 'keywords', content: 'hotel, hotel list, order, preserve hotel' },
+    { property: 'og:title', content: 'Hotel' },
+    { property: 'og:description', content: 'Order and research our list of hotels' }
   ]
 })
 
@@ -25,7 +25,7 @@ const latestList = ref<ILatestHotelData[]>([])
 const featuredList = ref<IHotelData[]>([])
 
 onMounted(async () => {
-  await getData();
+  await getData()
 })
 
 const getData = async () => {
@@ -33,7 +33,6 @@ const getData = async () => {
   latestList.value = await API.getLatestData()
   featuredList.value = await API.getFeaturedData()
 }
-
 </script>
 
 <template>

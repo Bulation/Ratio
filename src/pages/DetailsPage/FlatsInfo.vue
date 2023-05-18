@@ -1,36 +1,36 @@
 <script setup lang="ts">
-import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData';
-import LoaderComponent from '@/components/LoaderComponent.vue';
-import SvgIcon from '@/components/UI/SvgIcon.vue';
-import { ElSkeletonItem } from 'element-plus';
+import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData'
+import LoaderComponent from '@/components/LoaderComponent.vue'
+import SvgIcon from '@/components/UI/SvgIcon.vue'
+import { ElSkeletonItem } from 'element-plus'
 
 interface IDetailsFlatsProps {
   hotel: IDetailedHotelData
 }
-defineProps<IDetailsFlatsProps>();
+defineProps<IDetailsFlatsProps>()
 </script>
 
 <template>
   <LoaderComponent :data="hotel">
     <template #template>
-        <ElSkeletonItem class='flat-info-skeleton' variant="rect" />
-        <ElSkeletonItem class='flat-info-skeleton' variant="rect" />
-      </template>
-      <template #default>
-        <ul class="details-flats-info-list">
-          <li class="details-flats-info-item" v-for="(value, key) in hotel.info[0]" :key="key">
-            <SvgIcon :id="String(key)" className="details-flats-info-item__svg" />
-            <p class="details-flats-info-item__text">{{ value }} {{ key }}</p>
-          </li> 
-        </ul>
-      </template>
+      <ElSkeletonItem class="flat-info-skeleton" variant="rect" />
+      <ElSkeletonItem class="flat-info-skeleton" variant="rect" />
+    </template>
+    <template #default>
+      <ul class="details-flats-info-list">
+        <li class="details-flats-info-item" v-for="(value, key) in hotel.info[0]" :key="key">
+          <SvgIcon :id="String(key)" className="details-flats-info-item__svg" />
+          <p class="details-flats-info-item__text">{{ value }} {{ key }}</p>
+        </li>
+      </ul>
+    </template>
   </LoaderComponent>
 </template>
 
 <style scoped lang="scss">
 .flat-info-skeleton {
-  display: inline-block; 
-  width: 176px; 
+  display: inline-block;
+  width: 176px;
   height: 160px;
   margin-right: 14px;
 }

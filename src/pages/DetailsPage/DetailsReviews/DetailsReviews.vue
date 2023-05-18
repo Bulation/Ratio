@@ -1,29 +1,32 @@
 <script setup lang="ts">
-import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData';
-import SvgIcon from '@/components/UI/SvgIcon.vue';
-import DetailsRating from './DetailsRating.vue';
-import DetailsReview from './DetailsReview.vue';
-import DetailsExpandButton from '@/components/UI/DetailsExpandButton.vue';
-import LoaderComponent from '@/components/LoaderComponent.vue';
-import { ElSkeletonItem } from 'element-plus';
-import { ref, watch } from 'vue';
-import { TOTAL_RATING } from '@/constants';
+import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData'
+import SvgIcon from '@/components/UI/SvgIcon.vue'
+import DetailsRating from './DetailsRating.vue'
+import DetailsReview from './DetailsReview.vue'
+import DetailsExpandButton from '@/components/UI/DetailsExpandButton.vue'
+import LoaderComponent from '@/components/LoaderComponent.vue'
+import { ElSkeletonItem } from 'element-plus'
+import { ref, watch } from 'vue'
+import { TOTAL_RATING } from '@/constants'
 
 interface IDetailsReviewsProps {
   hotel: IDetailedHotelData
 }
 
 const props = defineProps<IDetailsReviewsProps>()
-const isExpand = ref(false);
-const copyReviews = ref([]);
+const isExpand = ref(false)
+const copyReviews = ref([])
 const showMore = () => {
-  copyReviews.value = props.hotel.reviews;
-  isExpand.value = true;
+  copyReviews.value = props.hotel.reviews
+  isExpand.value = true
 }
 
-watch(() => props.hotel, () => {
-  copyReviews.value = props.hotel?.reviews.slice(0, 4)
-});
+watch(
+  () => props.hotel,
+  () => {
+    copyReviews.value = props.hotel?.reviews.slice(0, 4)
+  }
+)
 </script>
 
 <template>
@@ -55,7 +58,12 @@ watch(() => props.hotel, () => {
         </template>
       </LoaderComponent>
     </ul>
-    <DetailsExpandButton v-if="!isExpand && hotel?.reviews.length > 4" @click="showMore" type="button">Show All {{ hotel.reviews.length }} Reviews</DetailsExpandButton>
+    <DetailsExpandButton
+      v-if="!isExpand && hotel?.reviews.length > 4"
+      @click="showMore"
+      type="button"
+      >Show All {{ hotel.reviews.length }} Reviews</DetailsExpandButton
+    >
   </div>
 </template>
 

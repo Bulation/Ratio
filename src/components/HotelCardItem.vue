@@ -2,19 +2,20 @@
 import HotelInfo from './HotelInfo.vue'
 import type { IHotelData } from '@/interfaces/IHotelData'
 import type { ILatestHotelData } from '@/interfaces/ILatestHotelData'
-import { onActivated } from 'vue';
+import { onActivated } from 'vue'
 import HostInfo from './HostInfo.vue'
 
 import { ref, watchEffect } from 'vue'
 import convertArrayPriceToString from '@/helperFunctions/convertArrayPriceToString'
-import yandexMetrica from '@/services/yandexMetrika';
+import yandexMetrica from '@/services/yandexMetrika'
 import SvgIcon from './UI/SvgIcon.vue'
 
 import { register } from 'swiper/element/bundle' // регистрация свайпера
 register()
 
 const swiperEl = ref(null)
-const paginationStyles = { // cтили для пагинации, которые нужно встроить в shadow DOM
+const paginationStyles = {
+  // cтили для пагинации, которые нужно встроить в shadow DOM
   injectStyles: [
     `
     .swiper-pagination-bullets.swiper-pagination-horizontal {
@@ -34,7 +35,7 @@ const paginationStyles = { // cтили для пагинации, которы�
   ]
 }
 
-const handleRouteClick = () => yandexMetrica.redirectToPage('/details');
+const handleRouteClick = () => yandexMetrica.redirectToPage('/details')
 
 interface IHotelCardItemProps {
   item: IHotelData | ILatestHotelData
@@ -53,107 +54,116 @@ watchEffect(injectPaginationStyles)
 onActivated(injectPaginationStyles) // при переходе со страницы на страницу нужно заново инжектить стили для пагинации
 </script>
 <template>
-    <li v-if="location === 'latest'" class="list-item list-item_latest">
-      <router-link @click="handleRouteClick" :to="{ name: 'details', params: { id: item._id } }" class="item item_latest">
-        <div
-          class="item__back-img"
-          :style="{ backgroundImage: `url(${item.image})`, borderRadius: '8px' }"
-        >
-          <SvgIcon className="item__heart" id="heart" />
-          <img class="item__img" :src="item.author.avatar" alt="avatar" />
+  <li v-if="location === 'latest'" class="list-item list-item_latest">
+    <router-link
+      @click="handleRouteClick"
+      :to="{ name: 'details', params: { id: item._id } }"
+      class="item item_latest"
+    >
+      <div
+        class="item__back-img"
+        :style="{ backgroundImage: `url(${item.image})`, borderRadius: '8px' }"
+      >
+        <SvgIcon className="item__heart" id="heart" />
+        <img class="item__img" :src="item.author.avatar" alt="avatar" />
+        <HotelInfo :name="item.name" :address="item.address" />
+      </div>
+    </router-link>
+  </li>
+  <li v-else-if="location === 'featured'" class="list-item list-item_featured">
+    <div class="item item_featured">
+      <swiper-container
+        init="false"
+        ref="swiperEl"
+        :pagination="{
+          clickable: true
+        }"
+      >
+        <swiper-slide v-for="(image, index) in (item as IHotelData).images" :key="index">
+          <div
+            class="item__back-img"
+            :style="{ backgroundImage: `url(${image})`, borderRadius: '12px' }"
+          >
+            <SvgIcon className="item__heart" id="heart" />
+            <div class="swiper-no-swiping item__price">
+              {{ convertArrayPriceToString((item as IHotelData).price) }}
+            </div>
+          </div>
+        </swiper-slide>
+      </swiper-container>
+      <router-link
+        @click="handleRouteClick"
+        :to="{ name: 'details', params: { id: item._id } }"
+        class="item__link"
+      >
+        <div class="item__container">
           <HotelInfo :name="item.name" :address="item.address" />
+          <div class="item__flat-info flat-info">
+            <div class="flat-info__bed">
+              <SvgIcon className="flat-info__bed-icon" id="bedroom" />
+              <span>{{ (item as IHotelData).info[0].bathroom }}</span>
+            </div>
+            <div class="flat-info__bath">
+              <SvgIcon className="flat-info__bath-icon" id="bathroom" />
+              <span>{{ (item as IHotelData).info[0].bedroom }}</span>
+            </div>
+          </div>
         </div>
       </router-link>
-    </li>
-    <li v-else-if="location === 'featured'" class="list-item list-item_featured">
-      <div class="item item_featured">
-        <swiper-container
-          init="false"
-          ref="swiperEl"
-          :pagination="{
-            clickable: true
-          }"
-        >
-          <swiper-slide
-            v-for="(image, index) in (item as IHotelData).images"
-            :key="index"
+    </div>
+  </li>
+  <li v-else-if="location === 'details'" class="list-item list-item_details">
+    <div class="item item_details">
+      <swiper-container
+        init="false"
+        ref="swiperEl"
+        :pagination="{
+          clickable: true
+        }"
+      >
+        <swiper-slide v-for="(image, index) in (item as IHotelData).images" :key="index">
+          <div
+            class="item__back-img item__back-img_details"
+            :style="{ backgroundImage: `url(${image})`, borderRadius: '16px' }"
           >
-            <div
-              class="item__back-img"
-              :style="{ backgroundImage: `url(${image})`, borderRadius: '12px' }"
-            >
-              <SvgIcon className="item__heart" id="heart" />
-              <div class="swiper-no-swiping item__price">
-                {{ convertArrayPriceToString((item as IHotelData).price) }}
-              </div>
+            <SvgIcon className="item__heart" id="heart" />
+            <HostInfo
+              :name="(item as IHotelData).name"
+              :avatar="(item as IHotelData).author.avatar"
+              :price="(item as IHotelData).price"
+            />
+          </div>
+        </swiper-slide>
+      </swiper-container>
+      <router-link
+        @click="handleRouteClick"
+        :to="{ name: 'details', params: { id: item._id } }"
+        class="item__link item__link_details"
+      >
+        <div class="item__container">
+          <HotelInfo :name="item.name" :address="item.address" />
+          <div class="item__flat-info flat-info">
+            <div class="flat-info__bed">
+              <SvgIcon className="flat-info__bed-icon" id="bedroom" />
+              <span>{{ (item as IHotelData).info[0].bathroom }}</span>
             </div>
-          </swiper-slide>
-        </swiper-container>
-        <router-link @click="handleRouteClick" :to="{ name: 'details', params: { id: item._id } }" class="item__link">
-          <div class="item__container">
-            <HotelInfo :name="item.name" :address="item.address" />
-            <div class="item__flat-info flat-info">
-              <div class="flat-info__bed">
-                <SvgIcon className="flat-info__bed-icon" id="bedroom" />
-                <span>{{ (item as IHotelData).info[0].bathroom }}</span>
-              </div>
-              <div class="flat-info__bath">
-                <SvgIcon className="flat-info__bath-icon" id="bathroom" />
-                <span>{{ (item as IHotelData).info[0].bedroom }}</span>
-              </div>
+            <div class="flat-info__bath">
+              <SvgIcon className="flat-info__bath-icon" id="bathroom" />
+              <span>{{ (item as IHotelData).info[0].bedroom }}</span>
             </div>
           </div>
-        </router-link>
-      </div>
-    </li>
-    <li v-else-if="location === 'details'" class="list-item list-item_details">
-      <div class="item item_details">
-        <swiper-container
-          init="false"
-          ref="swiperEl"
-          :pagination="{
-            clickable: true
-          }"
-        >
-          <swiper-slide
-            v-for="(image, index) in (item as IHotelData).images"
-            :key="index"
-          >
-            <div
-              class="item__back-img item__back-img_details"
-              :style="{ backgroundImage: `url(${image})`, borderRadius: '16px' }"
-            >
-              <SvgIcon className="item__heart" id="heart" />
-              <HostInfo :name="(item as IHotelData).name" :avatar="(item as IHotelData).author.avatar" :price="(item as IHotelData).price" />
-            </div>
-          </swiper-slide>
-        </swiper-container>
-        <router-link @click="handleRouteClick" :to="{ name: 'details', params: { id: item._id } }" class="item__link item__link_details">
-          <div class="item__container">
-            <HotelInfo :name="item.name" :address="item.address" />
-            <div class="item__flat-info flat-info">
-              <div class="flat-info__bed">
-                <SvgIcon className="flat-info__bed-icon" id="bedroom" />
-                <span>{{ (item as IHotelData).info[0].bathroom }}</span>
-              </div>
-              <div class="flat-info__bath">
-                <SvgIcon className="flat-info__bath-icon" id="bathroom" />
-                <span>{{ (item as IHotelData).info[0].bedroom }}</span>
-              </div>
-            </div>
-            <div class="item__other-info other-info">
-              <p>Apartment on Rent</p>
-              <div class="other-info__separator"></div>
-              <p>For Long Period: 1 - 2 Years</p>
-            </div>
+          <div class="item__other-info other-info">
+            <p>Apartment on Rent</p>
+            <div class="other-info__separator"></div>
+            <p>For Long Period: 1 - 2 Years</p>
           </div>
-        </router-link>
-      </div>
-    </li>
+        </div>
+      </router-link>
+    </div>
+  </li>
 </template>
 
 <style scoped lang="scss">
-
 .list-item {
   &_latest {
     max-width: 279px;
@@ -166,7 +176,7 @@ onActivated(injectPaginationStyles) // при переходе со страни
   &_details {
     max-width: 574px;
     width: 100%;
-    box-shadow: 0px 0px 10px 0px #E5E5E5;
+    box-shadow: 0px 0px 10px 0px #e5e5e5;
     border-radius: 16px;
   }
 }
@@ -271,5 +281,4 @@ onActivated(injectPaginationStyles) // при переходе со страни
     background-color: var(--separator-color);
   }
 }
-
 </style>

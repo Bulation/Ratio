@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { RATING_LIST, MAX_RATING_WIDTH } from '@/constants';
-const finalRatingWidth = (rating: number) => MAX_RATING_WIDTH * (rating / 5);
+import { RATING_LIST, MAX_RATING_WIDTH } from '@/constants'
+const finalRatingWidth = (rating: number) => MAX_RATING_WIDTH * (rating / 5)
 </script>
 
 <template>
@@ -16,36 +16,36 @@ const finalRatingWidth = (rating: number) => MAX_RATING_WIDTH * (rating / 5);
 </template>
 
 <style scoped lang="scss">
-  .ratings-list {
-    column-count: 2;
-    &__item {
-      margin-bottom: 15px;
-    }
-    @media screen and (max-width: 768px) {
-      column-count: 1;
-    }
+.ratings-list {
+  column-count: 2;
+  &__item {
+    margin-bottom: 15px;
   }
+  @media screen and (max-width: 768px) {
+    column-count: 1;
+  }
+}
 
-  .rating {
-    max-width: 366px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font: 500 16px/20px Montserrat;
-    color: var(--main-text-color);
-    &__bar {
-      height: 4px;
-      border-radius: 2px;
-      background-color: var(--second-text-color);
-      margin-right: 13px;
-    }
-    &__mark {
-      font-weight: 600;
-    }
-    &__mark-wrapper {
-      display: flex;
-      align-items: center;
-    }
+.rating {
+  max-width: 366px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: 500 16px/20px Montserrat;
+  color: var(--main-text-color);
+  &__bar {
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--second-text-color);
+    margin-right: 13px;
   }
+  &__mark {
+    font-weight: 600;
+  }
+  &__mark-wrapper {
+    display: flex;
+    align-items: center;
+  }
+}
 </style>

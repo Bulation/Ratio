@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import PageHeader from '@/layout/PageHeader.vue'
-import { onErrorCaptured, ref } from 'vue';
-import ErrorComponent from './components/ErrorComponent.vue';
-const error = ref(null);
+import { onErrorCaptured, ref } from 'vue'
+import ErrorComponent from './components/ErrorComponent.vue'
+const error = ref(null)
 
 onErrorCaptured(() => {
-  error.value = true;
-});
+  error.value = true
+})
 </script>
 
 <template>

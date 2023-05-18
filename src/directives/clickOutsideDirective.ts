@@ -1,4 +1,4 @@
-import type { Directive } from "vue";
+import type { Directive } from 'vue'
 // директива для обработки кликов по бэкдропам
 const clickOutsideDirective: Directive = {
   mounted(element, { value }) {
@@ -12,6 +12,6 @@ const clickOutsideDirective: Directive = {
   unmounted(element) {
     document.body.removeEventListener('click', element.clickOutside)
   }
-};
+}
 
-export default clickOutsideDirective;
+export default clickOutsideDirective

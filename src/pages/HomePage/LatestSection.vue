@@ -40,8 +40,8 @@ defineProps<ILatestProps>()
 }
 
 .card-skeleton {
-  width: 279px; 
-  height: 340px; 
+  width: 279px;
+  height: 340px;
   margin-right: 20px;
 }
 </style>

@@ -2,17 +2,17 @@
 import { onActivated, onDeactivated, onMounted, reactive, ref } from 'vue'
 import SvgIcon from '@/components/UI/SvgIcon.vue'
 import type { ICountry } from '@/interfaces/ICountry'
-import DatePicker from 'vue-datepicker-next';
-import 'vue-datepicker-next/index.css';
+import DatePicker from 'vue-datepicker-next'
+import 'vue-datepicker-next/index.css'
 import useForm from '@/hooks/useForm'
 import { useSearchedState } from '@/store/modules/searchModule'
 import { useRouter } from 'vue-router'
-import yandexMetrica from '@/services/yandexMetrika';
-import API from '@/services/api' 
+import yandexMetrica from '@/services/yandexMetrika'
+import API from '@/services/api'
 
 const countries = ref<ICountry[]>([])
-const searchStore = useSearchedState();
-const router = useRouter();
+const searchStore = useSearchedState()
+const router = useRouter()
 
 const getCountries = async () => {
   countries.value = await API.getCountries()
@@ -27,8 +27,8 @@ const initialFormState = JSON.parse(localStorage.getItem('formState')) || {
   checkIn: '',
   checkOut: '',
   guest: null
-};
-const formState = reactive(initialFormState);
+}
+const formState = reactive(initialFormState)
 
 const rules = {
   location: (value: string) => {
@@ -41,7 +41,7 @@ const rules = {
     return value.length === 0 || isNaN(Date.parse(value))
   },
   guest: (value: string) => {
-    return isNaN(Number(value)) || !value;
+    return isNaN(Number(value)) || !value
   }
 }
 
@@ -57,24 +57,24 @@ const { isSubmitDisabled, updateFormState, validateForm } = useForm(formState, e
 const submitForm = async () => {
   validateForm()
   if (isSubmitDisabled.value) {
-    return;
+    return
   }
   formState.checkIn = new Date(formState.checkIn).toISOString()
   formState.checkOut = new Date(formState.checkOut).toISOString()
-  searchStore.setSearchedState(formState);
-  router.push('/search');
-  yandexMetrica.redirectToPage('/search');
+  searchStore.setSearchedState(formState)
+  router.push('/search')
+  yandexMetrica.redirectToPage('/search')
 }
 
 onActivated(() => {
   window.onbeforeunload = () => {
-    localStorage.setItem('formState', JSON.stringify(formState));
+    localStorage.setItem('formState', JSON.stringify(formState))
   }
 })
 
 onDeactivated(() => {
-  localStorage.setItem('formState', JSON.stringify(formState));
-  window.onbeforeunload = null;
+  localStorage.setItem('formState', JSON.stringify(formState))
+  window.onbeforeunload = null
 })
 </script>
 

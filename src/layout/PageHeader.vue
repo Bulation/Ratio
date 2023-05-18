@@ -16,12 +16,10 @@ const toggleBurger = () => {
     document.body.classList.add('body_overlay')
   }
 }
-
 </script>
 
 <template>
-  <header class="header" 
-          v-click-outside="() => isMobileNavShow ? toggleBurger() : null">
+  <header class="header" v-click-outside="() => (isMobileNavShow ? toggleBurger() : null)">
     <div class="header__container">
       <div class="header__wrap">
         <h1 class="title header__title">

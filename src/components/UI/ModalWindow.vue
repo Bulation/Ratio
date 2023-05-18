@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import OrderButton from './OrderButton.vue';
-const isPopupOpen = ref(false);
-const openPopup = () => isPopupOpen.value = true;
-defineExpose({openPopup});
+import { ref } from 'vue'
+import OrderButton from './OrderButton.vue'
+const isPopupOpen = ref(false)
+const openPopup = () => (isPopupOpen.value = true)
+defineExpose({ openPopup })
 </script>
 
 <template>
-<Teleport to="body">
+  <Teleport to="body">
     <Transition name="popup">
       <div v-if="isPopupOpen" class="popup-wrapper">
-        <div class="popup" v-click-outside="() => isPopupOpen = false">
+        <div class="popup" v-click-outside="() => (isPopupOpen = false)">
           <h2>Form is successfully submitted!</h2>
-          <OrderButton :style="'margin-top: 14px'" :isDisabled="false" @click="isPopupOpen = false">Ok</OrderButton>
+          <OrderButton :style="'margin-top: 14px'" :isDisabled="false" @click="isPopupOpen = false"
+            >Ok</OrderButton
+          >
         </div>
       </div>
     </Transition>

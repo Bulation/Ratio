@@ -13,8 +13,8 @@ defineProps<IHotelCardListProps>()
 
 <template>
   <ul class="card-list">
-    <TransitionGroup  name="list">
-      <HotelCardItem v-for="item in list" :key="item._id" :item="item" :location="location"  />
+    <TransitionGroup name="list">
+      <HotelCardItem v-for="item in list" :key="item._id" :item="item" :location="location" />
     </TransitionGroup>
   </ul>
 </template>

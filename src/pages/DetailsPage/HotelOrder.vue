@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import LoaderComponent from '@/components/LoaderComponent.vue';
-import { ElSkeletonItem } from 'element-plus';
-import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData';
-import OrderButton from '@/components/UI/OrderButton.vue';
-import convertArrayPriceToString from '@/helperFunctions/convertArrayPriceToString';
-import router from '@/router/router';
-import { usePreservedHotel } from '@/store/modules/orderModule';
+import LoaderComponent from '@/components/LoaderComponent.vue'
+import { ElSkeletonItem } from 'element-plus'
+import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData'
+import OrderButton from '@/components/UI/OrderButton.vue'
+import convertArrayPriceToString from '@/helperFunctions/convertArrayPriceToString'
+import router from '@/router/router'
+import { usePreservedHotel } from '@/store/modules/orderModule'
 
-const preservedHotelStore = usePreservedHotel();
+const preservedHotelStore = usePreservedHotel()
 
 interface IHotelPriceProps {
   hotel: IDetailedHotelData
@@ -16,24 +16,23 @@ interface IHotelPriceProps {
 const props = defineProps<IHotelPriceProps>()
 
 const redirectToOrderPage = () => {
-  preservedHotelStore.setPreservedHotel(props.hotel);
-  router.push('/order');
+  preservedHotelStore.setPreservedHotel(props.hotel)
+  router.push('/order')
 }
 </script>
 
 <template>
   <LoaderComponent :data="hotel">
-  <template #template>
-    <ElSkeletonItem class="hotel-order-skeleton" variant="rect"/>
-  </template>
-  <template #default>
-    <div class="hotel-order">
-      <div class="hotel-order__value">{{ convertArrayPriceToString(hotel.price) }}</div>
-      <div class="hotel-order__separator"></div>
-      <OrderButton @click="redirectToOrderPage" :isDisabled="false">Reserve Now</OrderButton>
-    </div>
-  </template>
-  
+    <template #template>
+      <ElSkeletonItem class="hotel-order-skeleton" variant="rect" />
+    </template>
+    <template #default>
+      <div class="hotel-order">
+        <div class="hotel-order__value">{{ convertArrayPriceToString(hotel.price) }}</div>
+        <div class="hotel-order__separator"></div>
+        <OrderButton @click="redirectToOrderPage" :isDisabled="false">Reserve Now</OrderButton>
+      </div>
+    </template>
   </LoaderComponent>
 </template>
 
@@ -50,7 +49,7 @@ const redirectToOrderPage = () => {
   max-width: 382px;
   margin-left: auto;
   padding: 30px;
-  box-shadow: 0px 0px 16px 0px #C2C6CC99;
+  box-shadow: 0px 0px 16px 0px #c2c6cc99;
   border-radius: 10px;
   &__value {
     font: 700 22px/27px Montserrat;

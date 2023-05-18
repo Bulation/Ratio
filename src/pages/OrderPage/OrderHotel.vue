@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { usePreservedHotel } from '@/store/modules/orderModule';
-import HotelInfo from '@/components/HotelInfo.vue';
+import { usePreservedHotel } from '@/store/modules/orderModule'
+import HotelInfo from '@/components/HotelInfo.vue'
 
-const preservedHotelStore = usePreservedHotel();
-const hotelState = preservedHotelStore.getPreservedHotel;
+const preservedHotelStore = usePreservedHotel()
+const hotelState = preservedHotelStore.getPreservedHotel
 </script>
 
 <template>

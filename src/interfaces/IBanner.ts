@@ -1,5 +1,5 @@
 export interface IBanner {
-  title?: string;
-  description?: string;
-  image: string;
+  title?: string
+  description?: string
+  image: string
 }

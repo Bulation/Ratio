@@ -1,4 +1,4 @@
 export interface IFlatInfo {
-  bedroom: string;
-  bathroom: string;
+  bedroom: string
+  bathroom: string
 }

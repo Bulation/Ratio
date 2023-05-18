@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData';
-import { ElSkeletonItem } from 'element-plus';
-import ImagesGallery from './ImagesGallery.vue';
+import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData'
+import { ElSkeletonItem } from 'element-plus'
+import ImagesGallery from './ImagesGallery.vue'
 
 interface IGalleryLoaderProps {
   hotel: IDetailedHotelData
@@ -10,20 +10,25 @@ defineProps<IGalleryLoaderProps>()
 </script>
 
 <template>
-<LoaderComponent :data="hotel">
-      <template #template>
-        <div class="gallery-skeleton">
-          <ElSkeletonItem class="large-image-skeleton" variant="rect" />
-          <ElSkeletonItem class="image-skeleton" variant="rect" />
-          <ElSkeletonItem class="image-skeleton" variant="rect" />
-          <ElSkeletonItem class="image-skeleton" variant="rect" />
-          <ElSkeletonItem class="image-skeleton" variant="rect" />
-        </div>
-      </template>
-      <template #default>
-        <ImagesGallery :images="hotel.images" :avatar="hotel.author.avatar" :name="hotel.name" :price="hotel.price" />
-      </template>
-    </LoaderComponent>
+  <LoaderComponent :data="hotel">
+    <template #template>
+      <div class="gallery-skeleton">
+        <ElSkeletonItem class="large-image-skeleton" variant="rect" />
+        <ElSkeletonItem class="image-skeleton" variant="rect" />
+        <ElSkeletonItem class="image-skeleton" variant="rect" />
+        <ElSkeletonItem class="image-skeleton" variant="rect" />
+        <ElSkeletonItem class="image-skeleton" variant="rect" />
+      </div>
+    </template>
+    <template #default>
+      <ImagesGallery
+        :images="hotel.images"
+        :avatar="hotel.author.avatar"
+        :name="hotel.name"
+        :price="hotel.price"
+      />
+    </template>
+  </LoaderComponent>
 </template>
 
 <style scoped lang="scss">
@@ -40,8 +45,8 @@ defineProps<IGalleryLoaderProps>()
   }
 }
 .large-image-skeleton {
-  display: block; 
-  width: 668px; 
+  display: block;
+  width: 668px;
   height: 540px;
   grid-column: 1/3;
   grid-row: 1/3;
@@ -51,8 +56,8 @@ defineProps<IGalleryLoaderProps>()
 }
 
 .image-skeleton {
-  display: block; 
-  width: 315px; 
+  display: block;
+  width: 315px;
   height: 260px;
   @media screen and (max-width: 700px) {
     margin-top: 20px;

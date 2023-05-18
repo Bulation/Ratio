@@ -1,44 +1,54 @@
 <script setup lang="ts">
-import type { IHotelData } from '@/interfaces/IHotelData';
-import LoaderComponent from '@/components/LoaderComponent.vue';
-import HotelCardList from '@/components/HotelCardList.vue';
-import { ElSkeletonItem } from 'element-plus';
-import { onActivated, ref, watch } from 'vue';
+import type { IHotelData } from '@/interfaces/IHotelData'
+import LoaderComponent from '@/components/LoaderComponent.vue'
+import HotelCardList from '@/components/HotelCardList.vue'
+import { ElSkeletonItem } from 'element-plus'
+import { onActivated, ref, watch } from 'vue'
 
 interface ISearchHotelsProps {
-  list: IHotelData[],
+  list: IHotelData[]
 }
 
-const isExpand = ref(false);
-const props = defineProps<ISearchHotelsProps>();
+const isExpand = ref(false)
+const props = defineProps<ISearchHotelsProps>()
 const copyList = ref(props.list.slice(0, 3))
 
-onActivated(() => isExpand.value = false); // при возвращении на страницу отображаем кнопку показа всех результатов
+onActivated(() => (isExpand.value = false)) // при возвращении на страницу отображаем кнопку показа всех результатов
 
 const showMore = () => {
-  copyList.value = props.list;
-  isExpand.value = true;
+  copyList.value = props.list
+  isExpand.value = true
 }
 
-watch(() => props.list, () => copyList.value = props.list.slice(0, 3)); // наблюдаем за изменением пропса, чтобы обновить copyList
+watch(
+  () => props.list,
+  () => (copyList.value = props.list.slice(0, 3))
+) // наблюдаем за изменением пропса, чтобы обновить copyList
 </script>
 <template>
-<div class="hotels-list">
-      <LoaderComponent :style="'margin-top: 110px;'" :data="list" :count="3">
-        <template #template>
-          <ElSkeletonItem class="hotel-skeleton" variant="rect" />
-          <ElSkeletonItem class="text-skeleton" variant="text" />
-          <ElSkeletonItem class="text-skeleton" :style="'margin-bottom: 93px;'" variant="text" />
-        </template>
-        <template #default>
-          <h3 class="hotels-list__title">{{ list.length }} Results Found</h3>
-          <div class="hotels-list__wrapper">
-            <HotelCardList :style="'row-gap: 80px'" :list="copyList" location="details" />
-          </div>
-          <button class="hotels-list__button" v-if="!isExpand && list.length > 3" @click="showMore" type="button">Other as per found results...</button>
-        </template>
-      </LoaderComponent>
-    </div>
+  <div class="hotels-list">
+    <LoaderComponent :style="'margin-top: 110px;'" :data="list" :count="3">
+      <template #template>
+        <ElSkeletonItem class="hotel-skeleton" variant="rect" />
+        <ElSkeletonItem class="text-skeleton" variant="text" />
+        <ElSkeletonItem class="text-skeleton" :style="'margin-bottom: 93px;'" variant="text" />
+      </template>
+      <template #default>
+        <h3 class="hotels-list__title">{{ list.length }} Results Found</h3>
+        <div class="hotels-list__wrapper">
+          <HotelCardList :style="'row-gap: 80px'" :list="copyList" location="details" />
+        </div>
+        <button
+          class="hotels-list__button"
+          v-if="!isExpand && list.length > 3"
+          @click="showMore"
+          type="button"
+        >
+          Other as per found results...
+        </button>
+      </template>
+    </LoaderComponent>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -69,9 +79,9 @@ watch(() => props.list, () => copyList.value = props.list.slice(0, 3)); // на�
 }
 
 .hotel-skeleton {
-  display: block; 
-  width: 574px; 
-  height: 384px; 
+  display: block;
+  width: 574px;
+  height: 384px;
   margin-bottom: 30px;
   @media screen and (max-width: 600px) {
     width: 100%;
@@ -79,9 +89,9 @@ watch(() => props.list, () => copyList.value = props.list.slice(0, 3)); // на�
 }
 
 .text-skeleton {
-  display: block; 
-  width: 453px; 
-  height: 24px; 
+  display: block;
+  width: 453px;
+  height: 24px;
   margin-bottom: 57px;
   @media screen and (max-width: 450px) {
     width: 100%;

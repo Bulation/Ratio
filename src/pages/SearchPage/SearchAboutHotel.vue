@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { IAmenity } from '@/interfaces/IAmenity';
-import HotelInfo from '@/components/HotelInfo.vue';
+import type { IAmenity } from '@/interfaces/IAmenity'
+import HotelInfo from '@/components/HotelInfo.vue'
 
 interface ISearchAboutHotelProps {
-  name: string,
+  name: string
   address: string
   amenities: IAmenity[]
 }
@@ -11,17 +11,22 @@ defineProps<ISearchAboutHotelProps>()
 </script>
 
 <template>
-<div class="hotel-info-wrapper">
-            <div class="about-hotel">
-              <HotelInfo :name="name" :address="address" />
-              <ul class="amenities-list">
-                <li class="amenities-list__item amenity" v-for="(amenity, ind) in amenities.slice(0, 4)" :key="amenity.icon">
-                  <div :style="`background-image: url(${amenity.icon})`" class="amenity__icon"></div>
-                  <span>{{ ind }}</span> <!-- в бэке нет инфы о количестве amenity, поэтому стоит заглушка -->
-                </li>
-              </ul>
-            </div>
-          </div>
+  <div class="hotel-info-wrapper">
+    <div class="about-hotel">
+      <HotelInfo :name="name" :address="address" />
+      <ul class="amenities-list">
+        <li
+          class="amenities-list__item amenity"
+          v-for="(amenity, ind) in amenities.slice(0, 4)"
+          :key="amenity.icon"
+        >
+          <div :style="`background-image: url(${amenity.icon})`" class="amenity__icon"></div>
+          <span>{{ ind }}</span>
+          <!-- в бэке нет инфы о количестве amenity, поэтому стоит заглушка -->
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">

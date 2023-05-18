@@ -1,7 +1,7 @@
-import type { IBanner } from "./IBanner";
+import type { IBanner } from './IBanner'
 
 export interface IBannerData {
-  main: IBanner;
-  second: IBanner;
-  last: IBanner;
+  main: IBanner
+  second: IBanner
+  last: IBanner
 }

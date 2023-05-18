@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import "leaflet/dist/leaflet.css";
-import { LMap, LTileLayer, LMarker, LIcon } from "@vue-leaflet/vue-leaflet";
-import { ICON_HEIGHT, ICON_WIDTH } from "@/constants";
+import 'leaflet/dist/leaflet.css'
+import { LMap, LTileLayer, LMarker, LIcon } from '@vue-leaflet/vue-leaflet'
+import { ICON_HEIGHT, ICON_WIDTH } from '@/constants'
 interface IMapProps {
-  center: string[];
+  center: string[]
 }
 
 const icon = {
@@ -11,18 +11,17 @@ const icon = {
   iconSize: [ICON_WIDTH, ICON_HEIGHT]
 }
 defineProps<IMapProps>()
-
 </script>
 
 <template>
-    <l-map :use-global-leaflet="false" ref="map" :zoom="10" :center="center">
-      <l-tile-layer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        layer-type="base"
-        name="OpenStreetMap"
-      ></l-tile-layer>
-      <l-marker :lat-lng="center">
-        <l-icon :icon-url="icon.iconUrl" :icon-size="icon.iconSize" />
-      </l-marker>
-    </l-map>
+  <l-map :use-global-leaflet="false" ref="map" :zoom="10" :center="center">
+    <l-tile-layer
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      layer-type="base"
+      name="OpenStreetMap"
+    ></l-tile-layer>
+    <l-marker :lat-lng="center">
+      <l-icon :icon-url="icon.iconUrl" :icon-size="icon.iconSize" />
+    </l-marker>
+  </l-map>
 </template>
