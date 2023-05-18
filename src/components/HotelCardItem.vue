@@ -10,12 +10,11 @@ import convertArrayPriceToString from '@/helperFunctions/convertArrayPriceToStri
 import yandexMetrica from '@/services/yandexMetrika';
 import SvgIcon from './UI/SvgIcon.vue'
 
-import { register } from 'swiper/element/bundle'
+import { register } from 'swiper/element/bundle' // регистрация свайпера
 register()
 
-
 const swiperEl = ref(null)
-const paginationStyles = {
+const paginationStyles = { // cтили для пагинации, которые нужно встроить в shadow DOM
   injectStyles: [
     `
     .swiper-pagination-bullets.swiper-pagination-horizontal {
