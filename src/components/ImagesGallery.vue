@@ -85,6 +85,8 @@ const showMore = () => {
 }
 
 .image-content {
+  width: 100%;
+  height: 100%;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -92,6 +94,7 @@ const showMore = () => {
   font: 700 48px/59px Montserrat;
   color: var(--main-text-color);
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 12px;
   cursor: pointer;
