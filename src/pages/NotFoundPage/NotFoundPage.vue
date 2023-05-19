@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useHead } from 'unhead'
+import { useHead } from '@vueuse/head'
 useHead({
   title: '404 not found',
   meta: [

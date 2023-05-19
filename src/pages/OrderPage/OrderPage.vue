@@ -3,7 +3,7 @@ import { onActivated } from 'vue'
 import OrderForm from './OrderForm.vue'
 import OrderHotel from './OrderHotel.vue'
 import PageFooter from '@/layout/PageFooter/PageFooter.vue'
-import { useHead } from 'unhead'
+import { useHead } from '@vueuse/head'
 onActivated(() => {
   useHead({
     title: 'Order',

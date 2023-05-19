@@ -5,7 +5,7 @@ import API from '@/services/api'
 import { useSearchedState } from '@/store/modules/searchModule'
 import type { IHotelData } from '@/interfaces/IHotelData'
 import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData'
-import { useHead } from 'unhead'
+import { useHead } from '@vueuse/head'
 import { onActivated, ref, watch } from 'vue'
 
 const store = useSearchedState()

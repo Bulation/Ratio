@@ -9,7 +9,7 @@ import { onActivated, onMounted, ref } from 'vue'
 import type { IBannerData } from '@/interfaces/IBannerData'
 import type { ILatestHotelData } from '@/interfaces/ILatestHotelData'
 import type { IHotelData } from '@/interfaces/IHotelData'
-import { useHead } from 'unhead'
+import { useHead } from '@vueuse/head'
 
 const banners = ref<IBannerData>(null)
 const latestList = ref<ILatestHotelData[]>([])
