@@ -6,7 +6,7 @@ import { useSearchedState } from '@/store/modules/searchModule'
 import type { IHotelData } from '@/interfaces/IHotelData'
 import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData'
 import { useHead } from '@vueuse/head'
-import { onActivated, ref, watch } from 'vue'
+import { computed, onActivated, ref, watch } from 'vue'
 
 const store = useSearchedState()
 const list = ref<IHotelData[]>([])
@@ -17,7 +17,7 @@ const getList = async () => {
   firstHotel.value = await API.getHotelData(list.value[0]._id) // получаем данные для отображения их поверх карты
 }
 
-const metaObject = {
+const metaObject = computed(() => ({
   title: `${list.value?.length} hotels found`,
   meta: [
     { name: 'description', content: 'list of found hotels' },
@@ -25,7 +25,7 @@ const metaObject = {
     { property: 'og:title', content: `${list.value?.length} hotels found` },
     { property: 'og:description', content: 'list of found hotels' }
   ]
-}
+}));
 
 watch(list, () => {
   useHead(metaObject)

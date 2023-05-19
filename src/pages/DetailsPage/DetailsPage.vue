@@ -9,14 +9,14 @@ import DetailsReviews from './DetailsReviews/DetailsReviews.vue'
 import HotelOrder from './HotelOrder.vue'
 import PageFooter from '@/layout/PageFooter/PageFooter.vue'
 import { useRoute } from 'vue-router'
-import { onActivated, onMounted, ref, watch } from 'vue'
+import { computed, onActivated, onMounted, ref, watch } from 'vue'
 import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData'
 import API from '@/services/api'
 import { useHead } from '@vueuse/head'
 
 const route = useRoute()
 const hotel = ref<IDetailedHotelData>(null)
-const metaObject = {
+const metaObject = computed(() => ({
   title: `${hotel.value?.name} hotel`,
   meta: [
     {
@@ -33,7 +33,7 @@ const metaObject = {
       content: `Details of ${hotel.value?.name} hotel. There are described description, price, amenities, rating, reviews of the hotel`
     }
   ]
-}
+}));
 
 onMounted(async () => {
   const id = route.params.id as string
