@@ -13,6 +13,7 @@ export default class Blog extends Page {
   articles: IArticle[];
   counter: number;
   timer: NodeJS.Timer | null;
+  articlesSection: Component;
   constructor(parent: HTMLElement) {
     super();
     this.parent = parent;
@@ -23,54 +24,44 @@ export default class Blog extends Page {
   }
 
   pageWillUnmount() {
-    window.onscroll = null;
-    window.onresize = null; // снимаем обработчики при уничтожении страницы
-    const timer = this.timer;
-    clearTimeout(timer);
     this.main.destroy();
   }
 
   render(featuredArticle: IArticle, articles: IArticle[]) {
-    window.onscroll = () => this.throttle(250);
-    window.onresize = () => this.throttle(250); // при ресайзе высота документа будет меняться, поэтому прикрепляем обработчик
     this.counter = 0; // свойство будет содержать индекс статьи, которую надо отрендерить
     this.main = new Component(this.parent, 'main', '', '');
     this.articles = articles;
     this.renderBanner(featuredArticle, { top: '0', left: '45px' });
     this.renderArticlesSection();
     for (let i = 0; i < 3; i += 1) {
-      const img = new URL(`../assets/article${this.counter}.jpg`, import.meta.url).href;
-      this.renderArticle(articles[this.counter], img);
+      const img = new URL(`../../public/img/article${this.counter}.jpg`, import.meta.url).href;
+      this.renderArticle(this.articles[this.counter], img);
       this.counter++;
     }
+    this.observeArticles();
   }
 
-  throttle(timeout: number) {
-    if (this.timer) return;
-    this.timer = setTimeout(() => {
-      this.checkPosition();
-      const timer = this.timer;
-      clearTimeout(timer);
-      this.timer = null;
-    }, timeout);
-  }
-
-  checkPosition() {
-    const height = document.body.offsetHeight; // высота документа
-    const screenHeight = window.innerHeight; // высота экрана
-    const scrolledHeight = window.scrollY; // высота проскроленного контента
-    const threshold = height - screenHeight / 4; // пороговое значение при котором будет происходить загрузка нового контента
-    const positionOfPageBottom = scrolledHeight + screenHeight;
-    if (positionOfPageBottom >= threshold) {
-      for (let i = 0; i < 3; i += 1) {
-        const img = new URL(`../assets/article${this.counter}.jpg`, import.meta.url).href;
-        this.renderArticle(this.articles[this.counter], img);
-        this.counter++;
-        if (this.counter === this.articles.length) {
-          // если счетчик превысил индекс последнего элемента в массиве, то обнуляем счетчик
-          this.counter = 0;
+  observeArticles() { // метод для реализации бесконечной ленты
+    const observerDiv = new Component(this.articlesSection.node, 'div', '', '');
+    observerDiv.setStyle('height', '1px'); // создание дива, за которым будет следить обсервер. При скролле до дива будет подгружаться контент
+    const options = {
+      rootMargin: '0px',
+      threshold: 0.5,
+    };
+    const callback = (entries: IntersectionObserverEntry[]) => {
+      if (entries[0].isIntersecting) {
+        for (let i = 0; i < 3; i += 1) {
+          const img = new URL(`../../public/img/article${this.counter}.jpg`, import.meta.url).href;
+          this.renderArticle(this.articles[this.counter], img);
+          this.counter++;
+          if (this.counter === this.articles.length) {
+            // если счетчик превысил индекс последнего элемента в массиве, то обнуляем счетчик
+            this.counter = 0;
+          }
         }
       }
-    }
+    };
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(observerDiv.node);
   }
 }
