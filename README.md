@@ -1,42 +1,39 @@
 # module5
 
-This template should help get you started developing with Vue 3 in Vite.
+## Краткая информация о проекте
 
-## Recommended IDE Setup
+Сайт представляет из себя SPA и состоит из 4 страниц: Home, Search, Details и Order. Все технические требования выполнены, также добавлена работа с Local Storage.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+## Стек технологий
 
-## Type Support for `.vue` Imports in TS
+- Vue 3
+- Pinia
+- Swiper
+- Leaflet Map
+- Skeleton from Element-Plus
+- Vue Datepicker
+- Vue Router
+- TypeScript
+- ESLint
+- Prettier
+- Vite
+- SCSS
+- БЭМ
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+## Архитектура
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+Приложение поделено на папку pages, в которых хранятся файлы для работы с конкретными страницами; на папку store, в котором заключена логика работы с глобальным стейтом; на папку layout, в котором находятся хедер и футер, на папку с хуками и директивами, на папку components, в котором находятся компоненты, общие для всех страниц и с подпапкой UI для переиспользуемух мелких компонентов без логики чисто для отрисовки.
 
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
+## Установка проекта
 
 ```sh
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Запуск в браузере
 
 ```sh
 npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
@@ -44,3 +41,7 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### Деплой
+
+https://ratio-module5.netlify.app
