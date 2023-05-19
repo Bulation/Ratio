@@ -151,12 +151,12 @@
     flex-shrink: 0;
     background-color: var(--arrow-color);
     &_left {
-      background-image: url(./assets/prev.svg);
+      background-image: url(../public/svg/prev.svg);
       background-repeat: no-repeat;
       background-position: center center;
     }
     &_right {
-      background-image: url(./assets/next.svg);
+      background-image: url(../public/svg/next.svg);
       background-repeat: no-repeat;
       background-position: center center;
     }
