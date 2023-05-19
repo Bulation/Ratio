@@ -5,25 +5,27 @@ import FeaturedSection from './FeaturedSection.vue'
 import BannerComponent from '@/components/BannerComponent.vue'
 import PageFooter from '@/layout/PageFooter/PageFooter.vue'
 import API from '@/services/api'
-import { onMounted, ref } from 'vue'
+import { onActivated, onMounted, ref } from 'vue'
 import type { IBannerData } from '@/interfaces/IBannerData'
 import type { ILatestHotelData } from '@/interfaces/ILatestHotelData'
 import type { IHotelData } from '@/interfaces/IHotelData'
 import { useHead } from 'unhead'
-useHead({
-  title: 'Home',
-  meta: [
-    { name: 'description', content: 'Order and research our list of hotels' },
-    { name: 'keywords', content: 'hotel, hotel list, order, preserve hotel' },
-    { property: 'og:title', content: 'Hotel' },
-    { property: 'og:description', content: 'Order and research our list of hotels' }
-  ]
-})
 
 const banners = ref<IBannerData>(null)
 const latestList = ref<ILatestHotelData[]>([])
 const featuredList = ref<IHotelData[]>([])
 
+onActivated(() => {
+  useHead({
+    title: 'Home',
+    meta: [
+      { name: 'description', content: 'Order and research our list of hotels' },
+      { name: 'keywords', content: 'hotel, hotel list, order, preserve hotel' },
+      { property: 'og:title', content: 'Home' },
+      { property: 'og:description', content: 'Order and research our list of hotels' }
+    ]
+  })
+})
 onMounted(async () => {
   await getData()
 })

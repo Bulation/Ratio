@@ -9,38 +9,43 @@ import DetailsReviews from './DetailsReviews/DetailsReviews.vue'
 import HotelOrder from './HotelOrder.vue'
 import PageFooter from '@/layout/PageFooter/PageFooter.vue'
 import { useRoute } from 'vue-router'
-import { onMounted, ref, watch } from 'vue'
+import { onActivated, onMounted, ref, watch } from 'vue'
 import type { IDetailedHotelData } from '@/interfaces/IDetailedHotelData'
 import API from '@/services/api'
 import { useHead } from '@vueuse/head'
 
 const route = useRoute()
 const hotel = ref<IDetailedHotelData>(null)
+const metaObject = {
+  title: `${hotel.value?.name} hotel`,
+  meta: [
+    {
+      name: 'description',
+      content: `Details of ${hotel.value?.name} hotel. There are described description, price, amenities, rating, reviews of the hotel`
+    },
+    {
+      name: 'keywords',
+      content: 'hotel, amenities, preserve hotel, price, rating, reviews, map'
+    },
+    { property: 'og:title', content: `${hotel.value?.name} hotel` },
+    {
+      property: 'og:description',
+      content: `Details of ${hotel.value?.name} hotel. There are described description, price, amenities, rating, reviews of the hotel`
+    }
+  ]
+}
 
 onMounted(async () => {
   const id = route.params.id as string
   hotel.value = await API.getHotelData(id)
 })
 
+onActivated(() => {
+  useHead(metaObject)
+})
+
 watch(hotel, () => {
-  useHead({
-    title: `${hotel.value.name} hotel`,
-    meta: [
-      {
-        name: 'description',
-        content: `Details of ${hotel.value.name} hotel. There are described description, price, amenities, rating, reviews of the hotel`
-      },
-      {
-        name: 'keywords',
-        content: 'hotel, amenities, preserve hotel, price, rating, reviews, map'
-      },
-      { property: 'og:title', content: `${hotel.value.name} hotel` },
-      {
-        property: 'og:description',
-        content: `Details of ${hotel.value.name} hotel. There are described description, price, amenities, rating, reviews of the hotel`
-      }
-    ]
-  })
+  useHead(metaObject)
 })
 </script>
 

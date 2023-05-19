@@ -17,20 +17,23 @@ const getList = async () => {
   firstHotel.value = await API.getHotelData(list.value[0]._id) // получаем данные для отображения их поверх карты
 }
 
+const metaObject = {
+  title: `${list.value?.length} hotels found`,
+  meta: [
+    { name: 'description', content: 'list of found hotels' },
+    { name: 'keywords', content: 'hotel, search, hotel search results, hotel in map' },
+    { property: 'og:title', content: `${list.value?.length} hotels found` },
+    { property: 'og:description', content: 'list of found hotels' }
+  ]
+}
+
 watch(list, () => {
-  useHead({
-    title: `${list.value?.length} hotels found`,
-    meta: [
-      { name: 'description', content: 'list of found hotels' },
-      { name: 'keywords', content: 'hotel, search, hotel search results, hotel in map' },
-      { property: 'og:title', content: `${list.value?.length} hotels found` },
-      { property: 'og:description', content: 'list of found hotels' }
-    ]
-  })
+  useHead(metaObject)
 }) // изначально в list находится пустой массив, поэтому следим за изменениями, чтобы отобразить их в мета-тегах
 
 onActivated(async () => {
   await getList()
+  useHead(metaObject)
 })
 </script>
 

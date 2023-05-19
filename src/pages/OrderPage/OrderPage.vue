@@ -1,16 +1,19 @@
 <script setup lang="ts">
+import { onActivated } from 'vue'
 import OrderForm from './OrderForm.vue'
 import OrderHotel from './OrderHotel.vue'
 import PageFooter from '@/layout/PageFooter/PageFooter.vue'
 import { useHead } from 'unhead'
-useHead({
-  title: 'Order',
-  meta: [
-    { name: 'description', content: 'Make order and preserve hotel' },
-    { name: 'keywords', content: 'hotel, hotel list, order, preserve hotel' },
-    { property: 'og:title', content: 'Order' },
-    { property: 'og:description', content: 'Make order and preserve hotel' }
-  ]
+onActivated(() => {
+  useHead({
+    title: 'Order',
+    meta: [
+      { name: 'description', content: 'Make order and preserve hotel' },
+      { name: 'keywords', content: 'hotel, hotel list, order, preserve hotel' },
+      { property: 'og:title', content: 'Order' },
+      { property: 'og:description', content: 'Make order and preserve hotel' }
+    ]
+  })
 })
 </script>
 

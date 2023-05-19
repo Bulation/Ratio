@@ -6,6 +6,7 @@ import OrderButton from '@/components/UI/OrderButton.vue'
 import convertArrayPriceToString from '@/helperFunctions/convertArrayPriceToString'
 import router from '@/router/router'
 import { usePreservedHotel } from '@/store/modules/orderModule'
+import yandexMetrica from '@/services/yandexMetrika'
 
 const preservedHotelStore = usePreservedHotel()
 
@@ -18,6 +19,7 @@ const props = defineProps<IHotelPriceProps>()
 const redirectToOrderPage = () => {
   preservedHotelStore.setPreservedHotel(props.hotel)
   router.push('/order')
+  yandexMetrica.redirectToPage('/order')
 }
 </script>
 
