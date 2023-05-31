@@ -1,7 +1,36 @@
 import { SITE_URL } from '../constants/constants';
+import Controller from '../controller/controller';
 
 export default class Router {
   routes: { [key: string]: (url: string) => boolean } = {};
+  routesMap: { path: string; handler: (params: { [key: string]: string }) => Promise<void> }[];
+
+  constructor() {
+    const controller = new Controller();
+    this.routesMap = [
+      // массив со всеми роутами, которые будем добавлять в роутер
+      {
+        path: `${SITE_URL}`,
+        handler: controller.handleHomeRoute.bind(controller),
+      },
+      {
+        path: `${SITE_URL}about`,
+        handler: controller.handleAboutRoute.bind(controller),
+      },
+      {
+        path: `${SITE_URL}blog`,
+        handler: controller.handleBlogRoute.bind(controller),
+      },
+      {
+        path: `${SITE_URL}blog/article/:id`,
+        handler: controller.handleArticleRoute.bind(controller),
+      },
+      {
+        path: `${SITE_URL}404`,
+        handler: controller.handleWrongRoute.bind(controller),
+      },
+    ];
+  }
 
   addRoute(path: string, handleRoute: (params?: { [key: string]: string }) => void) {
     const urlSegments = path.split('/');
