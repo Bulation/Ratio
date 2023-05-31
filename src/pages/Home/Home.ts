@@ -1,6 +1,6 @@
 import Component from '../../common/component';
 import { ARTICLES_COUNT_PER_PAGE, SITE_URL } from '../../constants/constants';
-import getCreatedDate from '../../helperFunctions/getCreatedDate';
+import { getCreatedDate } from '../../helperFunctions/getCreatedDate';
 import getMinsRead from '../../helperFunctions/getMinsRead';
 import { IArticle } from '../../interfaces/IArticle';
 import Page from '../Page';

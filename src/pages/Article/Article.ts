@@ -1,5 +1,5 @@
 import Component from '../../common/component';
-import getCreatedDate from '../../helperFunctions/getCreatedDate';
+import { getCreatedDate } from '../../helperFunctions/getCreatedDate';
 import getMinsRead from '../../helperFunctions/getMinsRead';
 import { IDetailedArticle } from '../../interfaces/IDetailedArticle';
 import Page from '../Page';
