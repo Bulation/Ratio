@@ -12,7 +12,6 @@ export default class Blog extends Page {
   renderArticle: (articleData: IArticle, img: string) => void;
   articles: IArticle[];
   counter: number;
-  timer: NodeJS.Timer | null;
   articlesSection: Component;
   constructor(parent: HTMLElement) {
     super();
@@ -41,7 +40,8 @@ export default class Blog extends Page {
     this.observeArticles();
   }
 
-  observeArticles() { // метод для реализации бесконечной ленты
+  observeArticles() {
+    // метод для реализации бесконечной ленты
     const observerDiv = new Component(this.articlesSection.node, 'div', '', '');
     observerDiv.setStyle('height', '1px'); // создание дива, за которым будет следить обсервер. При скролле до дива будет подгружаться контент
     const options = {
