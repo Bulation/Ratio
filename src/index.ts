@@ -1,5 +1,5 @@
-import Router from './router';
-import Controller from './controller';
+import Router from './router/router';
+import Controller from './controller/controller';
 import './scss/style.scss';
 import { SITE_URL } from './constants/constants';
 

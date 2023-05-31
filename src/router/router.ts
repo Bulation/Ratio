@@ -1,4 +1,4 @@
-import { SITE_URL } from './constants/constants';
+import { SITE_URL } from '../constants/constants';
 
 export default class Router {
   routes: { [key: string]: (url: string) => boolean } = {};

@@ -1,14 +1,14 @@
-import Header from './components/Header/header';
-import About from './pages/About/About';
-import API from './api/api';
-import NotFoundPage from './pages/NotFoundPage';
-import Home from './pages/Home/Home';
-import Blog from './pages/Blog';
-import Article from './pages/Article/Article';
-import { IDetailedArticle } from './interfaces/IDetailedArticle';
-import Page from './pages/Page';
-import { IAboutSEO } from './interfaces/IAboutSEO';
-import { IDetailedArticleSEO } from './interfaces/IDetailedArticleSEO';
+import Header from '../components/Header/header';
+import About from '../pages/About/About';
+import API from '../api/api';
+import NotFoundPage from '../pages/NotFoundPage';
+import Home from '../pages/Home/Home';
+import Blog from '../pages/Blog';
+import Article from '../pages/Article/Article';
+import { IDetailedArticle } from '../interfaces/IDetailedArticle';
+import Page from '../pages/Page';
+import { IAboutSEO } from '../interfaces/IAboutSEO';
+import { IDetailedArticleSEO } from '../interfaces/IDetailedArticleSEO';
 
 export default class Controller {
   about: About;
