@@ -1,4 +1,5 @@
 import Component from '../../common/component';
+import './navigation.scss';
 import { IMenuItem } from '../../interfaces/IMenuItem';
 
 export default class Navigation {

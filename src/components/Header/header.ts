@@ -2,6 +2,7 @@ import Component from '../../common/component';
 import { MENU_ITEMS_COUNT, MENU_LINKS_OBJECT, SITE_URL } from '../../constants/constants';
 import Navigation from '../Navigation/navigation';
 import svg from '/svg/logo.svg?raw';
+import './header.scss';
 
 export default class Header {
   header: Component;

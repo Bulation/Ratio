@@ -4,6 +4,7 @@ import getCreatedDate from '../../helperFunctions/getCreatedDate';
 import getMinsRead from '../../helperFunctions/getMinsRead';
 import { IArticle } from '../../interfaces/IArticle';
 import Page from '../Page';
+import './home.scss';
 
 export default class Home extends Page {
   parent: HTMLElement;

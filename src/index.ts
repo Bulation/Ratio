@@ -1,6 +1,6 @@
 import Router from './router';
 import Controller from './controller';
-import './style.scss';
+import './scss/style.scss';
 import { SITE_URL } from './constants/constants';
 
 const router = new Router();

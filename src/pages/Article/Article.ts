@@ -5,6 +5,7 @@ import { IDetailedArticle } from '../../interfaces/IDetailedArticle';
 import Page from '../Page';
 import authorAvatar from '/img/author.jpg';
 import { SITE_URL } from '../../constants/constants';
+import './article.scss';
 
 export default class Article extends Page {
   main: Component;

@@ -1,5 +1,6 @@
 import Component from '../../common/component';
 import { IAbout } from '../../interfaces/IAbout';
+import './about.scss';
 
 export default class About {
   main: Component;
