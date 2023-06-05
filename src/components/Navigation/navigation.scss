@@ -1,9 +1,11 @@
+@import '../../scss/mixins.scss';
+
 .navigation {
-  background-color: #ffffff;
+  background-color: var(--light-color);
   &__list {
     display: flex;
     gap: 26px;
-    @media screen and (max-width: 767px) {
+    @include tablet {
       flex-direction: column;
       align-items: center;
       width: 320px;
@@ -11,7 +13,7 @@
     }
   }
   &__link {
-    color: #000000;
+    color: var(--dark-color);
     font: 400 20px/25px Libre Baskerville;
     &_active {
       font-weight: 700;
@@ -20,7 +22,7 @@
       font-weight: 700;
     }
   }
-  @media screen and (max-width: 767px) {
+  @include tablet {
     display: none;
     transform: translateX(100%);
     position: fixed;
@@ -73,7 +75,7 @@
   }
 }
 
-@media screen and (max-width: 767px) {
+@include tablet {
   .burger {
     display: block;
   }

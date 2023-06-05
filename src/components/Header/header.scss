@@ -1,3 +1,6 @@
+@import '../../scss/commonStyles.scss';
+@import '../../scss/mixins.scss';
+
 .header-container {
   @extend .container;
   display: flex;
@@ -18,7 +21,7 @@
   white-space: nowrap;
 }
 
-@media screen and (max-width: 767px) {
+@include tablet {
   .header-container {
      justify-content: space-between;
   }
