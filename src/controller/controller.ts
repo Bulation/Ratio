@@ -89,7 +89,7 @@ export default class Controller {
     if (articleData.nextId !== null) {
       nextArticle = await API.getArticle(articleData.nextId.toString());
     }
-    const imgSrc = new URL(`../public/img/article${params.id}.jpg`, import.meta.url).href; // получаем зарезолвенный для билда урл картинки
+    const imgSrc = new URL(`../assets/article${params.id}.jpg`, import.meta.url).href; // получаем зарезолвенный для билда урл картинки
     this.article.render(articleData, imgSrc, prevArticle, nextArticle);
     this.deleteSEO();
     this.addSEO(articleData.seo);
