@@ -1,11 +1,11 @@
 @mixin article-tag {
   font: 400 20px/27px Open Sans;
   color: var(--tag-color);
-  @media screen and (max-width: 768px) {
+  @include tablet {
     margin-bottom: 8px;
     font: 400 14px/19px Open Sans;
   }
-  @media screen and (max-width: 600px) {
+  @include mobile {
     font: 400 12px/16px Open Sans;
   }
 }
@@ -14,11 +14,12 @@
   font: 700 33px/41px Libre Baskerville;
   margin-bottom: 12px;
   cursor: pointer;
-  @media screen and (max-width: 768px) {
+  transition: color 0.3s ease-in;
+  @include laptop {
     font: 700 24px/30px Libre Baskerville;
     margin-bottom: 8px;
   }
-  @media screen and (max-width: 600px) {
+  @include tablet {
     font: 700 18px/22px Libre Baskerville;
   }
 }
@@ -37,14 +38,14 @@
     width: 3px;
     height: 3px;
     background-color: var(--tag-color);
-    @media screen and (max-width: 768px) {
+    @include tablet {
       top: 8px;
     }
   }
-  @media screen and (max-width: 768px) {
+  @include tablet {
     font: 400 12px/16px Open Sans;
   }
-  @media screen and (max-width: 600px) {
+  @include mobile {
     padding-right: 8px;
   }
 }
@@ -54,10 +55,10 @@
   padding-left: 9px;
   font: 400 16px/22px Open Sans;
   color: var(--tag-color);
-  @media screen and (max-width: 768px) {
+  @include tablet {
     font: 400 12px/16px Open Sans;
   }
-  @media screen and (max-width: 600px) {
+  @include mobile {
     padding-left: 5px;
   }
 }
@@ -66,7 +67,7 @@
   text-align: center;
   font: 400 14px/19px Open Sans;
   color: var(--tag-color);
-  @media screen and (max-width: 768px) {
+  @include tablet {
     font: 400 12px/16px Open Sans;
   }
 }
@@ -74,8 +75,26 @@
 @mixin article-description {
   font: 400 16px/24px Open Sans;
   margin-top: 14px;
-  @media screen and (max-width: 768px) {
+  @include tablet {
     margin-top: 8px;
     font: 400 14px/24px Open Sans;
+  }
+}
+
+@mixin laptop {
+  @media screen and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media screen and (max-width: 600px) {
+    @content;
   }
 }
