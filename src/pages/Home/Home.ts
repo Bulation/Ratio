@@ -25,7 +25,7 @@ export default class Home extends Page {
     this.renderBanner(featuredArticle, { top: '0', left: '45px' }); // рендер баннера, передаем туда данные и стили
     this.renderArticlesSection(); // рендер блока со статьями
     for (let i = 0; i < ARTICLES_COUNT_PER_PAGE; i += 1) {
-      const img = new URL(`../../../public/img/article${i}.jpg`, import.meta.url).href;
+      const img = new URL(`../../assets/article${i}.jpg`, import.meta.url).href;
       this.renderArticle(articles[i], img); // рендер каждой статьи в блоке со статьями
     }
     this.renderBanner(featuredArticle, { top: '54px', right: '78px' });
