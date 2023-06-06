@@ -3,7 +3,7 @@ import { getCreatedDate } from '../../helperFunctions/getCreatedDate';
 import getMinsRead from '../../helperFunctions/getMinsRead';
 import { IDetailedArticle } from '../../interfaces/IDetailedArticle';
 import Page from '../Page';
-import authorAvatar from '../../assets/author.jpg';
+import authorAvatar from '../../assets/img/author.jpg';
 import { SITE_URL } from '../../constants/constants';
 import './article.scss';
 
