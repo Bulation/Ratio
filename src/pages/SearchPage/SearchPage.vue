@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import SearchMap from './SearchMap.vue'
-import SearchHotelsList from './SearchHotelsList.vue'
+import SearchMap from '@/components/SearchPageComponents/SearchMap.vue'
+import SearchHotelsList from '@/components/SearchPageComponents/SearchHotelsList.vue'
 import API from '@/services/api'
 import { useSearchedState } from '@/store/modules/searchModule'
 import type { IHotelData } from '@/interfaces/IHotelData'
@@ -25,7 +25,7 @@ const metaObject = computed(() => ({
     { property: 'og:title', content: `${list.value?.length} hotels found` },
     { property: 'og:description', content: 'list of found hotels' }
   ]
-}));
+}))
 
 watch(list, () => {
   useHead(metaObject)

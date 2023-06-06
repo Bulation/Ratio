@@ -30,7 +30,7 @@ defineExpose({ openPopup })
   padding: 20px;
   top: 50%;
   flex-wrap: wrap;
-  background-color: #ffffff;
+  background-color: var(--light-color);
   text-align: center;
   color: #000;
   width: calc(100% - 20px);
@@ -51,7 +51,7 @@ defineExpose({ openPopup })
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #29292999;
+  background-color: var(--overlay-color);
   transition: all 0.2s ease 0.1s;
 }
 

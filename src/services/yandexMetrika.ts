@@ -1,4 +1,4 @@
-import { YANDEX_METRICA_ID } from '@/constants'
+import { YANDEX_METRICA_ID } from '@/constants/constants'
 
 type TargetName = 'location' | 'checkIn' | 'checkOut' | 'guest' | 'orderError'
 

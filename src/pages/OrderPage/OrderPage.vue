@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onActivated } from 'vue'
-import OrderForm from './OrderForm.vue'
-import OrderHotel from './OrderHotel.vue'
+import OrderForm from '@/components/OrderComponents/OrderForm.vue'
+import OrderHotel from '@/components/OrderComponents/OrderHotel.vue'
 import PageFooter from '@/layout/PageFooter/PageFooter.vue'
 import { useHead } from '@vueuse/head'
 onActivated(() => {

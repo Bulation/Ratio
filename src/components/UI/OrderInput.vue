@@ -39,10 +39,10 @@ function handleInput(event: Event) {
   color: var(--order-input-color);
   font: 500 14px/20px Montserrat;
   padding: 14px;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid var(--dark-color);
 }
 .order-form-error-msg {
-  color: red;
+  color: var(--error-color);
   font: 700 12px/15px Montserrat;
 }
 </style>

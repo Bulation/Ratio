@@ -14,11 +14,15 @@ defineProps<{
   width: 324px;
   padding: 22px 0;
   border-radius: 30px;
-  color: #ffffff;
+  color: var(--light-color);
   background-color: var(--button-color);
   cursor: pointer;
+  transition: background-color 0.3s ease-in;
+  &:hover {
+    background-color: var(--second-text-color);
+  }
   &:disabled {
-    background-color: grey;
+    background-color: var(--disabled-color);
   }
   @media screen and (max-width: 420px) {
     width: 210px;

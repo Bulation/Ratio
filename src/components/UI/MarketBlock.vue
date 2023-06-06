@@ -24,6 +24,10 @@ defineProps<IMarketBlockProps>()
   gap: 15px;
   border-radius: 6px;
   background-color: var(--market-bg);
+  transition: background-color 0.3s ease-in;
+  &:hover {
+    background-color: var(--btn-bg);
+  }
   &__name {
     color: var(--main-text-color);
     font: 600 15px/18px Montserrat;

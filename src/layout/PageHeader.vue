@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MENU_LINKS_OBJECT } from '@/constants'
+import { MENU_LINKS_OBJECT } from '@/constants/constants'
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
 
@@ -45,9 +45,7 @@ const toggleBurger = () => {
           :class="{ burger_active: isMobileNavShow }"
           @click="toggleBurger"
         >
-          <span class="burger__item"></span>
-          <span class="burger__item"></span>
-          <span class="burger__item"></span>
+          <span v-for="n in 3" :key="n" class="burger__item"></span>
         </div>
       </div>
     </div>
@@ -82,6 +80,10 @@ const toggleBurger = () => {
   cursor: pointer;
   &__link {
     color: var(--link-color);
+    transition: color 0.3s ease-in;
+    &:hover {
+      color: var(--second-text-color);
+    }
   }
 }
 .navigation {
@@ -100,13 +102,13 @@ const toggleBurger = () => {
     font: 600 16px/20px Montserrat;
     transition: color 0.3s ease-in;
     &_active {
-      color: #000000;
+      color: var(--second-text-color);
     }
     &:hover {
-      color: #000000;
+      color: var(--second-text-color);
     }
   }
-  @media screen and (max-width: 767px) {
+  @media screen and (max-width: 768px) {
     background-color: #ffffff;
     transform: translateX(100%);
     position: fixed;

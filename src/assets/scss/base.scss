@@ -1,0 +1,37 @@
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.body_overlay {
+  overflow: hidden;
+  &:before {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--overlay-color);
+    z-index: 2;
+  }
+}
+
+.section-title {
+  font: 700 36px/48px Montserrat;
+  color: var(--title-color);
+  position: relative;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 140px;
+    height: 6px;
+    border-radius: 3px;
+    background-color: var(--title-color);
+    left: 0;
+    bottom: -35px;
+  }
+}

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import SvgIcon from '@/components/UI/SvgIcon.vue'
 import ModalWindow from '@/components/UI/ModalWindow.vue'
-import { EMAIL_REGEXP } from '@/constants'
+import { EMAIL_REGEXP } from '@/constants/constants'
 import { ref } from 'vue'
 
 const inputValue = ref('')
@@ -99,6 +99,10 @@ const submitForm = async () => {
     border-radius: 50%;
     background-color: var(--btn-bg);
     cursor: pointer;
+    transition: background-color 0.3s ease-in;
+    &:hover {
+      background-color: var(--button-color);
+    }
   }
   &__icon {
     position: absolute;
@@ -106,15 +110,11 @@ const submitForm = async () => {
     right: 10px;
     width: 28px;
     height: 28px;
-    transition: fill 0.3s ease-in;
-    &:hover {
-      fill: red;
-    }
   }
 }
 .order-form-error-msg {
   text-align: center;
-  color: red;
+  color: var(--error-color);
   font: 700 12px/15px Montserrat;
 }
 </style>

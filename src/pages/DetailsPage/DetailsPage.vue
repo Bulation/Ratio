@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import GalleryLoader from '@/components/GalleryLoader.vue'
-import FlatsInfo from './FlatsInfo.vue'
-import DetailsHeading from './DetailsHeading.vue'
-import DetailsDescription from './DetailsDescription.vue'
-import DetailsAmenities from './DetailsAmenities.vue'
-import DetailsMap from './DetailsMap.vue'
-import DetailsReviews from './DetailsReviews/DetailsReviews.vue'
-import HotelOrder from './HotelOrder.vue'
+import GalleryLoader from '@/components/Gallery/GalleryLoader.vue'
+import FlatsInfo from '@/components/DetailsComponents/FlatsInfo.vue'
+import DetailsHeading from '@/components/DetailsComponents/DetailsHeading.vue'
+import DetailsDescription from '@/components/DetailsComponents/DetailsDescription.vue'
+import DetailsAmenities from '@/components/DetailsComponents/DetailsAmenities.vue'
+import DetailsMap from '@/components/DetailsComponents/DetailsMap.vue'
+import DetailsReviews from '@/components/DetailsComponents/DetailsReviews/DetailsReviews.vue'
+import HotelOrder from '@/components/DetailsComponents/HotelOrder.vue'
 import PageFooter from '@/layout/PageFooter/PageFooter.vue'
 import { useRoute } from 'vue-router'
 import { computed, onActivated, onMounted, ref, watch } from 'vue'
@@ -33,7 +33,7 @@ const metaObject = computed(() => ({
       content: `Details of ${hotel.value?.name} hotel. There are described description, price, amenities, rating, reviews of the hotel`
     }
   ]
-}));
+}))
 
 onMounted(async () => {
   const id = route.params.id as string

@@ -39,7 +39,7 @@ defineProps<IFooterListProps>()
     font: 500 15px/20px Montserrat;
     transition: color 0.3s ease-in;
     &:hover {
-      color: #000000;
+      color: var(--second-text-color);
     }
   }
   &__item:not(:last-child) {

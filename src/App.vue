@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import PageHeader from '@/layout/PageHeader.vue'
 import { onErrorCaptured, ref } from 'vue'
-import ErrorComponent from './components/ErrorComponent.vue'
+import ErrorComponent from '@/components/ErrorComponent/ErrorComponent.vue'
 const error = ref(null)
 
 onErrorCaptured(() => {

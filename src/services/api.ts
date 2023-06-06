@@ -1,4 +1,4 @@
-import { BASE_URL } from '@/constants'
+import { BASE_URL } from '@/constants/constants'
 import type { IBannerData } from '@/interfaces/IBannerData'
 import type { ICountry } from '@/interfaces/ICountry'
 import type { IHotelData } from '@/interfaces/IHotelData'

@@ -9,7 +9,11 @@
   padding: 20px 35px;
   border: 1px solid var(--main-text-color);
   border-radius: 6px;
-  background-color: #ffffff;
+  background-color: var(--light-color);
   cursor: pointer;
+  transition: color 0.3s ease-in;
+  &:hover {
+    color: var(--second-text-color);
+  }
 }
 </style>

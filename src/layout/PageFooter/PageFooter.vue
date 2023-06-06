@@ -2,7 +2,7 @@
 import NewsLetter from './NewsLetter.vue'
 import MarketBlock from '@/components/UI/MarketBlock.vue'
 import FooterList from './FooterList.vue'
-import { HELP_LIST, COMPANY_LIST, CONTACT_LIST, SOCIALS_LIST } from '@/constants'
+import { HELP_LIST, COMPANY_LIST, CONTACT_LIST, SOCIALS_LIST } from '@/constants/constants'
 import SvgIcon from '@/components/UI/SvgIcon.vue'
 </script>
 
@@ -123,6 +123,10 @@ import SvgIcon from '@/components/UI/SvgIcon.vue'
   &__icon {
     width: 24px;
     height: 24px;
+    transition: fill 0.3s ease-in;
+    &:hover {
+      fill: var(--second-text-color);
+    }
   }
 }
 </style>
