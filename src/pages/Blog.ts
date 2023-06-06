@@ -33,7 +33,7 @@ export default class Blog extends Page {
     this.renderBanner(featuredArticle, { top: '0', left: '45px' });
     this.renderArticlesSection();
     for (let i = 0; i < 3; i += 1) {
-      const img = new URL(`../assets/article${this.counter}.jpg`, import.meta.url).href;
+      const img = new URL(`../assets/img/article${this.counter}.jpg`, import.meta.url).href;
       this.renderArticle(this.articles[this.counter], img);
       this.counter++;
     }
@@ -51,7 +51,7 @@ export default class Blog extends Page {
     const callback = (entries: IntersectionObserverEntry[]) => {
       if (entries[0].isIntersecting) {
         for (let i = 0; i < 3; i += 1) {
-          const img = new URL(`../assets/article${this.counter}.jpg`, import.meta.url).href;
+          const img = new URL(`../assets/img/article${this.counter}.jpg`, import.meta.url).href;
           this.renderArticle(this.articles[this.counter], img);
           this.counter++;
           if (this.counter === this.articles.length) {
