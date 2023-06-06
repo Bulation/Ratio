@@ -182,7 +182,7 @@
     &_weight {
       font-weight: 700;
     }
-    @include tablet {
+    @include laptop {
       font: 400 12px/15px Libre Baskerville;
     }
     @include mobile {
