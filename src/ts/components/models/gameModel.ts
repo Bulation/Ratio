@@ -5,7 +5,7 @@ import {
   PROBABILITY,
   WIN_VALUE
 } from '../../constants/constants';
-import { Directions } from '../../types/Directions';
+import { Directions } from '../../interfaces/IKeyCodes';
 import { IGameState } from '../../interfaces/IGameState';
 import { INumber } from '../../interfaces/INumber';
 
