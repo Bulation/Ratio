@@ -24,7 +24,7 @@ defineProps<{
   &:disabled {
     background-color: var(--disabled-color);
   }
-  @media screen and (max-width: 420px) {
+  @include mobile {
     width: 210px;
   }
 }

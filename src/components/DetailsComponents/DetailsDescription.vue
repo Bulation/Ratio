@@ -29,7 +29,7 @@ defineProps<IDetailsDescriptionProps>()
 .details-text-skeleton {
   width: 745px;
   height: 60px;
-  @media screen and (max-width: 768px) {
+  @include tablet {
     width: 100%;
   }
 }

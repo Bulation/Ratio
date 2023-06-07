@@ -72,7 +72,7 @@ const hotelState = preservedHotelStore.getPreservedHotel
     color: var(--second-text-color);
     font: 600 14px/17px Montserrat;
   }
-  @media screen and (max-width: 420px) {
+  @include mobile {
     flex-direction: column;
   }
 }

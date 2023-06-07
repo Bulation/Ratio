@@ -52,7 +52,7 @@ onActivated(async () => {
   max-width: 1366px;
   width: 100%;
   margin: 0 auto;
-  @media screen and (max-width: 1024px) {
+  @include laptop {
     display: block;
   }
 }

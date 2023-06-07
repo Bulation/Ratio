@@ -34,7 +34,7 @@ defineProps<ISearchMapProps>()
   display: block;
   width: 771px;
   height: 420px;
-  @media screen and (max-width: 768px) {
+  @include tablet {
     width: 100%;
   }
 }

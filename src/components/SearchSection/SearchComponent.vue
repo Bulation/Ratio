@@ -158,11 +158,11 @@ onDeactivated(() => {
     display: flex;
     align-items: center;
     position: relative;
-    @media screen and (max-width: 1024px) {
+    @include laptop {
       display: block;
       column-count: 2;
     }
-    @media screen and (max-width: 576px) {
+    @include tablet {
       column-count: 1;
     }
   }
@@ -178,10 +178,10 @@ onDeactivated(() => {
       height: 30px;
       width: 1px;
       background-color: var(--separator-color);
-      top: 0;
+      top: 5px;
       left: -10px;
     }
-    @media screen and (max-width: 420px) {
+    @include mobile {
       &:before {
         display: none;
       }
@@ -213,7 +213,7 @@ onDeactivated(() => {
     &:hover {
       background-color: var(--btn-bg);
     }
-    @media screen and (max-width: 1024px) {
+    @include laptop {
       bottom: 0;
       top: auto;
       transform: translate(0, 0);
@@ -226,7 +226,7 @@ onDeactivated(() => {
       background-color: var(--disabled-color);
     }
   }
-  @media screen and (max-width: 420px) {
+  @include mobile {
     padding-left: 12px;
   }
 }

@@ -91,7 +91,7 @@ main {
   width: calc(100% - 30px);
   margin: 0 auto;
   padding-top: 90px;
-  @media screen and (max-width: 1024px) {
+  @include desktop {
     flex-direction: column-reverse;
   }
 }

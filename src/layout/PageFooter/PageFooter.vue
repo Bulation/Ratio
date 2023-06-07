@@ -104,7 +104,7 @@ import SvgIcon from '@/components/UI/SvgIcon.vue'
     padding: 41px 0;
     color: var(--main-text-color);
     font: 600 16px/20px Montserrat;
-    @media screen and (max-width: 768px) {
+    @include tablet {
       flex-direction: column;
       align-items: center;
       gap: 10px;

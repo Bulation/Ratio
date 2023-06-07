@@ -58,7 +58,7 @@ const submitForm = async () => {
     width: calc(100% - 30px);
     margin: 0 auto;
     padding: 29px 0;
-    @media screen and (max-width: 420px) {
+    @include mobile {
       justify-content: center;
       gap: 30px;
     }

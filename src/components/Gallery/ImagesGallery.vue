@@ -53,7 +53,7 @@ const showMore = () => {
     position: absolute;
     bottom: 54px;
     left: 65px;
-    @media screen and (max-width: 420px) {
+    @include mobile {
       bottom: 35px;
       left: 10px;
     }
@@ -78,7 +78,7 @@ const showMore = () => {
     border-radius: 8px;
     cursor: pointer;
   }
-  @media screen and (max-width: 768px) {
+  @include tablet {
     display: block;
     width: calc(100% - 10px);
   }

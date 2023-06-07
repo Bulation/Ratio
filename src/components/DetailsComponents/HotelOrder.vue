@@ -42,7 +42,7 @@ const redirectToOrderPage = () => {
 .hotel-order-skeleton {
   width: 382px;
   height: 201px;
-  @media screen and (max-width: 400px) {
+  @include mobile {
     width: 100%;
   }
 }

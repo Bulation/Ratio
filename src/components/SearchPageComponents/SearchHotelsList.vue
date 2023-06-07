@@ -73,7 +73,7 @@ watch(
       color: var(--second-text-color);
     }
   }
-  @media screen and (max-width: 1024px) {
+  @include laptop {
     padding: 20px;
   }
 }
@@ -83,7 +83,7 @@ watch(
   width: 574px;
   height: 384px;
   margin-bottom: 30px;
-  @media screen and (max-width: 600px) {
+  @include tablet {
     width: 100%;
   }
 }
@@ -93,7 +93,7 @@ watch(
   width: 453px;
   height: 24px;
   margin-bottom: 57px;
-  @media screen and (max-width: 450px) {
+  @include tablet {
     width: 100%;
   }
 }

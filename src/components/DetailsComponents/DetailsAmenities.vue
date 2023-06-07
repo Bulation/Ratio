@@ -55,7 +55,7 @@ watch(
 <style scoped lang="scss">
 .amenities-skeleton-wrapper {
   column-count: 2;
-  @media screen and (max-width: 768px) {
+  @include tablet {
     column-count: 1;
   }
 }

@@ -41,7 +41,7 @@ defineProps<ISearchAboutHotelProps>()
   background-color: var(--hotel-info-bg);
   display: flex;
   justify-content: flex-end;
-  @media screen and (max-width: 490px) {
+  @include tablet {
     width: 100%;
   }
 }
@@ -50,7 +50,7 @@ defineProps<ISearchAboutHotelProps>()
   width: 325px;
   padding: 28px 36px 43px 18px;
   background-color: var(--light-color);
-  @media screen and (max-width: 490px) {
+  @include tablet {
     width: 100%;
   }
 }

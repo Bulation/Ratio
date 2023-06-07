@@ -32,9 +32,9 @@ defineProps<IDetailsHeadingProps>()
 
 <style scoped lang="scss">
 .details-heading-skeleton-text {
-  width: 420px;
+  width: 400px;
   height: 34px;
-  @media screen and (max-width: 450px) {
+  @include mobile {
     width: 100%;
   }
 }

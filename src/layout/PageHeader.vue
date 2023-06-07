@@ -62,7 +62,7 @@ const toggleBurger = () => {
     gap: 51px;
     max-width: 876px;
     width: 100%;
-    @media screen and (max-width: 768px) {
+    @include tablet {
       justify-content: space-between;
     }
   }
@@ -90,7 +90,7 @@ const toggleBurger = () => {
   &__list {
     display: flex;
     gap: 34px;
-    @media screen and (max-width: 768px) {
+    @include tablet {
       flex-direction: column;
       align-items: center;
       width: 320px;
@@ -108,7 +108,7 @@ const toggleBurger = () => {
       color: var(--second-text-color);
     }
   }
-  @media screen and (max-width: 768px) {
+  @include tablet {
     background-color: #ffffff;
     transform: translateX(100%);
     position: fixed;
@@ -143,7 +143,7 @@ const toggleBurger = () => {
   &_active {
     transform: rotate(90deg);
   }
-  @media screen and (max-width: 768px) {
+  @include tablet {
     display: block;
   }
 }

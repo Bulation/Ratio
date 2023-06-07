@@ -95,7 +95,7 @@ watch(
   }
   &__review {
     width: calc(50% - 20px);
-    @media screen and (max-width: 768px) {
+    @include tablet {
       width: 100%;
     }
   }
@@ -107,7 +107,7 @@ watch(
 }
 .review-skeleton {
   width: calc(50% - 20px);
-  @media screen and (max-width: 768px) {
+  @include tablet {
     width: 100%;
   }
 }

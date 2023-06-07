@@ -37,7 +37,7 @@ defineProps<IGalleryLoaderProps>()
   grid-template-columns: repeat(auto-fill, minmax(315px, 1fr));
   grid-template-rows: 260px 260px;
   grid-gap: 17px;
-  @media screen and (max-width: 700px) {
+  @include tablet {
     display: block;
   }
 }
@@ -47,7 +47,7 @@ defineProps<IGalleryLoaderProps>()
   height: 540px;
   grid-column: 1/3;
   grid-row: 1/3;
-  @media screen and (max-width: 700px) {
+  @include tablet {
     width: 100%;
   }
 }
@@ -56,7 +56,7 @@ defineProps<IGalleryLoaderProps>()
   display: block;
   width: 315px;
   height: 260px;
-  @media screen and (max-width: 700px) {
+  @include tablet {
     margin-top: 20px;
   }
 }

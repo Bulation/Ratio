@@ -21,7 +21,7 @@ const finalRatingWidth = (rating: number) => MAX_RATING_WIDTH * (rating / 5)
   &__item {
     margin-bottom: 15px;
   }
-  @media screen and (max-width: 768px) {
+  @include tablet {
     column-count: 1;
   }
 }
