@@ -143,7 +143,9 @@ export class Controller {
     };
     this.view.paginationClickHandle = (term: number) => {
       // обработка клика по кнопкам Prev и Next
-      this.view.tbody.destroy(); // уничтожаем таблицу
+      if (this.view.tbody) {
+        this.view.tbody.destroy(); // уничтожаем таблицу
+      }
       this.recordsModel.pageNumber += term; // меняем номер страницы в таблице рекордов. Если нажали на Prev, то номер уменьшается на 1, иначе увеличивается
       this.view.renderTableBody(this.recordsModel.getSlicedData(), this.recordsModel.pageNumber); // перерендер таблицы с учетом нового номера страницы
       this.view.editPagination(this.recordsModel.pageNumber, this.recordsModel.records.length); // редактируем кнопки пагинации и текст номера
