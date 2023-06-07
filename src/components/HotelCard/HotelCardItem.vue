@@ -168,6 +168,7 @@ onActivated(injectPaginationStyles) // при переходе со страни
 
 <style scoped lang="scss">
 .list-item {
+  contain: content;
   &_latest {
     max-width: 279px;
     width: 100%;
