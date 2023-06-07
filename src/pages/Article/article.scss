@@ -161,12 +161,12 @@
     background-color: var(--arrow-color);
     transition: background-color 0.3s ease-in;
     &_left {
-      background-image: url(../../public/svg/prev.svg);
+      background-image: url(../../svg/prev.svg);
       background-repeat: no-repeat;
       background-position: center center;
     }
     &_right {
-      background-image: url(../../public/svg/next.svg);
+      background-image: url(../../svg/next.svg);
       background-repeat: no-repeat;
       background-position: center center;
     }
