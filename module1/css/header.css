@@ -1,10 +1,11 @@
 .header-container {
   display: flex;
-  max-width: 400px;
+  max-width: 1120px;
+  gap: 120px;
   width: 100%;
+  margin: 0 auto;
   font: 500 16px/26px Ubuntu, sans-serif;
-  padding-top: 65px;
-  justify-content: space-between;
+  padding: 65px 20px 0;
 }
 
 .header__logo {
@@ -20,11 +21,19 @@
   gap: 40px;
 }
 
-.header-navigation__link:hover {
-  color: var(--text-hover-color);
+.header-navigation__link {
+  color: var(--text-color);
 }
 
-@media screen and (max-width: 420px) {
+.header-navigation__link:hover {
+  color: var(--text-hover-color);
+  font-weight: 800;
+}
+
+@media screen and (max-width: 480px) {
+  .header-container {
+    gap: 30px;
+  }
   .header-navigation__list {
     gap: 20px;
   }

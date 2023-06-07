@@ -1,5 +1,6 @@
 .testimonials-container {
   max-width: 1120px;
+  margin: 0 auto;
   padding: 109px 0 60px 93px;
   font: 400 18px/32px Ubuntu, sans-serif;
   background-color: var(--testimonials-bg);

@@ -1,6 +1,8 @@
 .footer-container {
   display: flex;
+  max-width: 1120px;
   flex-wrap: wrap;
+  margin: 0 auto;
   gap: 20px;
   color: var(--footer-text-color);
   justify-content: space-between;
@@ -80,6 +82,7 @@
 
 @media screen and (max-width: 768px) {
   .footer-container {
+    flex-direction: column;
     justify-content: center;
   }
 }
