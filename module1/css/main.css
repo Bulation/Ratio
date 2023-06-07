@@ -3,17 +3,10 @@
   background: linear-gradient(to bottom, var(--gradient-color) 0%, var(--light-color) 19.4%);
 }
 
-.main-container {
-  width: calc(100% - 40px);
-  max-width: 1260px;
-  margin: 0 auto;
-}
-
 .container {
-  max-width: 1120px;
   font: 500 18px/29px Ubuntu, sans-serif;
   color: var(--text-color);
-  padding-top: 150px;
+  padding: 150px 20px 0;
 }
 
 .link {
