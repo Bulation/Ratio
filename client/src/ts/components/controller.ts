@@ -145,10 +145,10 @@ export class Controller {
       // обработка клика по кнопкам Prev и Next
       if (this.view.tbody) {
         this.view.tbody.destroy(); // уничтожаем таблицу
+        this.recordsModel.pageNumber += term; // меняем номер страницы в таблице рекордов. Если нажали на Prev, то номер уменьшается на 1, иначе увеличивается
+        this.view.renderTableBody(this.recordsModel.getSlicedData(), this.recordsModel.pageNumber); // перерендер таблицы с учетом нового номера страницы
+        this.view.editPagination(this.recordsModel.pageNumber, this.recordsModel.records.length); // редактируем кнопки пагинации и текст номера
       }
-      this.recordsModel.pageNumber += term; // меняем номер страницы в таблице рекордов. Если нажали на Prev, то номер уменьшается на 1, иначе увеличивается
-      this.view.renderTableBody(this.recordsModel.getSlicedData(), this.recordsModel.pageNumber); // перерендер таблицы с учетом нового номера страницы
-      this.view.editPagination(this.recordsModel.pageNumber, this.recordsModel.records.length); // редактируем кнопки пагинации и текст номера
     };
     this.view.continueGame = () => (this.gameModel.playable = true); // метод для продолжения игры, игра вновь становится активной
     this.view.openRecordsPopup = async () => {
